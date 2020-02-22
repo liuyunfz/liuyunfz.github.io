@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.6yfz.cn">
-  <title>生产力工具-用Python做一个headers转换 | LiuYun的博客</title>
+  <title>为hexo博客添加CDN加速 | LiuYun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
+  <meta name="description" content="前言 众所周知，Github是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生产力工具-用Python做一个headers转换">
-<meta property="og:url" content="http://blog.6yfz.cn/2019/10/03/headers-transform/index.html">
+<meta property="og:title" content="为hexo博客添加CDN加速">
+<meta property="og:url" content="http://blog.6yfz.cn/%E4%B8%BAhexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0CDN%E5%8A%A0%E9%80%9F.html">
 <meta property="og:site_name" content="LiuYun的博客">
-<meta property="og:description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
+<meta property="og:description" content="前言 众所周知，Github是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2019-10-03T13:31:00.000Z">
-<meta property="article:modified_time" content="2020-01-20T14:39:44.551Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png">
+<meta property="article:published_time" content="2019-09-09T13:31:00.000Z">
+<meta property="article:modified_time" content="2020-01-27T03:04:07.387Z">
 <meta property="article:author" content="Liu Yun">
 <meta property="article:tag" content="教程">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="cdn">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png">
   
     <link rel="alternative" href="/atom.xml" title="LiuYun的博客" type="application/atom+xml">
   
@@ -152,14 +155,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-headers-transform" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-为hexo博客添加CDN加速" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      生产力工具-用Python做一个headers转换
+      为hexo博客添加CDN加速
     </h1>
   
 
@@ -173,25 +176,43 @@
           </a>
         
         
-        <a href="/2019/10/03/headers-transform/" class="archive-article-date">
-  	<time datetime="2019-10-03T13:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
+        <a href="/%E4%B8%BAhexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0CDN%E5%8A%A0%E9%80%9F.html" class="archive-article-date">
+  	<time datetime="2019-09-09T13:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。</p>
-<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
-<li>Python</li>
-<li>VS Code</li>
-<li>tkinter模块<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h4 id="python中dict类型样式为"><a href="#python中dict类型样式为" class="headerlink" title="python中dict类型样式为{"></a>python中dict类型样式为{<br></h4>a:”value”,<br></li>
-</ul>
-<p>b:”value”,<br></p>
-<p>c:”value”}<br></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 众所周知，<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。<br><br>本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png" alt="img"></p>
 <a id="more"></a>
-<p>利用python3自带的tkinter模块识别剪辑版内容，然后利用分割进行重写并加入末尾逗号，最后判断最后一行break</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> Tk</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(text=str)</span>:</span></span><br><span class="line">    strlist=text.split(<span class="string">": "</span>)</span><br><span class="line">    strheaders=<span class="string">"'&#123;0&#125;':'&#123;1&#125;'"</span>.format(strlist[<span class="number">0</span>],strlist[<span class="number">1</span>])</span><br><span class="line">    <span class="comment">#print(strheaders)</span></span><br><span class="line">    <span class="keyword">return</span> strheaders</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = Tk()</span><br><span class="line"><span class="comment"># read the clipboard</span></span><br><span class="line">c= r.clipboard_get()</span><br><span class="line">c_list= c.split(<span class="string">"\n"</span>)</span><br><span class="line">headers=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> c_list:</span><br><span class="line">    <span class="keyword">if</span> item==c_list[<span class="number">-1</span>]:</span><br><span class="line">        headers=headers+ transform(item)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        headers=headers+ transform(item)+<span class="string">",\n"</span></span><br><span class="line">    </span><br><span class="line">print(headers)</span><br></pre></td></tr></table></figure>
+<br>
+这是添加CDN之前的测速详情<br>
+![avatar](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/9.png)
+<br>
+## 开始
+本次使用的是 [jsDelivr](https://www.jsdelivr.com/) ，一个免费的cdn，支持npm，GitHub，wordpress。<br>操作十分简单，只需要利用他提供的网站引用自己要调用的GitHub资源即可。
+![avatar](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/10.png)
+一般我hexo写md时，是将图片放到source\img目录下，然后利用
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](/img/9.png)</span><br></pre></td></tr></table></figure>
+这样进行调用的就是我最上面的那个测速图片。
+而我们要做的操作就是将路径地址改为网址。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/9.png)</span><br></pre></td></tr></table></figure>
+![avatar](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/11.png)
+这样就实现了CDN对图片进行加速。
+## 结果
+![avatar](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/12.png)
+这就是我添加CDN后的测速结果，看上去好像并没有什么太大的区别，因为这个jsdelivr本来也就是国外的。<br>虽然测速没什么区别，但实际访问的体验上我感觉还是可以的。其实如果经济支持的话，可以购买一些国内的CDN加速服务，效果会很明显。
+## 后记
+### 原理
+CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。（内容来自百度百科）
+<br>按照我的理解大概就是CDN服务器先提交把数据给缓存到CDN服务器那里，当你向他索取时，它就把它缓存的数据直接转送给你。举个形象点的例子，你想参加跑步比赛但是跑不过别人，你请来了小明，他帮你拿到了第一名，然后把奖牌给你了。（#大雾）
+<br>这个CDN可能是实时访问转递的，就是当你要访问数据时他才去GitHub上当下数据，然后再传过来。猜想是源于我朋友写的一个p站爬虫，由于总所周知的原因，p站无法直接进行访问，所以他在国外服务器上加了一个php，后面传递要访问的网址，然后他会自动返回那个网址的内容。相当于充当了中介桥梁。
+### 其他
+本期博客启发于CSDN的一篇文章：[免费CDN：jsDelivr+Github 使用方法](https://blog.csdn.net/qq_36759224/article/details/86936453)
+<br>其实相比于用jsdelivr加速不如用七牛云储存图片外链，直接通过外链访问图片。速度应该能更快上一点，而且我印象中好像用户有免费的20G流量配额，但是手持身份证实名劝退。有兴趣的也可以自行了解一下：[七牛云](https://www.qiniu.com/)
+
+
 
 
 
@@ -240,7 +261,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cdn</a>
         		</li>
       		
 		</ul>
@@ -296,7 +321,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/2019/10/03/headers-transform/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/%E4%B8%BAhexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0CDN%E5%8A%A0%E9%80%9F.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +335,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/01/20/2020%E5%B9%B41%E6%9C%8820%E6%97%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/headers-transform.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          日记-2020年1月20日
+          生产力工具-用Python做一个headers转换
         
       </div>
     </a>
   
   
-    <a href="/2019/09/09/%E4%B8%BAhexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0CDN%E5%8A%A0%E9%80%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">为hexo博客添加CDN加速</div>
+    <a href="/%E5%9F%9F%E5%90%8D%E6%9B%B4%E6%94%B9.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">日记-2019年8月31日</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -340,6 +365,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -476,7 +514,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,15 +530,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cdn</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">不蒜子</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,11 +546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">不蒜子</a>
+                <a href="javascript:void(0)" class="js-tag color4">cdn</a>
               </li>
              
               <li class="article-tag-list-item">
