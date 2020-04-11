@@ -6,21 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.6yfz.cn">
-  <title>生产力工具-用Python做一个headers转换 | LiuYun的博客</title>
+  <title>为hexo-yilia添加文章阅读数 | LiuYun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
+  <meta name="description" content="前言一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生产力工具-用Python做一个headers转换">
-<meta property="og:url" content="http://blog.6yfz.cn/headers-transform.html">
+<meta property="og:title" content="为hexo-yilia添加文章阅读数">
+<meta property="og:url" content="http://blog.6yfz.cn/tutorial/hexo-busuanzi.html">
 <meta property="og:site_name" content="LiuYun的博客">
-<meta property="og:description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
+<meta property="og:description" content="前言一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2019-10-03T13:31:00.000Z">
-<meta property="article:modified_time" content="2020-01-20T14:39:44.551Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/19.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/20.png">
+<meta property="article:published_time" content="2020-01-20T15:18:00.000Z">
+<meta property="article:modified_time" content="2020-04-11T14:56:13.270Z">
 <meta property="article:author" content="Liu Yun">
 <meta property="article:tag" content="教程">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="yilia">
+<meta property="article:tag" content="不蒜子">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/19.png">
   
     <link rel="alternative" href="/atom.xml" title="LiuYun的博客" type="application/atom+xml">
   
@@ -152,48 +157,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-headers-transform" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hexo添加不蒜子统计" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      生产力工具-用Python做一个headers转换
+      为hexo-yilia添加文章阅读数
     </h1>
   
 
-        <!--显示阅读次数-->
         
-          <br/>
-          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-          <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;margin-left: 84.4%;">
-                    阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
-          </span>
-          </a>
-        
-        
-        <a href="/headers-transform.html" class="archive-article-date">
-  	<time datetime="2019-10-03T13:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
+        <a href="/tutorial/hexo-busuanzi.html" class="archive-article-date">
+  	<time datetime="2020-01-20T15:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-20</time>
 </a>
         
       </header>
     
+    <!--显示阅读次数-->
+    
+      <br/>
+      <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+      <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;float: right;margin-right: 6.3%;">
+              阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
+      </span>
+      </a>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。</p>
-<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
-<li>Python</li>
-<li>VS Code</li>
-<li>tkinter模块<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h4 id="python中dict类型样式为"><a href="#python中dict类型样式为" class="headerlink" title="python中dict类型样式为{"></a>python中dict类型样式为{<br></h4>a:”value”,<br></li>
-</ul>
-<p>b:”value”,<br></p>
-<p>c:”value”}<br></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。</p>
 <a id="more"></a>
-<p>利用python3自带的tkinter模块识别剪辑版内容，然后利用分割进行重写并加入末尾逗号，最后判断最后一行break</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> Tk</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(text=str)</span>:</span></span><br><span class="line">    strlist=text.split(<span class="string">": "</span>)</span><br><span class="line">    strheaders=<span class="string">"'&#123;0&#125;':'&#123;1&#125;'"</span>.format(strlist[<span class="number">0</span>],strlist[<span class="number">1</span>])</span><br><span class="line">    <span class="comment">#print(strheaders)</span></span><br><span class="line">    <span class="keyword">return</span> strheaders</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = Tk()</span><br><span class="line"><span class="comment"># read the clipboard</span></span><br><span class="line">c= r.clipboard_get()</span><br><span class="line">c_list= c.split(<span class="string">"\n"</span>)</span><br><span class="line">headers=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> c_list:</span><br><span class="line">    <span class="keyword">if</span> item==c_list[<span class="number">-1</span>]:</span><br><span class="line">        headers=headers+ transform(item)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        headers=headers+ transform(item)+<span class="string">",\n"</span></span><br><span class="line">    </span><br><span class="line">print(headers)</span><br></pre></td></tr></table></figure>
-
-
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><h3 id="1："><a href="#1：" class="headerlink" title="1："></a>1：</h3><p>首先修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>after-footer.ejs</strong>文件，在任意位置添加以下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=<span class="string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/19.png" alt="avatar"><br><br></p>
+<h3 id="2："><a href="#2：" class="headerlink" title="2："></a>2：</h3><p>然后再修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>article.ejs</strong>文件，在&lt;%- partial(‘post/title’, {class_name: ‘article-title’}) %&gt;代码下添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--显示阅读次数--&gt;</span><br><span class="line">        &lt;% <span class="keyword">if</span> (!index &amp;&amp; post.comments)&#123; %&gt;</span><br><span class="line">          &lt;br/&gt;</span><br><span class="line">          &lt;a class=<span class="string">"cloud-tie-join-count"</span> href=<span class="string">"javascript:void(0);"</span> style=<span class="string">"color:gray;font-size:14px;"</span>&gt;</span><br><span class="line">          &lt;span class=<span class="string">"icon-sort"</span> id=<span class="string">"busuanzi_container_page_pv"</span> style=<span class="string">"font-size:14px;margin-left:84.4%;"</span>&gt;</span><br><span class="line">                    阅读总数: &lt;span id=<span class="string">"busuanzi_value_page_pv"</span> style=<span class="string">"color:#ef7522;"</span>&gt;&lt;/span&gt;次 &amp;nbsp;&amp;nbsp;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">          &lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/20.png" alt="avatar"><br>当然也可以根据自己的审美需求修改代码的位置或者颜色等，如果有不清楚的可以与我讨论（虽然我也不太懂，是个半吊子）</p>
 
       
       
@@ -240,7 +240,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">不蒜子</a>
         		</li>
       		
 		</ul>
@@ -296,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/headers-transform.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/tutorial/hexo-busuanzi.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +318,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020%E5%B9%B41%E6%9C%8820%E6%97%A5.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/tutorial/python-spider-bilibili-comments.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          日记-2020年1月20日
+          实战Python爬取B站评论
         
       </div>
     </a>
   
   
-    <a href="/%E4%B8%BAhexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0CDN%E5%8A%A0%E9%80%9F.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">为hexo博客添加CDN加速</div>
+    <a href="/diary/20200120.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">日记-2020年1月20日</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -476,10 +484,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -513,6 +517,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bilibili</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,25 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.6yfz.cn">
-  <title>日记-2020年1月20日 | LiuYun的博客</title>
+  <title>生产力工具-用Python做一个headers转换 | LiuYun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="马上就是新的一年，先祝大家在2020新的一年里新年快乐。 这次的更新有： 添加网站ICO图标 利用不蒜子添加了网页阅读次数">
+  <meta name="description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日记-2020年1月20日">
-<meta property="og:url" content="http://blog.6yfz.cn/2020%E5%B9%B41%E6%9C%8820%E6%97%A5.html">
+<meta property="og:title" content="生产力工具-用Python做一个headers转换">
+<meta property="og:url" content="http://blog.6yfz.cn/tutorial/python-tools-transform_headers.html">
 <meta property="og:site_name" content="LiuYun的博客">
-<meta property="og:description" content="马上就是新的一年，先祝大家在2020新的一年里新年快乐。 这次的更新有： 添加网站ICO图标 利用不蒜子添加了网页阅读次数">
+<meta property="og:description" content="每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。 准备工具 Python VS Code tkinter模块原理python中dict类型样式为{a:”value”,  b:”value”, c:”value”}">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/15.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/16.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/17.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/18.jpg">
-<meta property="article:published_time" content="2020-01-20T02:25:00.000Z">
-<meta property="article:modified_time" content="2020-01-20T02:54:22.670Z">
+<meta property="article:published_time" content="2019-10-03T13:31:00.000Z">
+<meta property="article:modified_time" content="2020-04-11T14:59:44.653Z">
 <meta property="article:author" content="Liu Yun">
-<meta property="article:tag" content="日记">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/15.png">
   
     <link rel="alternative" href="/atom.xml" title="LiuYun的博客" type="application/atom+xml">
   
@@ -156,49 +152,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2020年1月20日" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-一键headers转换" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      日记-2020年1月20日
+      生产力工具-用Python做一个headers转换
     </h1>
   
 
-        <!--显示阅读次数-->
         
-          <br/>
-          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-          <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;margin-left: 84.4%;">
-                    阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
-          </span>
-          </a>
-        
-        
-        <a href="/2020%E5%B9%B41%E6%9C%8820%E6%97%A5.html" class="archive-article-date">
-  	<time datetime="2020-01-20T02:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-20</time>
+        <a href="/tutorial/python-tools-transform_headers.html" class="archive-article-date">
+  	<time datetime="2019-10-03T13:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
 </a>
         
       </header>
     
+    <!--显示阅读次数-->
+    
+      <br/>
+      <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+      <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;float: right;margin-right: 6.3%;">
+              阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
+      </span>
+      </a>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>马上就是新的一年，先祝大家在2020新的一年里新年快乐。<br><br></p>
-<h1 id="这次的更新有："><a href="#这次的更新有：" class="headerlink" title="这次的更新有："></a>这次的更新有：<br></h1><ol>
-<li><strong>添加网站ICO图标<br></strong></li>
-<li><strong>利用不蒜子添加了网页阅读次数</strong><a id="more"></a>
-虽然更新的内容不多，但中通还是遇到了各种各样问题。<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题 "></a>遇到的问题 <br></h1></li>
-</ol>
-<h2 id="404问题"><a href="#404问题" class="headerlink" title="404问题"></a>404问题</h2><p>这是一个老问题了，基本每次我更新网站都会遇到。当我调试好功能，并且在本地 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 正常显示<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/15.png" alt="img"><br>于是我将它提交到GitHub上，然后便出现了404找不到网页的错误。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/16.png" alt="img"><br>提交是正确的，我也在GitHub上校对了仓库文件，始终无法找到是哪里错误。<br><br>解决办法也很简单，就是每次最后一次成功提交并且可访问时，将文件进行备份，当出现提交后404则还原备份，然后重新更新一次，看似没有任何实质性的解决，但每次利用备份第二次提交却都可以正常访问，这点一次困扰了我很久，希望有遇到过类似问题的人可以<a href="mailto:liuyunfz@gmail.com">与我联系</a>，不胜感激。<br><br></p>
-<h2 id="阅读次数的显示问题"><a href="#阅读次数的显示问题" class="headerlink" title="阅读次数的显示问题"></a>阅读次数的显示问题</h2><p>为了与自身审美相适应，对网上的代码进行了更改（具体见我的添加不蒜子统计教程），但仍出现了不同分辨率设备的显示问题，这个问题也还待解决，也就先这样吧，至少在我的电脑上是正常显示的。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/17.png" alt="img"><br><br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/18.jpg" alt="img"></p>
+        <p>每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。</p>
+<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
+<li>Python</li>
+<li>VS Code</li>
+<li>tkinter模块<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h4 id="python中dict类型样式为"><a href="#python中dict类型样式为" class="headerlink" title="python中dict类型样式为{"></a>python中dict类型样式为{<br></h4>a:”value”,<br></li>
+</ul>
+<p>b:”value”,<br></p>
+<p>c:”value”}<br></p>
+<a id="more"></a>
+<p>利用python3自带的tkinter模块识别剪辑版内容，然后利用分割进行重写并加入末尾逗号，最后判断最后一行break</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> Tk</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(text=str)</span>:</span></span><br><span class="line">    strlist=text.split(<span class="string">": "</span>)</span><br><span class="line">    strheaders=<span class="string">"'&#123;0&#125;':'&#123;1&#125;'"</span>.format(strlist[<span class="number">0</span>],strlist[<span class="number">1</span>])</span><br><span class="line">    <span class="comment">#print(strheaders)</span></span><br><span class="line">    <span class="keyword">return</span> strheaders</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = Tk()</span><br><span class="line"><span class="comment"># read the clipboard</span></span><br><span class="line">c= r.clipboard_get()</span><br><span class="line">c_list= c.split(<span class="string">"\n"</span>)</span><br><span class="line">headers=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> c_list:</span><br><span class="line">    <span class="keyword">if</span> item==c_list[<span class="number">-1</span>]:</span><br><span class="line">        headers=headers+ transform(item)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        headers=headers+ transform(item)+<span class="string">",\n"</span></span><br><span class="line">    </span><br><span class="line">print(headers)</span><br></pre></td></tr></table></figure>
+
+
 
       
       
       
         <div class="declare" hidden="hidden"></div>
         
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>请作者买一杯咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -209,7 +236,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -265,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/2020%E5%B9%B41%E6%9C%8820%E6%97%A5.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/tutorial/python-tools-transform_headers.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -279,18 +310,18 @@
   
 <nav id="article-nav">
   
-    <a href="/readcounts.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/diary/20200120.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          为hexo-yilia添加文章阅读数
+          日记-2020年1月20日
         
       </div>
     </a>
   
   
-    <a href="/headers-transform.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">生产力工具-用Python做一个headers转换</div>
+    <a href="/tutorial/hexo-CDN.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为hexo博客添加CDN加速</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -445,10 +476,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -482,6 +509,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bilibili</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
             
             <div class="clearfix"></div>

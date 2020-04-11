@@ -6,20 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.6yfz.cn">
-  <title>Hello World | LiuYun的博客</title>
+  <title>实战破解4399HASH验证 | LiuYun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This is my first blog.Then I will tell you something about this blog.please press ‘MORE’ boutton">
+  <meta name="description" content="前景4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://blog.6yfz.cn/hello-world.html">
+<meta property="og:title" content="实战破解4399HASH验证">
+<meta property="og:url" content="http://blog.6yfz.cn/tutorial/python-spider-4399-hash.html">
 <meta property="og:site_name" content="LiuYun的博客">
-<meta property="og:description" content="This is my first blog.Then I will tell you something about this blog.please press ‘MORE’ boutton">
+<meta property="og:description" content="前景4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2019-08-23T08:35:03.000Z">
-<meta property="article:modified_time" content="2020-01-20T14:42:13.346Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/2.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/5.jpg">
+<meta property="article:published_time" content="2019-08-27T23:46:02.000Z">
+<meta property="article:modified_time" content="2020-04-11T15:02:03.465Z">
 <meta property="article:author" content="Liu Yun">
-<meta property="article:tag" content="一个信息网络爱好者，业余时间做些小程序，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我与我交流讨论。">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="4399">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="LiuYun的博客" type="application/atom+xml">
   
@@ -151,51 +160,125 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-实战4399破解HASH验证" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      实战破解4399HASH验证
     </h1>
   
 
-        <!--显示阅读次数-->
         
-          <br/>
-          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-          <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;margin-left: 84.4%;">
-                    阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
-          </span>
-          </a>
-        
-        
-        <a href="/hello-world.html" class="archive-article-date">
-  	<time datetime="2019-08-23T08:35:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
+        <a href="/tutorial/python-spider-4399-hash.html" class="archive-article-date">
+  	<time datetime="2019-08-27T23:46:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
     
+    <!--显示阅读次数-->
+    
+      <br/>
+      <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+      <span class="icon-sort" id="busuanzi_container_page_pv" style="font-size:14px;float: right;margin-right: 6.3%;">
+              阅读总数: <span id="busuanzi_value_page_pv" style="color:#ef7522;"></span>次 &nbsp;&nbsp;
+      </span>
+      </a>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This is my first blog.<br>Then I will tell you something about this blog.<br>please press ‘MORE’ boutton</p>
+        <h1 id="前景"><a href="#前景" class="headerlink" title="前景"></a>前景</h1><p>4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。<br><br><br>而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串验证代码。<br><br>而这次我们就来实战攻破4399的HASH验证。</p>
 <a id="more"></a>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本博客基于hexo，主题使用的是<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a><br><br>博客暂时通过GitHub进行运行，在将来有经济收入后可能会考虑自购空间进行转移。</p>
-<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>欢迎来到我的博客，在这里我会分享一些我在编程时遇到的问题，以就解决的步骤，并总结下心得。如果能对来到这的你有所帮助，我会不胜喜悦。<br>部分我觉得可能会有用的代码文件我也会开源在我的GitHub账号上。</p>
-<h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><p>如果您在阅读途中发现我的博客中有所错误，请及时通过左边的联系方式与我进行交流。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><blockquote>
+<p><strong>Python[模块：json,requests,matplotlib,execjs]</strong><br><strong>Chrome<br>VS Code</strong></p>
+</blockquote>
+<h1 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h1><p>我们先尝试用浏览器进行抓包分析。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/1.jpg" alt="avatar"><br><br>可以看到当我们点击关注时，系统会发送一个关注包，这时他会自动判断（玄学）是否需要输入验证码。如果需要则会再发送两个包，一个是图中的geturl?type=zone<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/2.jpg" alt="avatar"><br><br>可以看到，这个包的作用是获得验证码的地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def geturl(cookie):</span><br><span class="line">    get_headers=&#123;</span><br><span class="line">    <span class="string">'Accept'</span>: <span class="string">'application/json, text/javascript, */*; q=0.01'</span>,</span><br><span class="line">    <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">    <span class="string">'Accept-Language'</span>: <span class="string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,</span><br><span class="line">    <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">    <span class="string">'Cookie'</span>: cookie,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'my.4399.com'</span>,</span><br><span class="line">    <span class="string">'Referer'</span>: <span class="string">'http://my.4399.com/u/2576802349'</span>,</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'</span>,</span><br><span class="line">    <span class="string">'X-Requested-With'</span>: <span class="string">'XMLHttpRequest'</span></span><br><span class="line">    &#125;</span><br><span class="line">    rsp = requests.get(url=<span class="string">"http://my.4399.com/plugins/captcha/index-getUrl?type=zone"</span>,headers=get_headers)    </span><br><span class="line">    url=json.loads(rsp.text)</span><br><span class="line">    url = url[<span class="string">"result"</span>][<span class="string">"url"</span>]</span><br><span class="line">    <span class="built_in">return</span> url</span><br></pre></td></tr></table></figure>
+<p>根据这个包返回的格式我们判断出是json文件，所以利用json模块进行转换，然后按照格式取出包含在其中的URL。<br><br><br>这个时候我们还无法看出HASH的具体作用，我们输入验证码继续看看提交了什么<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.jpg" alt="avatar"><br><br>可以看到，当我们提交了验证码，后面多了一个index-check的包，大概能猜出是验证码验证进行check。其中三个参数，type：zone.cap就是验证码了，hash就是我们这篇要解决的内容了。<br><br>我们知道了用处，回去看下之前那个GET-HASH包<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.png" alt="avatar"><br><br>返回的是一堆json代码，我们尝试在命令提示符运行，可以看到，完美符合提交的HASH值。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/4.png" alt="avatar"><br><br>接下来的难点就是如何通过这个包返回的代码，利用python计算出hash，如果直接是json代码运行还可以，但是我们仔细观察可以看出，在返回的代码中，最后一句的大致意思是给网页中ID为cap_hash的对象赋值hash，但是在python中，我们并不会有相关的对象，所以我们得想办法取出我们想要的代码。<br>我首先想到的是读取行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">listd=rsp.text.split(<span class="string">"\n"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> listd:</span><br><span class="line">        <span class="built_in">print</span>(i,<span class="string">"\n"</span>,<span class="string">"————————————————————————————————————————————————————————"</span>)</span><br></pre></td></tr></table></figure>
+<p>返回的就有点奇怪</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var _4ba4cacd070fe=/*8/<span class="string">"e0*//*+f c62'c6-*/'_aa6b9'/*3=b8d'*/+/*5'5 3*/'69b11784ed'/*9"</span>b/;*/+/*,-5=4/;+_*/<span class="string">'a4f581c4'</span>/*;==,<span class="string">"18*/+/*/'+++9/9-*/'af15edcd1'/*a 48;4,,9*/+ </span></span><br><span class="line"><span class="string"> ————————————————————————————————————————————————————————</span></span><br><span class="line"><span class="string">        ''/*8f3c2+2;61*/;var _1eff743fb70c3ef68=/*3+=1+/- 5*/''/*;4ead70"</span>*/;var _f98ed25c1ead835f23e9fa=decodeURIComponent(/*<span class="string">"4ce8*//*f"</span>+9-,d1c8*/<span class="string">'%29%00'</span>/*=5--5_6+e8*/+/*f9c0=*/<span class="string">'%13%16%3'</span>/*<span class="string">'+d"c2 d*/+/*46 50*/'</span>D%5DU%0CW<span class="string">'/*/1f7db*/+/*4/d1"9c/d*/'</span>%00%00<span class="string">'/*'</span>3+<span class="string">'d54*/+/*c 854*/'</span>R%5BW<span class="string">'/*9-/b+3*/+/*87-9_;*/'</span>T%05Y%00W<span class="string">'/*c"'</span>00*/+/*--a;2*/<span class="string">'%04%0D'</span>/*4ce44_*/+/*a,b94_0_-*/<span class="string">'RZ%0C%0'</span>/*2_3e+b57f*/+/*_<span class="string">'__"c-/*/'</span>5%05%0<span class="string">'/*04+a6 b2,*/+/*=+=42*/'</span>7Q%5DSP<span class="string">'/*9474e*/+/*'</span>ee5c<span class="string">'/ad*/'</span>T%06jT%0<span class="string">'/*a2,";"b 2*/+/*f_- _1d/ef*/'</span>7S__CW%<span class="string">'/*5b,e6*/+/*638fd*/'</span>01EXXV<span class="string">'/*5f,+/67-*/+/*946f33*/'</span>%1CL%1F%<span class="string">'/*f5/9;868f*/+/*;9_;+4-*/'</span>17U%14<span class="string">'/*-42b210'</span>-*/+/*20<span class="string">";+*/'%15gRZ%01X'/*3_,a8*/+/*aeb0-*/'VP%03VQ%0'/*,ad39"</span>*/+/* ,01f_2/1<span class="string">'*/'</span>1%02%01%3<span class="string">'/*/2590/3a*/+/*5'</span>=57ff,b1*/<span class="string">'EV%05%0'</span>/*<span class="string">"208=3/*/+/*0=599/"</span><span class="string">'*/'</span>2R%0FS%0<span class="string">'/*79_-1",*/+/*==='</span>9=<span class="string">'0;e*/'</span>0_%16%16<span class="string">'/*;7/-3*/+/*=b61;a8-5*/'</span>%0CgW%5CQ<span class="string">'/*,5b/f554*/+/*90",a7*/'</span>X%04%07<span class="string">'/*e2/03076*/+/*92/ae-*/'</span>%03%0B%04%<span class="string">'/*69+0/__2_6*/+/*'</span> fd25_*/<span class="string">'01RQ%07'</span>/*34a3e,<span class="string">"*/+/*4-f3251c*/'%06QQTU%01'/*9ec"</span>9 0*/+/*2 8f/f*/<span class="string">'%08t%'</span>/*d+ 5fef7=*/+/*3c6c3*/<span class="string">'5CF%07W%0'</span>/*d;92d*/+/*;=4db<span class="string">'0*/'</span>F%11%<span class="string">'/*a"182+-de*/+/*5ce 6,,c0*/'</span>02%3DR%0<span class="string">'/*1=9a7=*/+/*1/;9//255b*/'</span>8%02%01%04<span class="string">'/*_0+=a/*/+/*a6257+09*/'</span>%04RR%01<span class="string">'/*5/ 9-*/+/*2,2-;f2*/'</span>%04S%<span class="string">'/*3,'</span>377*/+/*6<span class="string">"=6"</span>b*/<span class="string">'08PTPUV%0'</span>/*929a3d1/*/+/* 1a5cb*/<span class="string">'7P%5C'</span>/*7a<span class="string">'0"b*/+/*,_3173+/_*/'</span>O%5EC%0<span class="string">'/*b846+"96,"*/+/*;c4-23*/'</span>7jWP%0<span class="string">'/*d8'</span>,99-8a*/+/*8<span class="string">"='8bb'5,*/'2Z%0A'/*6170/8b,9_*/+/*_be658_*/'%11%02%3D'/*699=-=e*/+/*27f9809*/'R%08%02'/* d97+6105;*/+/*9+36/4+c7*/'%01%04'/*81+"</span>2*/+/*,1; c7=c*/<span class="string">'%04RR%01'</span>/*6 3,+4;1*/+/*7fd d/d<span class="string">'b0*/'</span>%04S%<span class="string">'/*1;0571_*/+/*'</span>a5<span class="string">'+_+- ,*/'</span>08PTPUV<span class="string">'/*ab-5e=e*/+/*"5fe e802*/'</span>%07P%5C<span class="string">'/*e6a2,d*/+/*=+_;ed-*/'</span>O%5ECMfPF<span class="string">'/*41=b"5*/+/*=24b1'</span>=a*/<span class="string">'%0D%3'</span>/*70d_9c*/+/*,;_b0;5a*/<span class="string">'DZ%0F'</span>/*33967*/+/*5+3; */<span class="string">'%0C%5B%01P'</span>/*,93352f*/+/*4 ,<span class="string">'0*/'</span>%01%0<span class="string">'/*+;3+_8+*/+/*5+;0,/ 9ec*/'</span>B%01%07<span class="string">'/*+ c; */+/*/b;3_6c,*/'</span>%02QUQQ%0C<span class="string">'/*'</span>b1f54*/+/* 0 2;*/<span class="string">'%01UQX'</span>/*2ad=3f-*/+/*_ 5240f*/<span class="string">'M%0C%12P%'</span>/*;4f2d91*/+/*2_d<span class="string">'8;4*/'</span>05D_n%3CXT<span class="string">'/*f2d3"*/+/*,38/66cb*/'</span>%0FRX%00%<span class="string">'/* 3;;_*/+/*;67"6'</span>_1*/<span class="string">'0AWSW%0'</span>/*a_13_94<span class="string">'a*/+/*772a_9,*/'</span>7Y%03%<span class="string">'/*+c+6f6;d-*/+/*d;13a1e66+*/'</span>01PQ%02%0<span class="string">'/*a+5611*/+/*-"7b2*/'</span>3%0C%13%<span class="string">'/*86cc"=-*/+/*4f"a'</span>f*/<span class="string">'0CDQ%'</span>/*ba6b3+;*/+/*bef5<span class="string">'61*/'</span>04A%0Aj%<span class="string">'/*6;'</span><span class="string">"6"</span>a<span class="string">"/*/+/*3+_f4'6*/'06%5D'/*094/5fc52;*/+/*e"</span>d2b9+97*/<span class="string">'V%5D%0'</span>/*d064b<span class="string">"b7eb*/+/*8f3=ae;8*/'1%3EWR%0'/*+=-'4*/+/*_7383a*/'3%00_%06X'/*34;"</span>3,6;8*/+/*44c bca ea*/<span class="string">'UU%05%07%0'</span>/*+0c5,*/+/*e0d880_3f*/<span class="string">'EQ%5CO%5C%'</span>/*f0,,f aa9*/+/*a+9a<span class="string">";,*/'13S%02YWU'/*e6-3,36e"</span>*/+/*0e428,, <span class="string">"8*/'%05%03S'/*d /119-e'*/+/*3;/d-40c2-*/'%16%0E%3'/*f87/;24b,*/+/*'e bfb,*/'A%07Z'/*/_554*/+/*c6+=588-c_*/'Q%08o%00W'/*=fecc*/+/*ce 3"</span>ce*/<span class="string">'%05W%5'</span>/*ad1_<span class="string">"505*/+/*,+a-d*/'BP%09%03'/*6 ee7,;/*/+/*=5-7a0a*/'%06U%03'/*e9df5c*/+/*d=6 1*/'%08%02%'/*cd'915,/31*/+/*'f7b/,d*/'00%5DJ%'/*,3/6d*/+/*4-6b0"</span>6c11*/<span class="string">'09A%03'</span>/*b9f001*/+/*1,549=5cf */<span class="string">'%5E%04S%'</span>/*84a6f; */+/*1<span class="string">'6"/-,"*/'</span>00XVW%07SC<span class="string">'/*3_9'</span>7<span class="string">"b 8*/+/*8;_45/0;"</span>9*/<span class="string">'X%16T'</span>/*1030a/ _ce*/+/*228,ac*/<span class="string">'%2B%14%13'</span>/*18;_6*/+/*657; ++3<span class="string">"*/'XBfU%00W%0'/*a+0f  f_9*/+/*7;26,*/'8%01V%0E%0'/*280/09a//*/+/*'aa7 _*/'7P%06'/*/2cc9*/+/*3 b5_*/'%07%0'/*_b9 ==*/+/*4ca/df+*/'4%07%02%'/*_-0/630*/+/*4= ''9d2b-*/'5C%05'/*'d=_3d7b"</span>*/+/*-f<span class="string">"37cd9*/'S%02%04'/*/=3=de603*/+/*;,5a3*/'_%0AH%5E'/*2f6+'0b3*/+</span></span><br><span class="line"><span class="string"> ————————————————————————————————————————————————————————</span></span><br><span class="line"><span class="string">        ''/*eb -1bd1"</span>*/);</span><br><span class="line"> ————————————————————————————————————————————————————————</span><br><span class="line"><span class="keyword">for</span>(i=0; i&lt;_f98ed25c1ead835f23e9fa.length;i++)</span><br><span class="line"> ————————————————————————————————————————————————————————</span><br><span class="line">_1eff743fb70c3ef68 += String.fromCharCode(_4ba4cacd070fe.charCodeAt(i%_4ba4cacd070fe.length)^_f98ed25c1ead835f23e9fa.charCodeAt(i));</span><br><span class="line"> ————————————————————————————————————————————————————————</span><br><span class="line"><span class="built_in">eval</span>(_1eff743fb70c3ef68);</span><br><span class="line"> ————————————————————————————————————————————————————————</span><br><span class="line">document.getElementById(<span class="string">'cap_hash'</span>).value=_dc5511ecc1a84115c98dc6d8730755fe();</span><br><span class="line"> ————————————————————————————————————————————————————————</span><br></pre></td></tr></table></figure>
+<p>当我们多尝试几次后，会发现返回的代码是固定七行，只有第七行是我们需要进行修改的，所以我们将前六行写入一个新的字符串中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> listd[0:6]:</span><br><span class="line">        hashcode_str = hashcode_str + i + <span class="string">"\n"</span></span><br></pre></td></tr></table></figure>
+<p>这边的listd好像有点类似range，也是左闭右开，所以只能取出前6行。<br>然后把这个字符串用execjs的模块转换一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = execjs.compile(hashcode_str)</span><br></pre></td></tr></table></figure>
+<p>第七行其实我们只需要用到后面的方法调用，前面的赋值语句是不需要的。观察分析其实前面赋值对象的语句应该是固定的，所以我们可以直接通过长度来进行取值，我用鼠标一个个字符串数过去的，我们要的刚好是第42个字符开始，即“_”，后面则是一串随机的字母数字，我们取到底就好。<br>这边还有一个我在运行时遇到的问题，execjs调用命令后，好像结尾并不能加”:”,否则会报错，所以应该是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.eval(listd[6][42:-1])</span><br></pre></td></tr></table></figure>
+<p>总的获取hash代码就是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def gethash(cookie):</span><br><span class="line">    headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 5.1; U; zh-cn; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.70"</span>,</span><br><span class="line">    <span class="string">"Cookie"</span>:cookie</span><br><span class="line">    &#125;                        </span><br><span class="line">    url = <span class="string">"http://my.4399.com/plugins/captcha/index-getHash?_=1565359334744"</span></span><br><span class="line">    rsp = requests.get(url,headers=headers)</span><br><span class="line">    rsp.encoding =<span class="string">"utf-8"</span></span><br><span class="line">    hashcode_str = <span class="string">""</span></span><br><span class="line">    listd=rsp.text.split(<span class="string">"\n"</span>)</span><br><span class="line">    sum=0</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> listd[0:6]:</span><br><span class="line">        hashcode_str = hashcode_str + i + <span class="string">"\n"</span></span><br><span class="line">        sum+=1</span><br><span class="line">    <span class="built_in">print</span>(sum)</span><br><span class="line">    <span class="built_in">print</span>(len(listd))</span><br><span class="line">    a = execjs.compile(hashcode_str)</span><br><span class="line">    <span class="built_in">return</span> a.eval(listd[6][42:-1])</span><br></pre></td></tr></table></figure>
+<p>然后我们就可以完成这次要实现的关注模拟了<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/5.jpg" alt="avatar"><br></p>
 
       
       
       
-        <div class="declare" hidden="hidden"></div>
+        <div class="declare">
+          <strong>本文作者：</strong>
+          
+            Liu Yun
+          
+          <br>
+          <strong>本文链接：</strong>
+          http://blog.6yfz.cn/tutorial/python-spider-4399-hash.html
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+        </div>
         
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>请作者买一杯咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">4399</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -246,7 +329,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/hello-world.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/tutorial/python-spider-4399-hash.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -260,15 +343,20 @@
   
 <nav id="article-nav">
   
-    <a href="/%E5%AE%9E%E6%88%984399%E7%A0%B4%E8%A7%A3HASH%E9%AA%8C%E8%AF%81.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/tutorial/issue-4399-saving.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          实战破解4399HASH验证
+          【issue 未解决】关于4399造梦西游的存档保存
         
       </div>
     </a>
   
+  
+    <a href="/diary/hello-world.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -285,6 +373,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前景"><span class="toc-number">1.</span> <span class="toc-text">前景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正式开始"><span class="toc-number">3.</span> <span class="toc-text">正式开始</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -421,10 +522,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -458,6 +555,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bilibili</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
             
             <div class="clearfix"></div>
