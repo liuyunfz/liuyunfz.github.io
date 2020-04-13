@@ -6,28 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.6yfz.cn">
-  <title>为hexo博客添加CDN加速 | LiuYun的博客</title>
+  <title>利用Python爬取丁香园疫情数据 | LiuYun的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言 众所周知，Github是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。">
+  <meta name="description" content="疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂  准备： python及常用模块 VS Code 浏览器    目标网址：https:&#x2F;&#x2F;ncov.dxy.cn&#x2F;ncovh5&#x2F;view&#x2F;pneumonia?scene&#x3D;2&amp;clicktime&#x3D;1579579">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为hexo博客添加CDN加速">
-<meta property="og:url" content="http://blog.6yfz.cn/tutorial/hexo-CDN.html">
+<meta property="og:title" content="利用Python爬取丁香园疫情数据">
+<meta property="og:url" content="http://blog.6yfz.cn/tutorial/python-spider-dxy.html">
 <meta property="og:site_name" content="LiuYun的博客">
-<meta property="og:description" content="前言 众所周知，Github是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。">
+<meta property="og:description" content="疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂  准备： python及常用模块 VS Code 浏览器    目标网址：https:&#x2F;&#x2F;ncov.dxy.cn&#x2F;ncovh5&#x2F;view&#x2F;pneumonia?scene&#x3D;2&amp;clicktime&#x3D;1579579">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/9.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/10.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/11.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/12.png">
-<meta property="article:published_time" content="2019-09-09T13:31:00.000Z">
-<meta property="article:modified_time" content="2020-04-11T14:58:58.136Z">
+<meta property="og:image" content="http://blog.6yfz.cn/img/28.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/29.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/30.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/31.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/32.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/33.png">
+<meta property="og:image" content="http://blog.6yfz.cn/img/34.png">
+<meta property="article:published_time" content="2020-03-09T13:33:02.000Z">
+<meta property="article:modified_time" content="2020-04-13T04:46:25.717Z">
 <meta property="article:author" content="Liu Yun">
 <meta property="article:tag" content="教程">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="cdn">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png">
+<meta name="twitter:image" content="http://blog.6yfz.cn/img/28.png">
   
     <link rel="alternative" href="/atom.xml" title="LiuYun的博客" type="application/atom+xml">
   
@@ -159,20 +160,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-为hexo博客添加CDN加速" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-丁香园疫情数据" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      为hexo博客添加CDN加速
+      利用Python爬取丁香园疫情数据
     </h1>
   
 
         
-        <a href="/tutorial/hexo-CDN.html" class="archive-article-date">
-  	<time datetime="2019-09-09T13:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
+        <a href="/tutorial/python-spider-dxy.html" class="archive-article-date">
+  	<time datetime="2020-03-09T13:33:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-09</time>
 </a>
         
       </header>
@@ -188,26 +189,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 众所周知，<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是全球最大的社交编程及代码托管网站，但是由于他是国外的产品，所以导致我们访问会比较慢，有时甚至可能出现无法访问的情况。<br><br>本博客就是部署与GitHub上的（剩下了花钱买空间以及备案等杂事），但是也因此访问速度是个很大的诟病，尤其是一些技术博客中由于图片质量导致体积较大，加载慢影响阅读。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/14.png" alt="img"></p>
-<a id="more"></a>
-<br>
-这是添加CDN之前的测速详情
-<br>
+        <p>疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）<br>这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂 </p>
+<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ol>
+<li>python及常用模块</li>
+<li>VS Code</li>
+<li>浏览器  </li>
+</ol>
+<p>目标网址：<a href="https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&clicktime=1579579384&enterid=1579579384&from=timeline&isappinstalled=0" target="_blank" rel="noopener">https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0</a></p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="1-抓包"><a href="#1-抓包" class="headerlink" title="1.抓包"></a>1.抓包</h3><p>首先是抓包<br><img src="/img/28.png" alt="img"><br>经过分析可以看出，该网页的数据不同于平常的一个框架+单独的json数据包，它是直接渲染好了给我们传过来的，所以要做的事情就比较简单了，只需要从html代码中提取出我们需要的数据。</p>
+<h3 id="2-python代码编写"><a href="#2-python代码编写" class="headerlink" title="2.python代码编写"></a>2.python代码编写</h3><p>我们先实现获取html代码的代码，然后再尝试从中提取数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">"https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0"</span>)</span><br><span class="line">response.encoding = <span class="string">"utf-8"</span></span><br><span class="line">body = response.text</span><br></pre></td></tr></table></figure>
+<p>这里指定了一下编码，是为了防止出现不必要的转码错误。  </p>
+<h3 id="3-提取HTML中的代码"><a href="#3-提取HTML中的代码" class="headerlink" title="3.提取HTML中的代码"></a>3.提取HTML中的代码</h3><p>获取网页数据实现了，接下来我们分析一下数据的位置，以及该如何提取出来。<img src="/img/29.png" alt="img"><br>通过观察我们可以发现，它是利用一个script一个区域数据，分别对应的是全球地区，全国地区等，里面是一串类似是js代码，先不管，先把我们这次要的国内数据提代码取出来。<img src="/img/30.png" alt="img"><br>通过分析，国内的数据script对应的id值是“getAreaStat” 。因为是属于一个类里的，所以这里我用了xpath，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">html = etree.HTML(body, etree.HTMLParser())</span><br><span class="line">gethtml = html.xpath(<span class="string">'//*[@id="getAreaStat"]/text()'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-提取代码中的数据"><a href="#4-提取代码中的数据" class="headerlink" title="4.提取代码中的数据"></a>4.提取代码中的数据</h3><p>经过上面的步骤，我们已经实现了提取出了国内数据的js代码，但是很明显我们只需要数据，而我们利用python也不可能执行这串window.getAreaStat代码，所以我们尝试删去赋值等代码，直接提取数据，因为里面的数据刚好符合json格式。<br>要删除的头数据<br><img src="/img/31.png" alt="img"><br>要删除的尾数据<br><img src="/img/32.png" alt="img"><br>即</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gethtml[<span class="number">0</span>][<span class="number">28</span>:<span class="number">-12</span>]</span><br></pre></td></tr></table></figure>
+<p>这里[0]是因为前面xpath查找的返回的是list，因为我们指定了id，所以应该只能找到一个，并且正好是我们想要的，然后用[28:-12]提取出完美的json格式的数据。<br><img src="/img/33.png" alt="img"> </p>
+<h3 id="5-查找数据"><a href="#5-查找数据" class="headerlink" title="5.查找数据"></a>5.查找数据</h3><p>虽然每个省份都是一个很好的json数据，但是我们要取的是整个省份，所以我们将其转化为列表，然后利用迭代，查找到我们需要的城市。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data=eval(gethtml[<span class="number">0</span>][<span class="number">28</span>:<span class="number">-12</span>])</span><br><span class="line">p_count=<span class="string">"0"</span></span><br><span class="line">c_count=<span class="string">"0"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> str(i.get(<span class="string">"provinceName"</span>)) == province:</span><br><span class="line">        p_count=str(i.get(<span class="string">"confirmedCount"</span>))</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> i[<span class="string">"cities"</span>]:</span><br><span class="line">            <span class="keyword">if</span> str(c.get(<span class="string">"cityName"</span>)) == city[<span class="number">0</span>:<span class="number">-1</span>]:</span><br><span class="line">                c_count=c.get(<span class="string">"confirmedCount"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>然后我们调试看看<br><img src="/img/34.png" alt="img"><br>可以发现已经成功了，至于我为什么要用到city[0:-1]，是为了对接微信的地理位置数据，这个我会在下一次的博文介绍。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这次的难点主要在数据并不是一个单独的json包里，需要我们自己从html代码中获取，并且获取的是js代码，我们还要额外提取其中的数据，总的来说还是难度不大的。<br>如果有疑问可以在下面评论联系我，那我们下期见~</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/9.png" alt="avatar"><br><br></p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>本次使用的是 <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener">jsDelivr</a> ，一个免费的cdn，支持npm，GitHub，wordpress。<br>操作十分简单，只需要利用他提供的网站引用自己要调用的GitHub资源即可。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/10.png" alt="avatar"><br>一般我hexo写md时，是将图片放到source\img目录下，然后利用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](/img/9.png)</span><br></pre></td></tr></table></figure>
-<p>这样进行调用的就是我最上面的那个测速图片。<br>而我们要做的操作就是将路径地址改为网址。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/9.png)</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/11.png" alt="avatar"><br>这样就实现了CDN对图片进行加速。</p>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/12.png" alt="avatar"><br>这就是我添加CDN后的测速结果，看上去好像并没有什么太大的区别，因为这个jsdelivr本来也就是国外的。<br>虽然测速没什么区别，但实际访问的体验上我感觉还是可以的。其实如果经济支持的话，可以购买一些国内的CDN加速服务，效果会很明显。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。（内容来自百度百科）<br><br>按照我的理解大概就是CDN服务器先提交把数据给缓存到CDN服务器那里，当你向他索取时，它就把它缓存的数据直接转送给你。举个形象点的例子，你想参加跑步比赛但是跑不过别人，你请来了小明，他帮你拿到了第一名，然后把奖牌给你了。（#大雾）<br><br>这个CDN可能是实时访问转递的，就是当你要访问数据时他才去GitHub上当下数据，然后再传过来。猜想是源于我朋友写的一个p站爬虫，由于总所周知的原因，p站无法直接进行访问，所以他在国外服务器上加了一个php，后面传递要访问的网址，然后他会自动返回那个网址的内容。相当于充当了中介桥梁。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>本期博客启发于CSDN的一篇文章：<a href="https://blog.csdn.net/qq_36759224/article/details/86936453" target="_blank" rel="noopener">免费CDN：jsDelivr+Github 使用方法</a><br><br>其实相比于用jsdelivr加速不如用七牛云储存图片外链，直接通过外链访问图片。速度应该能更快上一点，而且我印象中好像用户有免费的20G流量配额，但是手持身份证实名劝退。有兴趣的也可以自行了解一下：<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a></p>
-
       
       
       
-        <div class="declare" hidden="hidden"></div>
+        <div class="declare">
+          <strong>本文作者：</strong>
+          
+            Liu Yun
+          
+          <br>
+          <strong>本文链接：</strong>
+          http://blog.6yfz.cn/tutorial/python-spider-dxy.html
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+        </div>
         
       
         <div class="page-reward">
@@ -249,11 +269,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cdn</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -309,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/tutorial/hexo-CDN.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.6yfz.cn/tutorial/python-spider-dxy.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -323,18 +339,9 @@
   
 <nav id="article-nav">
   
-    <a href="/tutorial/python-tools-transform_headers.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          生产力工具-用Python做一个headers转换
-        
-      </div>
-    </a>
   
-  
-    <a href="/diary/20190831.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">日记-2019年8月31日</div>
+    <a href="/tutorial/python-spider-bilibili-comments.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">实战Python爬取B站评论</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -361,7 +368,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始"><span class="toc-number">1.1.</span> <span class="toc-text">开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结果"><span class="toc-number">1.2.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">1.3.</span> <span class="toc-text">后记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">1.3.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">1.3.2.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备："><span class="toc-number">1.</span> <span class="toc-text">准备：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始"><span class="toc-number">2.</span> <span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-抓包"><span class="toc-number">2.1.</span> <span class="toc-text">1.抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-python代码编写"><span class="toc-number">2.2.</span> <span class="toc-text">2.python代码编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-提取HTML中的代码"><span class="toc-number">2.3.</span> <span class="toc-text">3.提取HTML中的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-提取代码中的数据"><span class="toc-number">2.4.</span> <span class="toc-text">4.提取代码中的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-查找数据"><span class="toc-number">2.5.</span> <span class="toc-text">5.查找数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">3.</span> <span class="toc-text">结语</span></a></li></ol>
                     </div>
                 </span>
             </div>

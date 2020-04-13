@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.6yfz.cn//tutorial/python-spider-dxy.html</loc>
+    <lastmod>2020-04-13</lastmod>
+  </url>  <url>
+    <loc>http://blog.6yfz.cn//tutorial/python-spider-bilibili-comments.html</loc>
+    <lastmod>2020-04-12</lastmod>
+  </url>  <url>
     <loc>http://blog.6yfz.cn//tutorial/python-spider-4399-hash.html</loc>
     <lastmod>2020-04-11</lastmod>
   </url>  <url>
@@ -8,9 +14,6 @@
     <lastmod>2020-04-11</lastmod>
   </url>  <url>
     <loc>http://blog.6yfz.cn//tutorial/hexo-CDN.html</loc>
-    <lastmod>2020-04-11</lastmod>
-  </url>  <url>
-    <loc>http://blog.6yfz.cn//tutorial/python-spider-bilibili-comments.html</loc>
     <lastmod>2020-04-11</lastmod>
   </url>  <url>
     <loc>http://blog.6yfz.cn//diary/20190831.html</loc>
