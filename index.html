@@ -182,23 +182,8 @@
 <h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ol>
 <li>python及常用模块</li>
 <li>VS Code</li>
-<li>浏览器  </li>
-</ol>
-<p>目标网址：<a href="https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&clicktime=1579579384&enterid=1579579384&from=timeline&isappinstalled=0" target="_blank" rel="noopener">https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0</a></p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="1-抓包"><a href="#1-抓包" class="headerlink" title="1.抓包"></a>1.抓包</h3><p>首先是抓包<br><img src="/img/28.png" alt="img"><br>经过分析可以看出，该网页的数据不同于平常的一个框架+单独的json数据包，它是直接渲染好了给我们传过来的，所以要做的事情就比较简单了，只需要从html代码中提取出我们需要的数据。</p>
-<h3 id="2-python代码编写"><a href="#2-python代码编写" class="headerlink" title="2.python代码编写"></a>2.python代码编写</h3><p>我们先实现获取html代码的代码，然后再尝试从中提取数据。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(<span class="string">"https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0"</span>)</span><br><span class="line">response.encoding = <span class="string">"utf-8"</span></span><br><span class="line">body = response.text</span><br></pre></td></tr></table></figure>
-<p>这里指定了一下编码，是为了防止出现不必要的转码错误。  </p>
-<h3 id="3-提取HTML中的代码"><a href="#3-提取HTML中的代码" class="headerlink" title="3.提取HTML中的代码"></a>3.提取HTML中的代码</h3><p>获取网页数据实现了，接下来我们分析一下数据的位置，以及该如何提取出来。<img src="/img/29.png" alt="img"><br>通过观察我们可以发现，它是利用一个script一个区域数据，分别对应的是全球地区，全国地区等，里面是一串类似是js代码，先不管，先把我们这次要的国内数据提代码取出来。<img src="/img/30.png" alt="img"><br>通过分析，国内的数据script对应的id值是“getAreaStat” 。因为是属于一个类里的，所以这里我用了xpath，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">html = etree.HTML(body, etree.HTMLParser())</span><br><span class="line">gethtml = html.xpath(<span class="string">'//*[@id="getAreaStat"]/text()'</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="4-提取代码中的数据"><a href="#4-提取代码中的数据" class="headerlink" title="4.提取代码中的数据"></a>4.提取代码中的数据</h3><p>经过上面的步骤，我们已经实现了提取出了国内数据的js代码，但是很明显我们只需要数据，而我们利用python也不可能执行这串window.getAreaStat代码，所以我们尝试删去赋值等代码，直接提取数据，因为里面的数据刚好符合json格式。<br>要删除的头数据<br><img src="/img/31.png" alt="img"><br>要删除的尾数据<br><img src="/img/32.png" alt="img"><br>即</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gethtml[<span class="number">0</span>][<span class="number">28</span>:<span class="number">-12</span>]</span><br></pre></td></tr></table></figure>
-<p>这里[0]是因为前面xpath查找的返回的是list，因为我们指定了id，所以应该只能找到一个，并且正好是我们想要的，然后用[28:-12]提取出完美的json格式的数据。<br><img src="/img/33.png" alt="img"> </p>
-<h3 id="5-查找数据"><a href="#5-查找数据" class="headerlink" title="5.查找数据"></a>5.查找数据</h3><p>虽然每个省份都是一个很好的json数据，但是我们要取的是整个省份，所以我们将其转化为列表，然后利用迭代，查找到我们需要的城市。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data=eval(gethtml[<span class="number">0</span>][<span class="number">28</span>:<span class="number">-12</span>])</span><br><span class="line">p_count=<span class="string">"0"</span></span><br><span class="line">c_count=<span class="string">"0"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> str(i.get(<span class="string">"provinceName"</span>)) == province:</span><br><span class="line">        p_count=str(i.get(<span class="string">"confirmedCount"</span>))</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> i[<span class="string">"cities"</span>]:</span><br><span class="line">            <span class="keyword">if</span> str(c.get(<span class="string">"cityName"</span>)) == city[<span class="number">0</span>:<span class="number">-1</span>]:</span><br><span class="line">                c_count=c.get(<span class="string">"confirmedCount"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>然后我们调试看看<br><img src="/img/34.png" alt="img"><br>可以发现已经成功了，至于我为什么要用到city[0:-1]，是为了对接微信的地理位置数据，这个我会在下一次的博文介绍。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这次的难点主要在数据并不是一个单独的json包里，需要我们自己从html代码中获取，并且获取的是js代码，我们还要额外提取其中的数据，总的来说还是难度不大的。<br>如果有疑问可以在下面评论联系我，那我们下期见~</p>
-
+<li>浏览器<br>目标网址：<a href="https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&clicktime=1579579384&enterid=1579579384&from=timeline&isappinstalled=0" target="_blank" rel="noopener">https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0</a>
+        
       
       
       
@@ -935,15 +920,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">4399</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">4399</a>
         		</li>
       		
 		</ul>
@@ -1160,14 +1145,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">4399</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">issue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
@@ -1189,6 +1166,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cdn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">4399</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">issue</a>
               </li>
              
               <li class="article-tag-list-item">
