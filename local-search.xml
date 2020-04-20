@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>日记-2020年4月20日</title>
+    <link href="/diary/20200420.html"/>
+    <url>/diary/20200420.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在是晚上的23点22分，本来我已经关闭了电脑，并且洗漱完打算上床，但因为一件事久久不能释怀。  </p><h1 id="事情经过"><a href="#事情经过" class="headerlink" title="事情经过"></a>事情经过</h1><p>这段不幸的经历发生在一个我刚认识了不到一周的来自酷安的群友。就在昨日，他还在和我们畅谈打算明日在阿里云买台学生机，然后把域名备案。然而今天一早，却收到了他的消息。<br><img src="/img/38.png" srcset="/img/loading.gif" alt="img"><br>昨天还说要备案的，怎么今天突然说要博客路要暂时停止了？<br>随即而来的，是我一直有耳闻，但却从未真切感受到的事——DDOS<br>以下是聊天记录：<br><img src="/img/39.png" srcset="/img/loading.gif" alt="img"><br>以下是涉及到的图片<br><img src="/img/41.jpg" srcset="/img/loading.gif" alt="img"><br><img src="/img/40.jpg" srcset="/img/loading.gif" alt="img"><br>短短一个晚上，6T的流量，直接欠费4500元，这对任何一个个人博客都是一个难以承担的数目，而这个不幸的遭遇者，还仅仅是一个初中生。  </p><h1 id="感思"><a href="#感思" class="headerlink" title="感思"></a>感思</h1><p>我为他的遭遇感到不幸，但我却不能为他做点什么，因为在此之前我从未遇到过这类事情。我无话可说，只能劝他保持心态，以及写下这篇文章用来警醒你我。被DDOS也许只是一个随机的事件，但谁也不能保证它不会降临到自己的身上，我们只有在危机到来之前，做好准备。<br>截至现在23：40分，腾讯云官方客服的态度仍然是不对流量及费用进行退回，可能会报公安吧，但它没备案，也不知道能不能成功。<br>就先写到这吧，有后续我会继续在这篇文章更进，希望它能挺过这一劫。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>diary</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【issue 已解决】Valine网址指向的一个小坑</title>
     <link href="/issue/hexo-valine-issue.html"/>
     <url>/issue/hexo-valine-issue.html</url>
@@ -22,9 +47,9 @@
       
       <tag>hexo</tag>
       
-      <tag>issue</tag>
-      
       <tag>valine</tag>
+      
+      <tag>issue</tag>
       
     </tags>
     
@@ -212,9 +237,9 @@
     
     <tags>
       
-      <tag>4399</tag>
-      
       <tag>issue</tag>
+      
+      <tag>4399</tag>
       
     </tags>
     

@@ -16,14 +16,14 @@
   <meta name="theme-color" content="#2f4154">
 
   
-      <meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。">
+    <meta name="description" content="4月20日，因为一个朋友的不幸遭遇有感而发。一定要开防DDOS!一定要开防DDOS!一定要开防DDOS!">
   
 
   <!--以上添加了description代码-->
   <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
   <meta name="author" content="Liu Yun">
   <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
-  <title>利用Python爬取丁香园疫情数据 | LiuYun的博客</title>
+  <title>日记-2020年4月20日 | LiuYun的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -161,8 +161,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-03-09 21:33">
-                    2020 三月 9日 , 星期一 , 9:33 晚上
+                  <time datetime="2020-04-20 23:19">
+                    2020 四月 20日 , 星期一 , 11:19 晚上
                   </time>
                 </div>
               
@@ -172,7 +172,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    868 字
+                    434 字
                   </span>
                 
 
@@ -182,7 +182,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    10
+                    4
                      分钟
                   </span>
                 
@@ -218,59 +218,15 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 13日 , 星期一 , 4:47 下午
+                本文最后更新于：2020 四月 20日 , 星期一 , 11:42 晚上
               </p>
             
           <article class="markdown-body">
-            <p>疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）<br>这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂 </p>
-<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ol>
-<li>python及常用模块</li>
-<li>VS Code</li>
-<li>浏览器<br>目标网址：<a href="https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&clicktime=1579579384&enterid=1579579384&from=timeline&isappinstalled=0" target="_blank" rel="noopener">https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0</a>  <a id="more"></a> 
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="1-抓包"><a href="#1-抓包" class="headerlink" title="1.抓包"></a>1.抓包</h3>首先是抓包<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/28.png" srcset="/img/loading.gif" alt="img"><br>经过分析可以看出，该网页的数据不同于平常的一个框架+单独的json数据包，它是直接渲染好了给我们传过来的，所以要做的事情就比较简单了，只需要从html代码中提取出我们需要的数据。<h3 id="2-python代码编写"><a href="#2-python代码编写" class="headerlink" title="2.python代码编写"></a>2.python代码编写</h3>我们先实现获取html代码的代码，然后再尝试从中提取数据。<pre><code class="hljs python">response = requests.get(<span class="hljs-string">"https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&amp;enterid=1579579384&amp;from=timeline&amp;isappinstalled=0"</span>)
-response.encoding = <span class="hljs-string">"utf-8"</span>
-body = response.text</code></pre>
-这里指定了一下编码，是为了防止出现不必要的转码错误。  <h3 id="3-提取HTML中的代码"><a href="#3-提取HTML中的代码" class="headerlink" title="3.提取HTML中的代码"></a>3.提取HTML中的代码</h3>获取网页数据实现了，接下来我们分析一下数据的位置，以及该如何提取出来。<img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/29.png" srcset="/img/loading.gif" alt="img"><br>通过观察我们可以发现，它是利用一个script一个区域数据，分别对应的是全球地区，全国地区等，里面是一串类似是js代码，先不管，先把我们这次要的国内数据提代码取出来。<img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/30.png" srcset="/img/loading.gif" alt="img"><br>通过分析，国内的数据script对应的id值是“getAreaStat” 。因为是属于一个类里的，所以这里我用了xpath，代码如下：<pre><code class="hljs python">html = etree.HTML(body, etree.HTMLParser())
-gethtml = html.xpath(<span class="hljs-string">'//*[@id="getAreaStat"]/text()'</span>)</code></pre>
-<h3 id="4-提取代码中的数据"><a href="#4-提取代码中的数据" class="headerlink" title="4.提取代码中的数据"></a>4.提取代码中的数据</h3>经过上面的步骤，我们已经实现了提取出了国内数据的js代码，但是很明显我们只需要数据，而我们利用python也不可能执行这串window.getAreaStat代码，所以我们尝试删去赋值等代码，直接提取数据，因为里面的数据刚好符合json格式。<br>要删除的头数据<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/31.png" srcset="/img/loading.gif" alt="img"><br>要删除的尾数据<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/32.png" srcset="/img/loading.gif" alt="img"><br>即<pre><code class="hljs python">gethtml[<span class="hljs-number">0</span>][<span class="hljs-number">28</span>:<span class="hljs-number">-12</span>]</code></pre>
-这里[0]是因为前面xpath查找的返回的是list，因为我们指定了id，所以应该只能找到一个，并且正好是我们想要的，然后用[28:-12]提取出完美的json格式的数据。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/33.png" srcset="/img/loading.gif" alt="img"> <h3 id="5-查找数据"><a href="#5-查找数据" class="headerlink" title="5.查找数据"></a>5.查找数据</h3>虽然每个省份都是一个很好的json数据，但是我们要取的是整个省份，所以我们将其转化为列表，然后利用迭代，查找到我们需要的城市。<pre><code class="hljs python">data=eval(gethtml[<span class="hljs-number">0</span>][<span class="hljs-number">28</span>:<span class="hljs-number">-12</span>])
-p_count=<span class="hljs-string">"0"</span>
-c_count=<span class="hljs-string">"0"</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data:
-    <span class="hljs-keyword">if</span> str(i.get(<span class="hljs-string">"provinceName"</span>)) == province:
-        p_count=str(i.get(<span class="hljs-string">"confirmedCount"</span>))
-        <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> i[<span class="hljs-string">"cities"</span>]:
-            <span class="hljs-keyword">if</span> str(c.get(<span class="hljs-string">"cityName"</span>)) == city[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>]:
-                c_count=c.get(<span class="hljs-string">"confirmedCount"</span>)
-                <span class="hljs-keyword">break</span></code></pre>
-然后我们调试看看<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/34.png" srcset="/img/loading.gif" alt="img"><br>可以发现已经成功了，至于我为什么要用到city[0:-1]，是为了对接微信的地理位置数据，这个我会在下一次的博文介绍。<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>这次的难点主要在数据并不是一个单独的json包里，需要我们自己从html代码中获取，并且获取的是js代码，我们还要额外提取其中的数据，总的来说还是难度不大的。<br>如果有疑问可以在下面评论联系我，那我们下期见~</li>
-</ol>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在是晚上的23点22分，本来我已经关闭了电脑，并且洗漱完打算上床，但因为一件事久久不能释怀。  </p>
+<h1 id="事情经过"><a href="#事情经过" class="headerlink" title="事情经过"></a>事情经过</h1><p>这段不幸的经历发生在一个我刚认识了不到一周的来自酷安的群友。就在昨日，他还在和我们畅谈打算明日在阿里云买台学生机，然后把域名备案。然而今天一早，却收到了他的消息。<br><img src="/img/38.png" srcset="/img/loading.gif" alt="img"><br>昨天还说要备案的，怎么今天突然说要博客路要暂时停止了？<br>随即而来的，是我一直有耳闻，但却从未真切感受到的事——DDOS<br>以下是聊天记录：<br><img src="/img/39.png" srcset="/img/loading.gif" alt="img"><br>以下是涉及到的图片<br><img src="/img/41.jpg" srcset="/img/loading.gif" alt="img"><br><img src="/img/40.jpg" srcset="/img/loading.gif" alt="img"><br>短短一个晚上，6T的流量，直接欠费4500元，这对任何一个个人博客都是一个难以承担的数目，而这个不幸的遭遇者，还仅仅是一个初中生。  </p>
+<h1 id="感思"><a href="#感思" class="headerlink" title="感思"></a>感思</h1><p>我为他的遭遇感到不幸，但我却不能为他做点什么，因为在此之前我从未遇到过这类事情。我无话可说，只能劝他保持心态，以及写下这篇文章用来警醒你我。被DDOS也许只是一个随机的事件，但谁也不能保证它不会降临到自己的身上，我们只有在危机到来之前，做好准备。<br>截至现在23：40分，腾讯云官方客服的态度仍然是不对流量及费用进行退回，可能会报公安吧，但它没备案，也不知道能不能成功。<br>就先写到这吧，有后续我会继续在这篇文章更进，希望它能挺过这一劫。</p>
 
           </article>
-
-            
-              <! -- 添加捐赠图标 -->
-<div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-      </div>  
-	<div id="donate_guide" class="donate_bar center hidden" style="background-color: aqua; padding: 40px; height: 290px;">
-		<!-- 支付宝打赏图案 -->
-		<img src="/img/mix_pay.png" srcset="/img/loading.gif" alt="支付宝" style="margin-top: 0px;"> <br>
-		<a>感谢您的支持，这也是我前进的动力</a>
-		<!-- 微信打赏图案 -->
-		<!--img src="/img/weixin.jpg" alt="微信打赏" -->  
-    </div>
-	<script type="text/javascript">
-		document.getElementById('btn_donate').onmousemove = function(){			
-			$('#donate_guide').removeClass('hidden');
-		}
-		document.getElementById('btn_donate').onmouseleave = function(){
-			$('#donate_guide').addClass('hidden');
-		}
-	</script>
-</div>
-
 
             
 
@@ -279,13 +235,18 @@ c_count=<span class="hljs-string">"0"</span>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/diary/">diary</a>
+                    
+                  </div>
+                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
-                    
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E8%AE%B0/">日记</a>
                     
                   </div>
                 
@@ -298,18 +259,12 @@ c_count=<span class="hljs-string">"0"</span>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/issue/hexo-valine-issue.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【issue 已解决】Valine网址指向的一个小坑</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/tutorial/python-spider-bilibili-comments.html">
-                        <span class="hidden-mobile">实战Python爬取B站评论</span>
+                      <a href="/issue/hexo-valine-issue.html">
+                        <span class="hidden-mobile">【issue 已解决】Valine网址指向的一个小坑</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -493,7 +448,7 @@ c_count=<span class="hljs-string">"0"</span>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "利用Python爬取丁香园疫情数据&nbsp;",
+        "日记-2020年4月20日&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
