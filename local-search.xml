@@ -8,7 +8,7 @@
     <link href="/diary/20200420.html"/>
     <url>/diary/20200420.html</url>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在是晚上的23点22分，本来我已经关闭了电脑，并且洗漱完打算上床，但因为一件事久久不能释怀。  </p><h1 id="事情经过"><a href="#事情经过" class="headerlink" title="事情经过"></a>事情经过</h1><p>这段不幸的经历发生在一个我刚认识了不到一周的来自酷安的群友。就在昨日，他还在和我们畅谈打算明日在阿里云买台学生机，然后把域名备案。然而今天一早，却收到了他的消息。<br><img src="/img/38.png" srcset="/img/loading.gif" alt="img"><br>昨天还说要备案的，怎么今天突然说要博客路要暂时停止了？<br>随即而来的，是我一直有耳闻，但却从未真切感受到的事——DDOS<br>以下是聊天记录：<br><img src="/img/39.png" srcset="/img/loading.gif" alt="img"><br>以下是涉及到的图片<br><img src="/img/41.jpg" srcset="/img/loading.gif" alt="img"><br><img src="/img/40.jpg" srcset="/img/loading.gif" alt="img"><br>短短一个晚上，6T的流量，直接欠费4500元，这对任何一个个人博客都是一个难以承担的数目，而这个不幸的遭遇者，还仅仅是一个初中生。  </p><h1 id="感思"><a href="#感思" class="headerlink" title="感思"></a>感思</h1><p>我为他的遭遇感到不幸，但我却不能为他做点什么，因为在此之前我从未遇到过这类事情。我无话可说，只能劝他保持心态，以及写下这篇文章用来警醒你我。被DDOS也许只是一个随机的事件，但谁也不能保证它不会降临到自己的身上，我们只有在危机到来之前，做好准备。<br>截至现在23：40分，腾讯云官方客服的态度仍然是不对流量及费用进行退回，可能会报公安吧，但它没备案，也不知道能不能成功。<br>就先写到这吧，有后续我会继续在这篇文章更进，希望它能挺过这一劫。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在是晚上的23点22分，本来我已经关闭了电脑，并且洗漱完打算上床，但因为一件事久久不能释怀。  </p><h1 id="事情经过"><a href="#事情经过" class="headerlink" title="事情经过"></a>事情经过</h1><p>这段不幸的经历发生在一个我刚认识了不到一周的来自酷安的群友。就在昨日，他还在和我们畅谈打算明日在阿里云买台学生机，然后把域名备案。然而今天一早，却收到了他的消息。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/38.png" srcset="/img/loading.gif" alt="img"><br>昨天还说要备案的，怎么今天突然说要博客路要暂时停止了？<br>随即而来的，是我一直有耳闻，但却从未真切感受到的事——DDOS<br>以下是聊天记录：<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/39.png" srcset="/img/loading.gif" alt="img"><br>以下是涉及到的图片<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/41.jpg" srcset="/img/loading.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/40.jpg" srcset="/img/loading.gif" alt="img"><br>短短一个晚上，6T的流量，直接欠费4500元，这对任何一个个人博客都是一个难以承担的数目，而这个不幸的遭遇者，还仅仅是一个初中生。  </p><h1 id="感思"><a href="#感思" class="headerlink" title="感思"></a>感思</h1><p>我为他的遭遇感到不幸，但我却不能为他做点什么，因为在此之前我从未遇到过这类事情。我无话可说，只能劝他保持心态，以及写下这篇文章用来警醒你我。被DDOS也许只是一个随机的事件，但谁也不能保证它不会降临到自己的身上，我们只有在危机到来之前，做好准备。<br>截至现在23：40分，腾讯云官方客服的态度仍然是不对流量及费用进行退回，可能会报公安吧，但它没备案，也不知道能不能成功。<br>就先写到这吧，有后续我会继续在这篇文章更进，希望它能挺过这一劫。</p>]]></content>
     
     
     <categories>
@@ -33,7 +33,7 @@
     <link href="/issue/hexo-valine-issue.html"/>
     <url>/issue/hexo-valine-issue.html</url>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用hexo博客的，肯定有很多评论系统用的是valine吧，毕竟这个方便还漂亮。并且支持的也不错，国内可以直连。但是我却因为一个小问题困扰了我两三个月之久（主要因为也没啥人来我博客评论）所以就一直没想着去修。<br>直到今天，我去改了一下leancloud的休眠政策，就想着顺便修复一下这个bug。</p><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>正常的显示，邮件收发都没啥问题，但唯独在邮件通知时，查看评论原文的地址指向出现了错误，不仅如此，在后台管理的地址指向也同样出现了错误。<br>本来应该是：</p><pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre><p>但指向却变成了</p><pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre><p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p><h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><p>解决的方法其实很简单，出错原因是因为valine的SITE_URL环境变量错误设置导致的，他会默认在该变量后添加具体的深层地址，即</p><pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre><p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用hexo博客的，肯定有很多评论系统用的是valine吧，毕竟这个方便还漂亮。并且支持的也不错，国内可以直连。但是我却因为一个小问题困扰了我两三个月之久（主要因为也没啥人来我博客评论）所以就一直没想着去修。<br>直到今天，我去改了一下leancloud的休眠政策，就想着顺便修复一下这个bug。</p><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>正常的显示，邮件收发都没啥问题，但唯独在邮件通知时，查看评论原文的地址指向出现了错误，不仅如此，在后台管理的地址指向也同样出现了错误。<br>本来应该是：</p><pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre><p>但指向却变成了</p><pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre><p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p><h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><p>解决的方法其实很简单，出错原因是因为valine的SITE_URL环境变量错误设置导致的，他会默认在该变量后添加具体的深层地址，即</p><pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre><p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>]]></content>
     
     
     <categories>
@@ -47,9 +47,9 @@
       
       <tag>hexo</tag>
       
-      <tag>valine</tag>
-      
       <tag>issue</tag>
+      
+      <tag>valine</tag>
       
     </tags>
     
@@ -237,9 +237,9 @@
     
     <tags>
       
-      <tag>issue</tag>
-      
       <tag>4399</tag>
+      
+      <tag>issue</tag>
       
     </tags>
     

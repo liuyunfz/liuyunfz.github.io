@@ -218,7 +218,7 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 20日 , 星期一 , 11:46 中午
+                本文最后更新于：2020 四月 21日 , 星期二 , 4:15 下午
               </p>
             
           <article class="markdown-body">
@@ -227,10 +227,10 @@
 <pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre>
 <p>但指向却变成了</p>
 <pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre>
-<p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p>
+<p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p>
 <h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><p>解决的方法其实很简单，出错原因是因为valine的SITE_URL环境变量错误设置导致的，他会默认在该变量后添加具体的深层地址，即</p>
 <pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre>
-<p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>
+<p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>
 
           </article>
 
@@ -278,9 +278,9 @@
                     
                       <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
                     
-                      <a class="hover-with-bg" href="/tags/valine/">valine</a>
-                    
                       <a class="hover-with-bg" href="/tags/issue/">issue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/valine/">valine</a>
                     
                   </div>
                 
