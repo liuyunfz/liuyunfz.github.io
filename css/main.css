@@ -1539,3 +1539,19 @@ h6::before {
   background-color: #455a6f;
   border-color: #004188;
 }
+.v .vbtn {
+  color: #fff !important;
+  width: 25% !important;
+  height: 100% !important;
+  line-height: 2 !important;
+  font-weight: bolder !important;
+  border-radius: 30px !important;
+  border: 1px solid #e9eff3 !important;
+  background-color: #a11616 !important;
+}
+.v .vicon {
+  display: none !important;
+}
+.v .vinput {
+  border: none !important;
+}
