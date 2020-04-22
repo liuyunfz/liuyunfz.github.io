@@ -105,3 +105,9 @@
   background-color: #455a6f;
   border-color: #004188;
 }
+.dark .vwrap {
+  background: rgba(49,116,148,0.149);
+}
+.dark .v .vinput {
+  color: #fff;
+}
