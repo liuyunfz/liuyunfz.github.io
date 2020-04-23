@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.6yfz.cn/issue/hexo-valine-issue.html</loc>
+    
+    <lastmod>2020-04-23T14:02:05.129Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.6yfz.cn/tutorial/python-tools-transform_headers.html</loc>
     
     <lastmod>2020-04-23T08:34:22.659Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://blog.6yfz.cn/tutorial/python-spider-bilibili-comments.html</loc>
     
     <lastmod>2020-04-23T06:49:39.143Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.6yfz.cn/issue/hexo-valine-issue.html</loc>
-    
-    <lastmod>2020-04-23T02:33:10.382Z</lastmod>
     
   </url>
   

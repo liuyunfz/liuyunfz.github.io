@@ -29,7 +29,7 @@
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -218,18 +218,18 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 23日 , 星期四 , 10:33 上午
+                本文最后更新于：2020 四月 23日 , 星期四 , 10:02 晚上
               </p>
             
           <article class="markdown-body">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用hexo博客的，肯定有很多评论系统用的是valine吧，毕竟这个方便还漂亮。并且支持的也不错，国内可以直连。但是我却因为一个小问题困扰了我两三个月之久（主要因为也没啥人来我博客评论）所以就一直没想着去修。<br>直到今天，我去改了一下leancloud的休眠政策，就想着顺便修复一下这个bug。  </p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用hexo博客的，肯定有很多评论系统用的是valine吧，毕竟这个方便还漂亮。并且支持的也不错，国内可以直连。但是我却因为一个小问题困扰了我两三个月之久（主要因为也没啥人来我博客评论）所以就一直没想着去修。<br>直到今天，我去改了一下leancloud的休眠政策，就想着顺便修复一下这个bug。 </p>
 <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>正常的显示，邮件收发都没啥问题，但唯独在邮件通知时，查看评论原文的地址指向出现了错误，不仅如此，在后台管理的地址指向也同样出现了错误。<br>本来应该是：</p>
-<pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre>
+<div class="hljs"><pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre></div>
 <p>但指向却变成了</p>
-<pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre>
+<div class="hljs"><pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre></div>
 <p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p>
 <h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><p>解决的方法其实很简单，出错原因是因为valine的SITE_URL环境变量错误设置导致的，他会默认在该变量后添加具体的深层地址，即</p>
-<pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre>
+<div class="hljs"><pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre></div>
 <p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>
 
           </article>
@@ -558,6 +558,37 @@
 
 
 <!-- Plugins -->
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-164345578-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
 
 
 

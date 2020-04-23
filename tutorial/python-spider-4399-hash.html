@@ -29,7 +29,7 @@
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -228,7 +228,7 @@
 <p><strong>Python[模块：json,requests,matplotlib,execjs]</strong><br><strong>Chrome<br>VS Code</strong></p>
 </blockquote>
 <h1 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h1><p>我们先尝试用浏览器进行抓包分析。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/1.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到当我们点击关注时，系统会发送一个关注包，这时他会自动判断（玄学）是否需要输入验证码。如果需要则会再发送两个包，一个是图中的geturl?type=zone<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/2.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到，这个包的作用是获得验证码的地址。</p>
-<pre><code class="hljs bash">def geturl(cookie):
+<div class="hljs"><pre><code class="hljs bash">def geturl(cookie):
     get_headers=&#123;
     <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json, text/javascript, */*; q=0.01'</span>,
     <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>,
@@ -243,13 +243,13 @@
     rsp = requests.get(url=<span class="hljs-string">"http://my.4399.com/plugins/captcha/index-getUrl?type=zone"</span>,headers=get_headers)    
     url=json.loads(rsp.text)
     url = url[<span class="hljs-string">"result"</span>][<span class="hljs-string">"url"</span>]
-    <span class="hljs-built_in">return</span> url</code></pre>
+    <span class="hljs-built_in">return</span> url</code></pre></div>
 <p>根据这个包返回的格式我们判断出是json文件，所以利用json模块进行转换，然后按照格式取出包含在其中的URL。<br><br><br>这个时候我们还无法看出HASH的具体作用，我们输入验证码继续看看提交了什么<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到，当我们提交了验证码，后面多了一个index-check的包，大概能猜出是验证码验证进行check。其中三个参数，type：zone.cap就是验证码了，hash就是我们这篇要解决的内容了。<br><br>我们知道了用处，回去看下之前那个GET-HASH包<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.png" srcset="/img/loading.gif" alt="avatar"><br><br>返回的是一堆json代码，我们尝试在命令提示符运行，可以看到，完美符合提交的HASH值。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/4.png" srcset="/img/loading.gif" alt="avatar"><br><br>接下来的难点就是如何通过这个包返回的代码，利用python计算出hash，如果直接是json代码运行还可以，但是我们仔细观察可以看出，在返回的代码中，最后一句的大致意思是给网页中ID为cap_hash的对象赋值hash，但是在python中，我们并不会有相关的对象，所以我们得想办法取出我们想要的代码。<br>我首先想到的是读取行</p>
-<pre><code class="hljs bash">listd=rsp.text.split(<span class="hljs-string">"\n"</span>)
+<div class="hljs"><pre><code class="hljs bash">listd=rsp.text.split(<span class="hljs-string">"\n"</span>)
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd:
-        <span class="hljs-built_in">print</span>(i,<span class="hljs-string">"\n"</span>,<span class="hljs-string">"————————————————————————————————————————————————————————"</span>)</code></pre>
+        <span class="hljs-built_in">print</span>(i,<span class="hljs-string">"\n"</span>,<span class="hljs-string">"————————————————————————————————————————————————————————"</span>)</code></pre></div>
 <p>返回的就有点奇怪</p>
-<pre><code class="hljs bash">var _4ba4cacd070fe=/*8/<span class="hljs-string">"e0*//*+f c62'c6-*/'_aa6b9'/*3=b8d'*/+/*5'5 3*/'69b11784ed'/*9"</span>b/;*/+/*,-5=4/;+_*/<span class="hljs-string">'a4f581c4'</span>/*;==,<span class="hljs-string">"18*/+/*/'+++9/9-*/'af15edcd1'/*a 48;4,,9*/+ 
+<div class="hljs"><pre><code class="hljs bash">var _4ba4cacd070fe=/*8/<span class="hljs-string">"e0*//*+f c62'c6-*/'_aa6b9'/*3=b8d'*/+/*5'5 3*/'69b11784ed'/*9"</span>b/;*/+/*,-5=4/;+_*/<span class="hljs-string">'a4f581c4'</span>/*;==,<span class="hljs-string">"18*/+/*/'+++9/9-*/'af15edcd1'/*a 48;4,,9*/+ 
  ————————————————————————————————————————————————————————
         ''/*8f3c2+2;61*/;var _1eff743fb70c3ef68=/*3+=1+/- 5*/''/*;4ead70"</span>*/;var _f98ed25c1ead835f23e9fa=decodeURIComponent(/*<span class="hljs-string">"4ce8*//*f"</span>+9-,d1c8*/<span class="hljs-string">'%29%00'</span>/*=5--5_6+e8*/+/*f9c0=*/<span class="hljs-string">'%13%16%3'</span>/*<span class="hljs-string">'+d"c2 d*/+/*46 50*/'</span>D%5DU%0CW<span class="hljs-string">'/*/1f7db*/+/*4/d1"9c/d*/'</span>%00%00<span class="hljs-string">'/*'</span>3+<span class="hljs-string">'d54*/+/*c 854*/'</span>R%5BW<span class="hljs-string">'/*9-/b+3*/+/*87-9_;*/'</span>T%05Y%00W<span class="hljs-string">'/*c"'</span>00*/+/*--a;2*/<span class="hljs-string">'%04%0D'</span>/*4ce44_*/+/*a,b94_0_-*/<span class="hljs-string">'RZ%0C%0'</span>/*2_3e+b57f*/+/*_<span class="hljs-string">'__"c-/*/'</span>5%05%0<span class="hljs-string">'/*04+a6 b2,*/+/*=+=42*/'</span>7Q%5DSP<span class="hljs-string">'/*9474e*/+/*'</span>ee5c<span class="hljs-string">'/ad*/'</span>T%06jT%0<span class="hljs-string">'/*a2,";"b 2*/+/*f_- _1d/ef*/'</span>7S__CW%<span class="hljs-string">'/*5b,e6*/+/*638fd*/'</span>01EXXV<span class="hljs-string">'/*5f,+/67-*/+/*946f33*/'</span>%1CL%1F%<span class="hljs-string">'/*f5/9;868f*/+/*;9_;+4-*/'</span>17U%14<span class="hljs-string">'/*-42b210'</span>-*/+/*20<span class="hljs-string">";+*/'%15gRZ%01X'/*3_,a8*/+/*aeb0-*/'VP%03VQ%0'/*,ad39"</span>*/+/* ,01f_2/1<span class="hljs-string">'*/'</span>1%02%01%3<span class="hljs-string">'/*/2590/3a*/+/*5'</span>=57ff,b1*/<span class="hljs-string">'EV%05%0'</span>/*<span class="hljs-string">"208=3/*/+/*0=599/"</span><span class="hljs-string">'*/'</span>2R%0FS%0<span class="hljs-string">'/*79_-1",*/+/*==='</span>9=<span class="hljs-string">'0;e*/'</span>0_%16%16<span class="hljs-string">'/*;7/-3*/+/*=b61;a8-5*/'</span>%0CgW%5CQ<span class="hljs-string">'/*,5b/f554*/+/*90",a7*/'</span>X%04%07<span class="hljs-string">'/*e2/03076*/+/*92/ae-*/'</span>%03%0B%04%<span class="hljs-string">'/*69+0/__2_6*/+/*'</span> fd25_*/<span class="hljs-string">'01RQ%07'</span>/*34a3e,<span class="hljs-string">"*/+/*4-f3251c*/'%06QQTU%01'/*9ec"</span>9 0*/+/*2 8f/f*/<span class="hljs-string">'%08t%'</span>/*d+ 5fef7=*/+/*3c6c3*/<span class="hljs-string">'5CF%07W%0'</span>/*d;92d*/+/*;=4db<span class="hljs-string">'0*/'</span>F%11%<span class="hljs-string">'/*a"182+-de*/+/*5ce 6,,c0*/'</span>02%3DR%0<span class="hljs-string">'/*1=9a7=*/+/*1/;9//255b*/'</span>8%02%01%04<span class="hljs-string">'/*_0+=a/*/+/*a6257+09*/'</span>%04RR%01<span class="hljs-string">'/*5/ 9-*/+/*2,2-;f2*/'</span>%04S%<span class="hljs-string">'/*3,'</span>377*/+/*6<span class="hljs-string">"=6"</span>b*/<span class="hljs-string">'08PTPUV%0'</span>/*929a3d1/*/+/* 1a5cb*/<span class="hljs-string">'7P%5C'</span>/*7a<span class="hljs-string">'0"b*/+/*,_3173+/_*/'</span>O%5EC%0<span class="hljs-string">'/*b846+"96,"*/+/*;c4-23*/'</span>7jWP%0<span class="hljs-string">'/*d8'</span>,99-8a*/+/*8<span class="hljs-string">"='8bb'5,*/'2Z%0A'/*6170/8b,9_*/+/*_be658_*/'%11%02%3D'/*699=-=e*/+/*27f9809*/'R%08%02'/* d97+6105;*/+/*9+36/4+c7*/'%01%04'/*81+"</span>2*/+/*,1; c7=c*/<span class="hljs-string">'%04RR%01'</span>/*6 3,+4;1*/+/*7fd d/d<span class="hljs-string">'b0*/'</span>%04S%<span class="hljs-string">'/*1;0571_*/+/*'</span>a5<span class="hljs-string">'+_+- ,*/'</span>08PTPUV<span class="hljs-string">'/*ab-5e=e*/+/*"5fe e802*/'</span>%07P%5C<span class="hljs-string">'/*e6a2,d*/+/*=+_;ed-*/'</span>O%5ECMfPF<span class="hljs-string">'/*41=b"5*/+/*=24b1'</span>=a*/<span class="hljs-string">'%0D%3'</span>/*70d_9c*/+/*,;_b0;5a*/<span class="hljs-string">'DZ%0F'</span>/*33967*/+/*5+3; */<span class="hljs-string">'%0C%5B%01P'</span>/*,93352f*/+/*4 ,<span class="hljs-string">'0*/'</span>%01%0<span class="hljs-string">'/*+;3+_8+*/+/*5+;0,/ 9ec*/'</span>B%01%07<span class="hljs-string">'/*+ c; */+/*/b;3_6c,*/'</span>%02QUQQ%0C<span class="hljs-string">'/*'</span>b1f54*/+/* 0 2;*/<span class="hljs-string">'%01UQX'</span>/*2ad=3f-*/+/*_ 5240f*/<span class="hljs-string">'M%0C%12P%'</span>/*;4f2d91*/+/*2_d<span class="hljs-string">'8;4*/'</span>05D_n%3CXT<span class="hljs-string">'/*f2d3"*/+/*,38/66cb*/'</span>%0FRX%00%<span class="hljs-string">'/* 3;;_*/+/*;67"6'</span>_1*/<span class="hljs-string">'0AWSW%0'</span>/*a_13_94<span class="hljs-string">'a*/+/*772a_9,*/'</span>7Y%03%<span class="hljs-string">'/*+c+6f6;d-*/+/*d;13a1e66+*/'</span>01PQ%02%0<span class="hljs-string">'/*a+5611*/+/*-"7b2*/'</span>3%0C%13%<span class="hljs-string">'/*86cc"=-*/+/*4f"a'</span>f*/<span class="hljs-string">'0CDQ%'</span>/*ba6b3+;*/+/*bef5<span class="hljs-string">'61*/'</span>04A%0Aj%<span class="hljs-string">'/*6;'</span><span class="hljs-string">"6"</span>a<span class="hljs-string">"/*/+/*3+_f4'6*/'06%5D'/*094/5fc52;*/+/*e"</span>d2b9+97*/<span class="hljs-string">'V%5D%0'</span>/*d064b<span class="hljs-string">"b7eb*/+/*8f3=ae;8*/'1%3EWR%0'/*+=-'4*/+/*_7383a*/'3%00_%06X'/*34;"</span>3,6;8*/+/*44c bca ea*/<span class="hljs-string">'UU%05%07%0'</span>/*+0c5,*/+/*e0d880_3f*/<span class="hljs-string">'EQ%5CO%5C%'</span>/*f0,,f aa9*/+/*a+9a<span class="hljs-string">";,*/'13S%02YWU'/*e6-3,36e"</span>*/+/*0e428,, <span class="hljs-string">"8*/'%05%03S'/*d /119-e'*/+/*3;/d-40c2-*/'%16%0E%3'/*f87/;24b,*/+/*'e bfb,*/'A%07Z'/*/_554*/+/*c6+=588-c_*/'Q%08o%00W'/*=fecc*/+/*ce 3"</span>ce*/<span class="hljs-string">'%05W%5'</span>/*ad1_<span class="hljs-string">"505*/+/*,+a-d*/'BP%09%03'/*6 ee7,;/*/+/*=5-7a0a*/'%06U%03'/*e9df5c*/+/*d=6 1*/'%08%02%'/*cd'915,/31*/+/*'f7b/,d*/'00%5DJ%'/*,3/6d*/+/*4-6b0"</span>6c11*/<span class="hljs-string">'09A%03'</span>/*b9f001*/+/*1,549=5cf */<span class="hljs-string">'%5E%04S%'</span>/*84a6f; */+/*1<span class="hljs-string">'6"/-,"*/'</span>00XVW%07SC<span class="hljs-string">'/*3_9'</span>7<span class="hljs-string">"b 8*/+/*8;_45/0;"</span>9*/<span class="hljs-string">'X%16T'</span>/*1030a/ _ce*/+/*228,ac*/<span class="hljs-string">'%2B%14%13'</span>/*18;_6*/+/*657; ++3<span class="hljs-string">"*/'XBfU%00W%0'/*a+0f  f_9*/+/*7;26,*/'8%01V%0E%0'/*280/09a//*/+/*'aa7 _*/'7P%06'/*/2cc9*/+/*3 b5_*/'%07%0'/*_b9 ==*/+/*4ca/df+*/'4%07%02%'/*_-0/630*/+/*4= ''9d2b-*/'5C%05'/*'d=_3d7b"</span>*/+/*-f<span class="hljs-string">"37cd9*/'S%02%04'/*/=3=de603*/+/*;,5a3*/'_%0AH%5E'/*2f6+'0b3*/+
  ————————————————————————————————————————————————————————
@@ -262,16 +262,16 @@ _1eff743fb70c3ef68 += String.fromCharCode(_4ba4cacd070fe.charCodeAt(i%_4ba4cacd0
 <span class="hljs-built_in">eval</span>(_1eff743fb70c3ef68);
  ————————————————————————————————————————————————————————
 document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc5511ecc1a84115c98dc6d8730755fe();
- ————————————————————————————————————————————————————————</code></pre>
+ ————————————————————————————————————————————————————————</code></pre></div>
 <p>当我们多尝试几次后，会发现返回的代码是固定七行，只有第七行是我们需要进行修改的，所以我们将前六行写入一个新的字符串中</p>
-<pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:
-        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span></code></pre>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:
+        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span></code></pre></div>
 <p>这边的listd好像有点类似range，也是左闭右开，所以只能取出前6行。<br>然后把这个字符串用execjs的模块转换一下</p>
-<pre><code class="hljs bash">a = execjs.compile(hashcode_str)</code></pre>
+<div class="hljs"><pre><code class="hljs bash">a = execjs.compile(hashcode_str)</code></pre></div>
 <p>第七行其实我们只需要用到后面的方法调用，前面的赋值语句是不需要的。观察分析其实前面赋值对象的语句应该是固定的，所以我们可以直接通过长度来进行取值，我用鼠标一个个字符串数过去的，我们要的刚好是第42个字符开始，即“_”，后面则是一串随机的字母数字，我们取到底就好。<br>这边还有一个我在运行时遇到的问题，execjs调用命令后，好像结尾并不能加”:”,否则会报错，所以应该是</p>
-<pre><code class="hljs bash">a.eval(listd[6][42:-1])</code></pre>
+<div class="hljs"><pre><code class="hljs bash">a.eval(listd[6][42:-1])</code></pre></div>
 <p>总的获取hash代码就是</p>
-<pre><code class="hljs bash">def gethash(cookie):
+<div class="hljs"><pre><code class="hljs bash">def gethash(cookie):
     headers = &#123;
     <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"Mozilla/5.0 (Windows NT 5.1; U; zh-cn; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.70"</span>,
     <span class="hljs-string">"Cookie"</span>:cookie
@@ -288,7 +288,7 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
     <span class="hljs-built_in">print</span>(sum)
     <span class="hljs-built_in">print</span>(len(listd))
     a = execjs.compile(hashcode_str)
-    <span class="hljs-built_in">return</span> a.eval(listd[6][42:-1])</code></pre>
+    <span class="hljs-built_in">return</span> a.eval(listd[6][42:-1])</code></pre></div>
 <p>然后我们就可以完成这次要实现的关注模拟了<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/5.jpg" srcset="/img/loading.gif" alt="avatar"><br></p>
 
           </article>
@@ -610,6 +610,37 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
 
 
 <!-- Plugins -->
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-164345578-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
 
 
 

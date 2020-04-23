@@ -29,7 +29,7 @@
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -225,17 +225,17 @@
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。</p>
 <a id="more"></a>
 <h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><h3 id="1："><a href="#1：" class="headerlink" title="1："></a>1：</h3><p>首先修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>after-footer.ejs</strong>文件，在任意位置添加以下代码</p>
-<pre><code class="hljs bash">&lt;script async src=<span class="hljs-string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;</code></pre>
+<div class="hljs"><pre><code class="hljs bash">&lt;script async src=<span class="hljs-string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;</code></pre></div>
 <p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/19.png" srcset="/img/loading.gif" alt="avatar"><br><br></p>
 <h3 id="2："><a href="#2：" class="headerlink" title="2："></a>2：</h3><p>然后再修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>article.ejs</strong>文件，在&lt;%- partial(‘post/title’, {class_name: ‘article-title’}) %&gt;代码下添加</p>
-<pre><code class="hljs bash">&lt;!--显示阅读次数--&gt;
+<div class="hljs"><pre><code class="hljs bash">&lt;!--显示阅读次数--&gt;
         &lt;% <span class="hljs-keyword">if</span> (!index &amp;&amp; post.comments)&#123; %&gt;
           &lt;br/&gt;
           &lt;a class=<span class="hljs-string">"cloud-tie-join-count"</span> href=<span class="hljs-string">"javascript:void(0);"</span> style=<span class="hljs-string">"color:gray;font-size:14px;"</span>&gt;
           &lt;span class=<span class="hljs-string">"icon-sort"</span> id=<span class="hljs-string">"busuanzi_container_page_pv"</span> style=<span class="hljs-string">"font-size:14px;margin-left:84.4%;"</span>&gt;
                     阅读总数: &lt;span id=<span class="hljs-string">"busuanzi_value_page_pv"</span> style=<span class="hljs-string">"color:#ef7522;"</span>&gt;&lt;/span&gt;次 &amp;nbsp;&amp;nbsp;
           &lt;/span&gt;
-          &lt;/a&gt;</code></pre>
+          &lt;/a&gt;</code></pre></div>
 <p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/20.png" srcset="/img/loading.gif" alt="avatar"><br>当然也可以根据自己的审美需求修改代码的位置或者颜色等，如果有不清楚的可以与我讨论（虽然我也不太懂，是个半吊子）</p>
 
           </article>
@@ -559,6 +559,37 @@
 
 
 <!-- Plugins -->
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-164345578-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
