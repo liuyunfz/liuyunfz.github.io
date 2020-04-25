@@ -10,4 +10,4 @@ Disallow: /css/
 Disallow: /lib/
 Disallow: /fonts/
 
-Sitemap: http://blog.6yfz.cn/baidusitemap.xml
+Sitemap: https://blog.6yfz.cn/baidusitemap.xml
