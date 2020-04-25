@@ -16,14 +16,14 @@
   <meta name="theme-color" content="#2f4154">
 
   
-    <meta name="description" content="解决Valine评论中因环境变量的设置错误而导致的链接指向错误问题。">
+    <meta name="description" content="利用GitHub或coding实现免费利用html代码判断浏览器UA进行网址跳转，形成永久稳定的多个收款码合一。">
   
 
   <!--以上添加了description代码-->
   <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
   <meta name="author" content="Liu Yun">
   <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
-  <title>【issue 已解决】Valine网址指向的一个小坑 | LiuYun的博客</title>
+  <title>用GitHub/Coding为自己免费打造一个多合一收款码 | LiuYun的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -161,8 +161,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-04-20 11:21">
-                    2020 四月 20日 , 星期一 , 11:21 上午
+                  <time datetime="2020-04-24 21:58">
+                    2020 四月 24日 , 星期五 , 9:58 晚上
                   </time>
                 </div>
               
@@ -172,7 +172,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    371 字
+                    492 字
                   </span>
                 
 
@@ -182,7 +182,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    4
+                    5
                      分钟
                   </span>
                 
@@ -218,19 +218,15 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 23日 , 星期四 , 10:02 晚上
+                本文最后更新于：2020 四月 24日 , 星期五 , 10:49 晚上
               </p>
             
           <article class="markdown-body">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用hexo博客的，肯定有很多评论系统用的是valine吧，毕竟这个方便还漂亮。并且支持的也不错，国内可以直连。但是我却因为一个小问题困扰了我两三个月之久（主要因为也没啥人来我博客评论）所以就一直没想着去修。<br>直到今天，我去改了一下leancloud的休眠政策，就想着顺便修复一下这个bug。 </p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>正常的显示，邮件收发都没啥问题，但唯独在邮件通知时，查看评论原文的地址指向出现了错误，不仅如此，在后台管理的地址指向也同样出现了错误。<br>本来应该是：</p>
-<div class="hljs"><pre><code class="hljs bash">http://blog.6yfz.cn/tutorial/python-spider-dxy.html</code></pre></div>
-<p>但指向却变成了</p>
-<div class="hljs"><pre><code class="hljs bash">http://blog.6yfz.cn//tutorial/python-spider-dxy.html</code></pre></div>
-<p>虽然网页显示上不会出现404，依然是正确的地址，但是因为valine的评论识别靠的的地址，所以就会导致看不到那个指向的评论。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/35.png" srcset="/img/loading.gif" alt="正常地址的评论"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/36.png" srcset="/img/loading.gif" alt="错误地址的评论"></p>
-<h1 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h1><p>解决的方法其实很简单，出错原因是因为valine的SITE_URL环境变量错误设置导致的，他会默认在该变量后添加具体的深层地址，即</p>
-<div class="hljs"><pre><code class="hljs bash">/tutorial/python-spider-dxy.html</code></pre></div>
-<p>所以只需要将SITE_URL设置例如 <a href="http://blog.6yfz.cn">http://blog.6yfz.cn</a> 的，而不要 <a href="http://blog.6yfz.cn/">http://blog.6yfz.cn/</a> ，这也是我错误的原因<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/37.png" srcset="/img/loading.gif" alt="img"><br>到头来发现自己的错误真是觉得又气又笑😹</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>多个收款码合一是一个比较老的话题了，但是我在完善博客的打赏制度时又接触了一下，所以就打算顺便发一个教程。<br>其实网上有很多网站支持让你上传链接后给你自动生成多合一收款码。其中正常的就是根据判断浏览器ua进行跳转实现的；我还有听说是根据二维码的容错率强行合一的，不知道是不是真的，但是如果真的这样肯定不太好。<br>既然网上有那为什么我还要专门发一期教程呢，当然是他人的东西信不过啊，一个是安全性问题，还有一个就是服务器问题，万一只是哪个小青年一时兴起的用爱发电提供付费，哪天突然服务器到期了就尴尬了。<br>而这期利用GitHub/coding理论上是可以实现零成本且“永久”的（只要GitHub或coding不倒，这两个大公司估计也倒不了，等倒了的时候估计技术又是一波新的革新了）。  </p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ol>
+<li>一个coding或GitHub账号</li>
+<li>我准备的源码（会在文末或评论区放出）<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1>如果你已经在GitHub或coding上搭建了博客，那么恭喜你，你可以直接跳到下一步。如果没有，你可以简单的在注册后创建一个储存库（repository），不用像部署博客那样搞啥ssh这种，只需要有一个提供了域名的储存库，即GitHub pages 或coding里的静态网站。（这边如果要有图文教程的话我还得去搞一个号，太麻烦了，你们看其他博客自己搞搞吧，只要做到创建账户-创建储存库-开启了页面访问就ok了）<br>" srcset="/img/loading.gif" srcset="/img/loading.gif" srcset="/img/loading.gif<img src="" alt="github"><br>" srcset="/img/loading.gif" srcset="/img/loading.gif" srcset="/img/loading.gif<img src="" alt="codings"><h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2>很简单，将我的源码自己修改后上传</li>
+</ol>
 
           </article>
 
@@ -265,22 +261,13 @@
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/issue/">issue</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
                     
-                      <a class="hover-with-bg" href="/tags/valine/">valine</a>
-                    
-                      <a class="hover-with-bg" href="/tags/issue/">issue</a>
+                      <a class="hover-with-bg" href="/tags/html/">html</a>
                     
                   </div>
                 
@@ -288,29 +275,6 @@
               
                 <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noopener" style="text-decoration:underline;">CC BY-NC-SA</a> 4.0协议 。转载请注明出处！</p>
               
-              
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
-                    
-                    
-                      <a href="/diary/20200420.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">日记-2020年4月20日</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </div>
-                  <div class="post-next col-6">
-                    
-                    
-                      <a href="/tutorial/python-spider-dxy.html">
-                        <span class="hidden-mobile">利用Python爬取丁香园疫情数据</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </div>
-                </div>
               
             </div>
 
@@ -586,7 +550,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "【issue 已解决】Valine网址指向的一个小坑&nbsp;",
+        "用GitHub/Coding为自己免费打造一个多合一收款码&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

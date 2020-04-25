@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.6yfz.cn/history/index.html</loc>
+    
+    <lastmod>2020-04-24T13:56:56.479Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.6yfz.cn/issue/hexo-valine-issue.html</loc>
     
     <lastmod>2020-04-23T14:02:05.129Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://blog.6yfz.cn/tutorial/hexo-CDN.html</loc>
     
     <lastmod>2020-04-18T14:52:16.735Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/history/index.html</loc>
-    
-    <lastmod>2020-04-18T07:18:47.202Z</lastmod>
     
   </url>
   
