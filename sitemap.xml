@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.6yfz.cn/comments/index.html</loc>
+    
+    <lastmod>2020-04-27T15:11:40.413Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/tutorial/hexo-busuanzi.html</loc>
+    
+    <lastmod>2020-04-25T13:56:09.735Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.6yfz.cn/history/index.html</loc>
     
     <lastmod>2020-04-24T13:56:56.479Z</lastmod>
@@ -89,13 +103,6 @@
     <loc>https://blog.6yfz.cn/diary/20200120.html</loc>
     
     <lastmod>2020-04-11T14:57:36.173Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/tutorial/hexo-busuanzi.html</loc>
-    
-    <lastmod>2020-04-11T14:56:13.270Z</lastmod>
     
   </url>
   
