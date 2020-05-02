@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>为微信公众号接入疫情数据查询</title>
+    <link href="/tutorial/python-wechat-searchvirus.html"/>
+    <url>/tutorial/python-wechat-searchvirus.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>话接上文的《利用Python爬取丁香园疫情数据》，本次将利用这个完成的api，对接微信，实现微信公众号疫情查询。如果未看过上一篇文章的，可以 <a href="https://blog.6yfz.cn/tutorial/python-spider-dxy.html">点我前往</a> 。</p><h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>本次利用了python微信公众号开发框架的一个模块——<a href="https://github.com/offu/WeRoBot" target="_blank" rel="noopener">werobot</a>，具体功能可以阅读<a href="https://werobot.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">官方文档</a>。<br>除此之外，我们还需要一台服务器（仅指出80或443端口），用作公众号的功能对接。</p><h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>为了文章内容与字数考虑，本文不从零开始描述如何进行公众号的基本对接和验证，直接开始到功能添加。</p><h2 id="判断公众号位置数据内容"><a href="#判断公众号位置数据内容" class="headerlink" title="判断公众号位置数据内容"></a>判断公众号位置数据内容</h2><p>为了判断用户位置，我们需要知道用户发送了的地图位置数据在后台显示的是什么，所以我们分别到前后端进行查看。</p><h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>首先后端先写好调试的代码，为了方便观察，我们debug和return同时返回用户发送的location的数据内容。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/43.png" srcset="/img/loading.gif" alt="代码"><br>并且启动我们的端口监听<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/44.png" srcset="/img/loading.gif" alt="启动"></p><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>然后我们去前端发送位置数据，看看返回了什么。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/46.jpg" srcset="/img/loading.gif" alt="前端"></p><h3 id="数据判断"><a href="#数据判断" class="headerlink" title="数据判断"></a>数据判断</h3><p>再去看看后端<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/45.png" srcset="/img/loading.gif" alt="后端"><br>可以看到，前端和后端都返还了一个经纬度数据，并且数据类型是tuple（可以自行用type()函数进行查询）。</p><h2 id="逆地理编码"><a href="#逆地理编码" class="headerlink" title="逆地理编码"></a>逆地理编码</h2><p>微信公众号的地图数据返回的是经纬度信息，但是我们上次实现的是利用地区的名字判断查询的疫情数据，所以我们需要用到<a href="http://lbsyun.baidu.com/" target="_blank" rel="noopener">百度开发平台</a>的逆地理编码，实现将左边地址转换为地区信息。即使是未认证的用户也有每日六千条的配额，并发50次/s，对于普通用户来说完全足够。<br>所以我们利用百度账号登录这个开发者平台，创建一个应用<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/46.png" srcset="/img/loading.gif" alt="注册应用"><br>具体步骤就不展示了，记得勾选逆地理编码就行。<br>然后我们查看官方的<a href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding-abroad" target="_blank" rel="noopener">逆地理编码调用文档</a><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/47.png" srcset="/img/loading.gif" alt="服务文档"><br>这边你们自己看看奥，既然都是程序员了，这点基础肯定有的，或者看我写的成品。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/48.png" srcset="/img/loading.gif" alt="api请求"><br>为了不必要的麻烦，我们先本地指定经纬度，并且分析下返回的数据。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/49.png" srcset="/img/loading.gif" alt="api返回数据"><br>可以发现是成功的，我们也知道返回json的具体内容，剩下的就是接入完善了。</p><h2 id="代码接入"><a href="#代码接入" class="headerlink" title="代码接入"></a>代码接入</h2><p>上面的api已经写完了，然后就是和上次的内容对接了。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/50.png" srcset="/img/loading.gif" alt="功能对接"></p><h1 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h1><p>我们再将写好的代码转到后端，然后运行。去前端试一试。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/50.jpg" srcset="/img/loading.gif" alt="功能测试"><br>大功告成！  </p><h1 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h1><p>本次主要的难点在于需要调用百度的地理逆编码，总体还是简单的，这样我们就为我们的公众号增添了一个疫情查询功能。  </p><p>但是这段代码仍然有缺陷：</p><ol><li>是上次遗留下来的问题，地区查询因为部分例如自治区或者街道等特殊名称，导致无法利用简单的[:-1]进行匹配</li><li>其实也和第一个差不多，我们利用的是名字暴力循环匹配查找，理想状态是直接通过经纬度获得疫情数据（应该能实现，但得另外想办法抓包了）</li></ol><p>以上是全部内容，如果有疑问或者不对，又或者是有更好的解决办法，都可以在下面留言或者通过其他方式联系我~</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>教程</tag>
+      
+      <tag>python</tag>
+      
+      <tag>微信公众号</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>日记-2020年4月20日</title>
     <link href="/diary/20200420.html"/>
     <url>/diary/20200420.html</url>

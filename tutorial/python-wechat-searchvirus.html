@@ -16,14 +16,14 @@
   <meta name="theme-color" content="#2f4154">
 
   
-    <meta name="description" content="4月20日，因为一个朋友的不幸遭遇有感而发。一定要开防DDOS!一定要开防DDOS!一定要开防DDOS!">
+    <meta name="description" content="利用之前的Python爬取丁香园疫情数据文章内容，进一步对接微信公众号，实现用户通过发送地图位置信息实时查询当地省市的疫情数据。">
   
 
   <!--以上添加了description代码-->
   <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
   <meta name="author" content="Liu Yun">
   <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
-  <title>日记-2020年4月20日 | LiuYun的博客</title>
+  <title>为微信公众号接入疫情数据查询 | LiuYun的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -161,8 +161,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-04-20 23:19">
-                    2020 四月 20日 , 星期一 , 11:19 晚上
+                  <time datetime="2020-05-02 22:15">
+                    2020 五月 2日 , 星期六 , 10:15 晚上
                   </time>
                 </div>
               
@@ -172,7 +172,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    726 字
+                    903 字
                   </span>
                 
 
@@ -182,7 +182,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    7
+                    9
                      分钟
                   </span>
                 
@@ -218,20 +218,53 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 23日 , 星期四 , 4:29 下午
+                本文最后更新于：2020 五月 2日 , 星期六 , 11:23 晚上
               </p>
             
           <article class="markdown-body">
-            <div class="note note-primary"><p><strong>2020.04.23： 已更新后续</strong></p></div>  
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在是晚上的23点22分，本来我已经关闭了电脑，并且洗漱完打算上床，但因为一件事久久不能释怀。  </p>
-<h1 id="事情经过"><a href="#事情经过" class="headerlink" title="事情经过"></a>事情经过</h1><p>这段不幸的经历发生在一个我刚认识了不到一周的来自酷安的群友。就在昨日，他还在和我们畅谈打算明日在阿里云买台学生机，然后把域名备案。然而今天一早，却收到了他的消息。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/38.png" srcset="/img/loading.gif" alt="img"><br>昨天还说要备案的，怎么今天突然说要博客路要暂时停止了？<br>随即而来的，是我一直有耳闻，但却从未真切感受到的事——DDOS<br>以下是聊天记录：<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/39.png" srcset="/img/loading.gif" alt="img"><br>以下是涉及到的图片<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/41.jpg" srcset="/img/loading.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/40.jpg" srcset="/img/loading.gif" alt="img"><br>短短一个晚上，6T的流量，直接欠费4500元，这对任何一个个人博客都是一个难以承担的数目，而这个不幸的遭遇者，还仅仅是一个初中生。  </p>
-<h1 id="感思"><a href="#感思" class="headerlink" title="感思"></a>感思</h1><p>我为他的遭遇感到不幸，但我却不能为他做点什么，因为在此之前我从未遇到过这类事情。我无话可说，只能劝他保持心态，以及写下这篇文章用来警醒你我。被DDOS也许只是一个随机的事件，但谁也不能保证它不会降临到自己的身上，我们只有在危机到来之前，做好准备。<br>截至现在23：40分，腾讯云官方客服的态度仍然是不对流量及费用进行退回，可能会报公安吧，但它没备案，也不知道能不能成功。<br>就先写到这吧，有后续我会继续在这篇文章更进，希望它能挺过这一劫。</p>
-<h1 id="后续（更新于4-23"><a href="#后续（更新于4-23" class="headerlink" title="后续（更新于4.23)"></a>后续（更新于4.23)</h1><p>话接上文，这位群友因为受到DDOS攻击，巨额的流量与请求费用使得腾讯云欠款4000+元。最后和腾讯云客服协商说是因为这是真实流量，没有成功挽回金额，本打算报案，但估计当事人最后也不了了之了。  </p>
-<p>今天已是4.23日，距离事情发生已经过去了约3日，这三天内我了解了很多。许多个人博客用户都在19日当晚到20日早晨受到了攻击，损失金额也在百元不等，虽然比不上上文这位上千的，但都是一笔不小的损失了。事后，我的博客也在第二日收到了十余次web应用攻击（刚在去报表的时候发现又受到了一次攻击）。可以看出这是一次用户集群密度比较大的范围攻击，所以还是要提醒广大站长做好安全工作，CDN也尽量使用带有防御识别的。  </p>
-<p>谨以此文，时刻警醒我网络安全的重要性。</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>话接上文的《利用Python爬取丁香园疫情数据》，本次将利用这个完成的api，对接微信，实现微信公众号疫情查询。如果未看过上一篇文章的，可以 <a href="https://blog.6yfz.cn/tutorial/python-spider-dxy.html">点我前往</a> 。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>本次利用了python微信公众号开发框架的一个模块——<a href="https://github.com/offu/WeRoBot" target="_blank" rel="noopener">werobot</a>，具体功能可以阅读<a href="https://werobot.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">官方文档</a>。<br>除此之外，我们还需要一台服务器（仅指出80或443端口），用作公众号的功能对接。</p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>为了文章内容与字数考虑，本文不从零开始描述如何进行公众号的基本对接和验证，直接开始到功能添加。</p>
+<h2 id="判断公众号位置数据内容"><a href="#判断公众号位置数据内容" class="headerlink" title="判断公众号位置数据内容"></a>判断公众号位置数据内容</h2><p>为了判断用户位置，我们需要知道用户发送了的地图位置数据在后台显示的是什么，所以我们分别到前后端进行查看。</p>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>首先后端先写好调试的代码，为了方便观察，我们debug和return同时返回用户发送的location的数据内容。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/43.png" srcset="/img/loading.gif" alt="代码"><br>并且启动我们的端口监听<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/44.png" srcset="/img/loading.gif" alt="启动"></p>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>然后我们去前端发送位置数据，看看返回了什么。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/46.jpg" srcset="/img/loading.gif" alt="前端"></p>
+<h3 id="数据判断"><a href="#数据判断" class="headerlink" title="数据判断"></a>数据判断</h3><p>再去看看后端<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/45.png" srcset="/img/loading.gif" alt="后端"><br>可以看到，前端和后端都返还了一个经纬度数据，并且数据类型是tuple（可以自行用type()函数进行查询）。</p>
+<h2 id="逆地理编码"><a href="#逆地理编码" class="headerlink" title="逆地理编码"></a>逆地理编码</h2><p>微信公众号的地图数据返回的是经纬度信息，但是我们上次实现的是利用地区的名字判断查询的疫情数据，所以我们需要用到<a href="http://lbsyun.baidu.com/" target="_blank" rel="noopener">百度开发平台</a>的逆地理编码，实现将左边地址转换为地区信息。即使是未认证的用户也有每日六千条的配额，并发50次/s，对于普通用户来说完全足够。<br>所以我们利用百度账号登录这个开发者平台，创建一个应用<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/46.png" srcset="/img/loading.gif" alt="注册应用"><br>具体步骤就不展示了，记得勾选逆地理编码就行。<br>然后我们查看官方的<a href="http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding-abroad" target="_blank" rel="noopener">逆地理编码调用文档</a><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/47.png" srcset="/img/loading.gif" alt="服务文档"><br>这边你们自己看看奥，既然都是程序员了，这点基础肯定有的，或者看我写的成品。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/48.png" srcset="/img/loading.gif" alt="api请求"><br>为了不必要的麻烦，我们先本地指定经纬度，并且分析下返回的数据。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/49.png" srcset="/img/loading.gif" alt="api返回数据"><br>可以发现是成功的，我们也知道返回json的具体内容，剩下的就是接入完善了。</p>
+<h2 id="代码接入"><a href="#代码接入" class="headerlink" title="代码接入"></a>代码接入</h2><p>上面的api已经写完了，然后就是和上次的内容对接了。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/50.png" srcset="/img/loading.gif" alt="功能对接"></p>
+<h1 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h1><p>我们再将写好的代码转到后端，然后运行。去前端试一试。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/50.jpg" srcset="/img/loading.gif" alt="功能测试"><br>大功告成！  </p>
+<h1 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h1><p>本次主要的难点在于需要调用百度的地理逆编码，总体还是简单的，这样我们就为我们的公众号增添了一个疫情查询功能。  </p>
+<p>但是这段代码仍然有缺陷：</p>
+<ol>
+<li>是上次遗留下来的问题，地区查询因为部分例如自治区或者街道等特殊名称，导致无法利用简单的[:-1]进行匹配</li>
+<li>其实也和第一个差不多，我们利用的是名字暴力循环匹配查找，理想状态是直接通过经纬度获得疫情数据（应该能实现，但得另外想办法抓包了）</li>
+</ol>
+<p>以上是全部内容，如果有疑问或者不对，又或者是有更好的解决办法，都可以在下面留言或者通过其他方式联系我~</p>
 
           </article>
+
+            
+              <! -- 添加捐赠图标 -->
+<div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+      </div>  
+	<div id="donate_guide" class="donate_bar center hidden" style="background-color: aqua; padding: 40px; height: 290px;">
+		<!-- 支付宝打赏图案 -->
+		<img src="/img/mix_pay.png" srcset="/img/loading.gif" alt="支付宝" style="margin-top: 0px;"> <br>
+		<a>感谢您的支持，这也是我前进的动力</a>
+		<!-- 微信打赏图案 -->
+		<!--img src="/img/weixin.jpg" alt="微信打赏" -->  
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onmousemove = function(){			
+			$('#donate_guide').removeClass('hidden');
+		}
+		document.getElementById('btn_donate').onmouseleave = function(){
+			$('#donate_guide').addClass('hidden');
+		}
+	</script>
+</div>
+
 
             
 
@@ -240,18 +273,15 @@
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/diary/">diary</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E8%AE%B0/">日记</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">微信公众号</a>
                     
                   </div>
                 
@@ -264,18 +294,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/tutorial/python-wechat-searchvirus.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">为微信公众号接入疫情数据查询</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/issue/hexo-valine-issue.html">
-                        <span class="hidden-mobile">【issue 已解决】Valine网址指向的一个小坑</span>
+                      <a href="/diary/20200420.html">
+                        <span class="hidden-mobile">日记-2020年4月20日</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -562,7 +586,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "日记-2020年4月20日&nbsp;",
+        "为微信公众号接入疫情数据查询&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
