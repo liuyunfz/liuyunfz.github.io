@@ -110,17 +110,20 @@
     }
     function selectTrack2(flag) {
         //歌单api调用 https://api.uomg.com/doc-rand.music.html
-        $.getJSON('https://api.uomg.com/api/rand.music?', {
-            sort: "热歌榜" ,	 //选择输出分类[热歌榜|新歌榜|飙升榜|抖音榜|电音榜]，为空输出热歌榜
+        $.getJSON('http://musicapi.leanapp.cn/top/list?', {
+            idx: '1',
+            //sid: "热歌榜" ,	 //选择输出分类[热歌榜|新歌榜|飙升榜|抖音榜|电音榜]，为空输出热歌榜
             //mid: 12345,		//sort mid 二选一
-            format: 'json'
+            //format: 'json'
         }, function(json, textStatus) {
-            if (json.code == 1) {
+            
+            if (json.code == 200) {
                 if (flag == 0) i.attr('class', 'fa fa-play');
                 else {
                     albumArt.removeClass('buffering');
                     i.attr('class', 'fa fa-pause');
                 }
+                //window.alert(json.playlist.coverImgUrl);原code为1，api更换失败。
                 seekBar.width(0);
                 trackTime.removeClass('active');
                 tProgress.text('00:00');
