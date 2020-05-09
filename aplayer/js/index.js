@@ -185,9 +185,9 @@ $(function () {
 
                 currAlbum = json.data.name;
                 currTrackName = json.data.artistsname;
-                currArtwork = json.data.picurl;
+                currArtwork = json.data.picurl.replace(/http:/, "https:");
 
-                audio.src = json.data.url;
+                audio.src = json.data.url.replace(/http:/, "https:");
 
                 nTime = 0;
                 bTime = new Date();
