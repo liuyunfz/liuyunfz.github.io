@@ -110,9 +110,8 @@
     }
     function selectTrack2(flag) {
         //歌单api调用 https://api.uomg.com/doc-rand.music.html
-        $.getJSON('http://musicapi.leanapp.cn/top/list?', {
-            idx: '1',
-            //sid: "热歌榜" ,	 //选择输出分类[热歌榜|新歌榜|飙升榜|抖音榜|电音榜]，为空输出热歌榜
+        $.getJSON('https://api.uomg.com/api/rand.music?', {
+            sid: "热歌榜" ,	 //选择输出分类[热歌榜|新歌榜|飙升榜|抖音榜|电音榜]，为空输出热歌榜
             //mid: 12345,		//sort mid 二选一
             //format: 'json'
         }, function(json, textStatus) {
