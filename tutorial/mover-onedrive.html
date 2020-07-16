@@ -15,16 +15,15 @@
   
   <meta name="theme-color" content="#2f4154">
 
-   
-    <meta name="description" content="前言
-本人是一个崩坏三的游戏玩家，大家也都知道官方会因为一些活动，在其他平台发布一些兑换码。为了更方便的获取水晶，就一直有这么个想法，想爬取B站的评论，利用热心网友在官方账号动态下发的评论，来实现获取最新的水晶兑换码。（本思路启迪于酷安一位用网站RSS获取水晶码的大佬，很早以前见过他的帖子，但现在找不到了，这里匿名感谢下） ">
+  
+    <meta name="description" content="利用微软旗下的mover将Google Drive，Amazon，Dropbox等网盘的文件转存到自己的OneDrive目录下。在线转存，不消耗本机流量，不需要魔法，后台自动执行任务不需要常驻网页。">
   
 
   <!--以上添加了description代码-->
   <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
   <meta name="author" content="Liu Yun">
   <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
-  <title>实战Python爬取B站评论 | LiuYun的博客</title>
+  <title>网盘转存-将文件转存到OneDrive | LiuYun的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -174,8 +173,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-01-30 21:22">
-                    2020 一月 30日 , 星期四 , 9:22 晚上
+                  <time datetime="2020-07-16 15:55">
+                    2020 七月 16日 , 星期四 , 3:55 下午
                   </time>
                 </div>
               
@@ -185,7 +184,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    1.8k 字
+                    725 字
                   </span>
                 
 
@@ -195,7 +194,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    22
+                    7
                      分钟
                   </span>
                 
@@ -231,82 +230,18 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 23日 , 星期四 , 2:49 下午
+                本文最后更新于：2020 七月 16日 , 星期四 , 5:19 下午
               </p>
             
           <article class="markdown-body">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
-<p>本人是一个崩坏三的游戏玩家，大家也都知道官方会因为一些活动，在其他平台发布一些兑换码。为了更方便的获取水晶，就一直有这么个想法，想爬取B站的评论，利用热心网友在官方账号动态下发的评论，来实现获取最新的水晶兑换码。（本思路启迪于酷安一位用网站RSS获取水晶码的大佬，很早以前见过他的帖子，但现在找不到了，这里匿名感谢下） </p>
-<a id="more"></a>   
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><hr>
-<p>本次用到的有：  </p>
-<ol>
-<li>浏览器 （本人使用的是Chrome）  </li>
-<li>Python3（模块包含：requests，json，time）<br>本次实战的地址：<a href="https://space.bilibili.com/27534330/dynamic" target="_blank" rel="noopener">https://space.bilibili.com/27534330/dynamic</a><br>本次实战的目标：爬取下该链接下的所有评论  <h1 id="实战开始"><a href="#实战开始" class="headerlink" title="实战开始"></a>实战开始</h1></li>
-</ol>
-<hr>
-<h3 id="获取评论数据包"><a href="#获取评论数据包" class="headerlink" title="获取评论数据包"></a>获取评论数据包</h3><p>打开开发者工具，然后通过查看评论来获取我们要的数据包，很好找<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/23.png" srcset="/img/loading.gif" alt="img"><br>然后我们模拟发送get包来获取数据</p>
-<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_comment</span><span class="hljs-params">(oid=str,types=int)</span>:</span>
-    headers_small=&#123;
-        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'*/*'</span>,
-        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
-        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
-        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
-        <span class="hljs-string">'Cookie'</span>:<span class="hljs-string">r''</span>,
-        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'api.bilibili.com'</span>,
-        <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://space.bilibili.com/27534330/dynamic'</span>,
-        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'no-cors'</span>,
-        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'same-site'</span>,
-        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'</span>
-    &#125;
-    <span class="hljs-keyword">if</span> types==<span class="hljs-number">2</span>:
-        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=11&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
-    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">8</span>:    
-        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=1&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
-    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">4</span>:
-        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=17&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
-    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">1</span>:
-        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=17&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
-    <span class="hljs-keyword">else</span>:
-        print(<span class="hljs-string">"types error"</span>+str(types))</code></pre></div>
-<p>嗯<br>*<em>这里用到了两个参数，一个oid对应的是帖子的标识码，获取方法在下方，还有一个参数type是帖子的类型，对应了url里面的type，这里先一笔带过，具体我会在下面的内容中写到。 *</em></p>
-<hr>
-<p>然后我们分析response，通过返回的数据我猜测这是一个jQuery，奈何我没学过，但是不要紧，它的数据类型和json很像，于是我将jQuery的特征码去除，直接当作json处理<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/24.png" srcset="/img/loading.gif" alt="img"></p>
-<div class="hljs"><pre><code class="hljs python">rsp_json=json.loads(rsp.text[<span class="hljs-number">42</span>:<span class="hljs-number">-1</span>])</code></pre></div>
-<p>这段代码就是实现将jQuery特征码去除，变成我们可以处理的json.<br>然后利用network里的preview，我们可以很清晰的得出评论的目录为<strong>/data/hots/(0-5)/content/message</strong><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/25.png" srcset="/img/loading.gif" alt="img"><br>于是写出如下代码</p>
-<div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(rsp_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"hots"</span>])):
-        print(str(i+<span class="hljs-number">1</span>)+<span class="hljs-string">":   "</span>+rsp_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"hots"</span>][i][<span class="hljs-string">"content"</span>][<span class="hljs-string">"message"</span>])
-        print(<span class="hljs-string">"_______________________________________"</span>)
-<span class="hljs-keyword">except</span>:
-    <span class="hljs-keyword">pass</span></code></pre></div>
-<p>到此，我们的获取评论数据功能已经实现（这里我选择的是热评，对应的是hots，也可以自己选择爬取所有的评论）。接下来是获取oid数据来实现批量爬取。</p>
-<h3 id="获取动态数据包"><a href="#获取动态数据包" class="headerlink" title="获取动态数据包"></a>获取动态数据包</h3><p>首先打开开发者工具，通过刷新来重新获取发送与接受到的数据。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/gif_1.gif" srcset="/img/loading.gif" alt="gif"><br>找到我们需要的获取动态的包（小技巧是获取完动态的数据后肯定要向服务器获取动态的一些静态图片，所以在一堆图片的数据包前面找）<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/21.png" srcset="/img/loading.gif" alt="img"><br>然后将headers复制，按照之前的步骤一样，模拟数据包的发送<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/22.png" srcset="/img/loading.gif" alt="img"><br>写完数据包的发送后，我们开始对发送回来的response进行处理，这里直接通过浏览器的preview进行分析处理（排版挺好的），得出结论我们需要的动态地址的关键信息oid目录为<strong>/data/cards/(0-19)/desc/dynamic_id_str(或者rid_str)</strong>，说实话这里的oid分析卡了我好几天，因为根据动态的类型不同，对应的oid可能是rid，也可能是dynamic_id。<br>最后我通过穷举法归纳了以下，根据<strong>/data/cards/(0-19)/desc/type</strong>，2和8对应的是oid是rid，其他的4和1对应的是dynamic。<br>利用json，故得出以下代码</p>
-<div class="hljs"><pre><code class="hljs python">dynamic_json=json.loads(dynamic.text)
-comment_list=[]
-comment_type_list=[]
-<span class="hljs-keyword">try</span>:
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>])):
-        comment_type=dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"type"</span>]
-        <span class="hljs-keyword">if</span> comment_type == <span class="hljs-number">2</span> <span class="hljs-keyword">or</span> comment_type==<span class="hljs-number">8</span> :
-            comment_list.append(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"rid_str"</span>])
-        <span class="hljs-keyword">else</span>:
-            comment_list.append(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"dynamic_id_str"</span>])
-        comment_type_list.append(comment_type)
-        
-<span class="hljs-keyword">except</span>:
-    <span class="hljs-keyword">pass</span>
-<span class="hljs-keyword">return</span>([comment_list,comment_type_list])</code></pre></div>
-<p>在这里我将oid与type一并返回了，type将在后来的评论获取中再次派上用处。到这里我们其实已经实现了所有功能，只要将上面两个function结合，即可实现爬取所有动态的评论。</p>
-<h3 id="type与oid的处理"><a href="#type与oid的处理" class="headerlink" title="type与oid的处理"></a>type与oid的处理</h3><p>我觉得这是整个爬取过程的难点，直到这篇文章发布前，我仍未找到有效的解决方法，只能用穷举法。所幸也实现了我们需要的功能。<br>重新来看看我们评论数据包的地址，发现oid与动态对应的地址对上了，也就是我们之前获取的dynamic<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/26.png" srcset="/img/loading.gif" alt="img"><br>但是也有些动态并不符合这个规律，它的oid没有与动态的地址对应，也就不是dynamic，而是rid。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/27.png" srcset="/img/loading.gif" alt="img"><br>经过穷举的尝试，得出如下结论：<br>获取的type为2时，评论地址的oid对应rid，地址的type对应11<br>获取的type为8时，评论地址的oid对应rid，地址的type对应1<br>获取的type为4时，评论地址的oid对应dynamic，地址的type对应17<br>获取的type为1时，评论地址的oid对应dynamic，地址的type对应17<br>于是才得出了上面写的代码。  </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
-<p>以下为我在个人尝试中的一些错误，仅供各位参考借鉴：  </p>
-<ol>
-<li>受老旧思想禁锢，我的第一感觉是直接访问动态的地址来获取信息，也就是request-<a href="https://space.bilibili.com/27534330/dynamic" target="_blank" rel="noopener">https://space.bilibili.com/27534330/dynamic</a>  。结果错误返回，提示过多的重定向错误<div class="hljs"><pre><code class="hljs plain">requests.exceptions.TooManyRedirects: Exceeded 30 redirects.</code></pre></div>
-于是我通过查找信息,添加参数allow_redirects=False来忽略这个错误，结果是不报错了，但仍然没得到想要的数据，后来才想到通过数据包来获取动态数据  </li>
-<li>jQuery那段我也不清楚是不是jQuery，毕竟没接触过。然后凑巧的是当我将他前面的无关数据剔除掉后，他就是一个非常完美的json数据格式，有点投机取巧的感觉。  </li>
-<li>最后一点就是type和oid了，说实话穷举的方法实在不可取，但也是没办法，他获取的type也与链接里的type并不一致。目前我的猜想是在之前的数据包中有类似的js文件，用来进行对type的处理。  <h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2>全文共5200余字，感谢你能看到这里，打赏这种不可能的我也就不说了。成品文件我已放在了<a href="https://github.com/liuyunfz/bilibili_Extraction-cover/blob/master/bh3.py" target="_blank" rel="noopener">我的GitHub</a>上，如果有什么疑问或者我的代码有何问题，请在下方的评论区回复。</li>
-</ol>
+            <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>首先你得有个OneDrive账号以及你需要转存的源网盘。根据官方文档的说明，mover仅支持<strong>其他网盘转存至OneDrive</strong>，不支持OneDrive转存至其他网盘。除此之外，Mover似乎已经被微软收购了，所以可以直接登录你的Microsoft账号，也不太需要担心安全问题。  </p>
+<p>官方支持的网盘如下：<br>  <strong>File Shares , Amazon S3 , Azure Blob Storage , Box , Dropbox , Egnyte , Google Drive , Office 365 , OneDrive , SharePoint Online</strong></p>
+<p>网站地址： <a href="https://app.mover.io/login" target="_blank" rel="noopener">https://app.mover.io/login</a>  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>因为我个人也有转存的需求（我的大多数资源都是GD资源群里转存来的，所以都在GD里，而国内因为众所周知的原因无法直接访问）所以就想把GD里的东西转存到OneDrive里（office的E5账号附带了5T的空间）。E5应该是人均都有的，所以这里也就不赘述了。  </p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>首先登录上我们的微软账户，可以直接登录Business账号。<img src="/img/mover/1.png" srcset="/img/loading.gif" alt=""><br><img src="/img/mover/2.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="网盘连接"><a href="#网盘连接" class="headerlink" title="网盘连接"></a>网盘连接</h2><p><img src="/img/mover/3.png" srcset="/img/loading.gif" alt=""><br>这里我选择Google Drive (Single User)，好像就是普通用户的Google Drive目录。<br><img src="/img/mover/4.png" srcset="/img/loading.gif" alt=""><br>授权的时候记得还是要开启某种神秘力量的，因为需要调用Google的授权。<br><img src="/img/mover/5.png" srcset="/img/loading.gif" alt=""><br>选择完源与目录后就可以进行start copy了。不过因为我的资源都是转存到了团队Google Drive里了，所以我的个人账户里并没有文件。这边我用到是一个支持WebDave的app——Mixplore，我不知道网页版能不能直接进行操作，不过这个可以直接将团队盘里的文件复制到个人盘里。<br>这边也安利一下这个软件，支持的协议和网盘还是很多的。<br><img src="/img/mover/6.png" srcset="/img/loading.gif" alt=""><br><img src="/img/mover/6.jpg" srcset="/img/loading.gif" alt=""><br>具体步骤就是直接从团队盘里复制，然后退回到自己的盘目录，然后粘贴即可，一般等待一到两秒即可。<br><img src="/img/mover/2.jpg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="开始转存"><a href="#开始转存" class="headerlink" title="开始转存"></a>开始转存</h2><p>然后回到我们的mover，刷新一下就可以看到网盘里的内容更新了，可以发现Google Drive个人盘里已经多了我们刚刚复制过去的了，然后选择好目录后就直接点击start copy即可。<br><img src="/img/mover/7.png" srcset="/img/loading.gif" alt=""><br>这个running的任务就是我们刚刚创建的了，因为我之前已经自己试过了，所以显示已经完成了一个任务。<br><img src="/img/mover/8.png" srcset="/img/loading.gif" alt=""><br>接下来静待几分钟即可。在这段时间内我们也可以关闭我们的网页，如果想要查看的话只需要登录mover后在migration manager里查看就行。<br>最后转存完成，总大小7.94G，耗时29min，虽然不算快，但是胜在不耗流量不需要常驻。<br><img src="/img/mover/9.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>总体来说mover是个不错的转存方式，不仅可以剩下流量时间，而且完全免费。唯一的缺憾就是他只能将其他文件转存到OneDrive里，而且不支持某度。</p>
 
           </article>
 
@@ -345,11 +280,11 @@ comment_type_list=[]
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                      <a class="hover-with-bg" href="/tags/OneDrive/">OneDrive</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                      <a class="hover-with-bg" href="/tags/Google-Drive/">Google Drive</a>
                     
-                      <a class="hover-with-bg" href="/tags/bilibili/">bilibili</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%9B%98/">网盘</a>
                     
                   </div>
                 
@@ -362,18 +297,12 @@ comment_type_list=[]
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/tutorial/python-spider-dxy.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">利用Python爬取丁香园疫情数据</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/tutorial/hexo-busuanzi.html">
-                        <span class="hidden-mobile">为hexo-yilia添加文章阅读数</span>
+                      <a href="/issue/issue-gzip.html">
+                        <span class="hidden-mobile">【issue 已解决】一次gzip导致的编码问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -664,7 +593,7 @@ comment_type_list=[]
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "实战Python爬取B站评论&nbsp;",
+        "网盘转存-将文件转存到OneDrive&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
