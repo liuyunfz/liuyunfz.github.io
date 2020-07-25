@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.6yfz.cn/about/index.html</loc>
+    
+    <lastmod>2020-07-25T02:42:27.319Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.6yfz.cn/tutorial/mover-onedrive.html</loc>
     
     <lastmod>2020-07-16T09:19:30.963Z</lastmod>
@@ -89,13 +96,6 @@
     <loc>https://blog.6yfz.cn/tutorial/hexo-CDN.html</loc>
     
     <lastmod>2020-04-18T14:52:16.735Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/about/index.html</loc>
-    
-    <lastmod>2020-04-18T07:14:44.406Z</lastmod>
     
   </url>
   
