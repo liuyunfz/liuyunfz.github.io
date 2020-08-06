@@ -184,7 +184,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    302 字
+                    341 字
                   </span>
                 
 
@@ -230,15 +230,15 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 七月 26日 , 星期日 , 3:30 下午
+                本文最后更新于：2020 八月 6日 , 星期四 , 12:52 下午
               </p>
             
           <article class="markdown-body">
-            <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>前往我的仓库<a href="https://github.com/liuyunfz/DingTalkBot" target="_blank" rel="noopener">DingTalkBot</a>，并将它Fork到自己的仓库<img src="/img/dingtalk/1.png" srcset="/img/loading.gif" alt="fork"></p>
-<h1 id="配置钉钉"><a href="#配置钉钉" class="headerlink" title="配置钉钉"></a>配置钉钉</h1><p>首先选择自己要添加机器人的群，选择智能群助手<img src="/img/dingtalk/2.png" srcset="/img/loading.gif" alt=""><br>添加机器人<br><img src="/img/dingtalk/3.png" srcset="/img/loading.gif" alt=""><br><img src="/img/dingtalk/4.png" srcset="/img/loading.gif" alt=""><br>并选择自定义机器人<br><img src="/img/dingtalk/5.png" srcset="/img/loading.gif" alt=""><br>安全设置选择加sign<br><img src="/img/dingtalk/6.png" srcset="/img/loading.gif" alt=""><br>记得要把上面加签的那段代码复制下来，作为sign。<br>然后会出现webhook，只需要复制token后面那一段，作为我们的token。<br><img src="/img/dingtalk/7.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="配置Github-Action"><a href="#配置Github-Action" class="headerlink" title="配置Github Action"></a>配置Github Action</h1><p>接下来我们对我们fork了的仓库进行配置。打开我们fork了的仓库，选择Settings，然后选择Secrets。<br><img src="/img/dingtalk/8.png" srcset="/img/loading.gif" alt="">按照图示分别添加两个secret，一个是SECRET，一个是TOKEN。key就填之前钉钉给我们的。</p>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>到了这里我们已经配置完毕了我们的机器人，如果你要修改运行频率的话可以按照仓库的MD文档进行修改。<br>最后，我们只需要点一下自己fork了的仓库的star <img src="/img/dingtalk/9.png" srcset="/img/loading.gif" alt="">定时任务就启动了，具体可以在actions里查看。</p>
-<p>以下是效果图：<br><img src="/img/dingtalk/10.png" srcset="/img/loading.gif" alt=""><br>目前该机器人只添加了基于小刀网的线报推送，如果你有其他建议，欢迎提交issue或拉取请求。</p>
+            <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>前往我的仓库<a href="https://github.com/liuyunfz/DingTalkBot" target="_blank" rel="noopener">DingTalkBot</a>，并将它Fork到自己的仓库<img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/1.png" srcset="/img/loading.gif" alt="fork"></p>
+<h1 id="配置钉钉"><a href="#配置钉钉" class="headerlink" title="配置钉钉"></a>配置钉钉</h1><p>首先选择自己要添加机器人的群，选择智能群助手<img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/2.png" srcset="/img/loading.gif" alt="ast"><br>添加机器人<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/3.png" srcset="/img/loading.gif" alt="robot"><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/4.png" srcset="/img/loading.gif" alt="add"><br>并选择自定义机器人<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/5.png" srcset="/img/loading.gif" alt="div"><br>安全设置选择加sign<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/6.png" srcset="/img/loading.gif" alt="sign"><br>记得要把上面加签的那段代码复制下来，作为sign。<br>然后会出现webhook，只需要复制token后面那一段，作为我们的token。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/7.png" srcset="/img/loading.gif" alt="token"></p>
+<h1 id="配置Github-Action"><a href="#配置Github-Action" class="headerlink" title="配置Github Action"></a>配置Github Action</h1><p>接下来我们对我们fork了的仓库进行配置。打开我们fork了的仓库，选择Settings，然后选择Secrets。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/8.png" srcset="/img/loading.gif" alt="secrets">按照图示分别添加三个secret，一个是SECRET，一个是TOKEN。key就填之前钉钉给我们的。还有一个Mids填写的是你要关注的up主的id，可以不填，如果要订阅多个up主中间用逗号分隔就像<code>10160261,7053465</code>。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/11.png" srcset="/img/loading.gif" alt="mid"></p>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>到了这里我们已经配置完毕了我们的机器人，如果你要修改运行频率的话可以按照仓库的MD文档进行修改。<br>最后，我们只需要点一下自己fork了的仓库的star <img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/9.png" srcset="/img/loading.gif" alt="">定时任务就启动了，具体可以在actions里查看。</p>
+<p>以下是效果图：<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/dingtalk/10.png" srcset="/img/loading.gif" alt="stmp"><br>目前该机器人只添加了基于小刀网的线报推送，如果你有其他建议，欢迎提交issue或拉取请求。</p>
 
           </article>
 
