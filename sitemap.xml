@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.6yfz.cn/tutorial/mover-onedrive.html</loc>
+    
+    <lastmod>2020-08-24T04:23:59.317Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/tutorial/python-spider-bilibili-comments.html</loc>
+    
+    <lastmod>2020-08-24T04:21:41.876Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/diary/hello-world.html</loc>
+    
+    <lastmod>2020-08-24T04:12:09.003Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/tutorial/hexo-CDN.html</loc>
+    
+    <lastmod>2020-08-24T04:08:37.247Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.6yfz.cn/tutorial/bot-dingtalk.html</loc>
     
     <lastmod>2020-08-06T04:52:40.698Z</lastmod>
@@ -19,13 +47,6 @@
     <loc>https://blog.6yfz.cn/about/index.html</loc>
     
     <lastmod>2020-07-25T02:42:27.319Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/tutorial/mover-onedrive.html</loc>
-    
-    <lastmod>2020-07-16T09:19:30.963Z</lastmod>
     
   </url>
   
@@ -93,23 +114,9 @@
   </url>
   
   <url>
-    <loc>https://blog.6yfz.cn/tutorial/python-spider-bilibili-comments.html</loc>
-    
-    <lastmod>2020-04-23T06:49:39.143Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.6yfz.cn/issue/issue-4399-saving.html</loc>
     
     <lastmod>2020-04-20T04:11:31.206Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/tutorial/hexo-CDN.html</loc>
-    
-    <lastmod>2020-04-18T14:52:16.735Z</lastmod>
     
   </url>
   
@@ -138,13 +145,6 @@
     <loc>https://blog.6yfz.cn/diary/20200120.html</loc>
     
     <lastmod>2020-04-11T14:57:36.173Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/diary/hello-world.html</loc>
-    
-    <lastmod>2020-04-11T14:55:40.253Z</lastmod>
     
   </url>
   

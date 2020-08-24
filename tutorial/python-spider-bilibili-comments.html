@@ -185,7 +185,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    1.8k 字
+                    2.5k 字
                   </span>
                 
 
@@ -195,7 +195,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    22
+                    35
                      分钟
                   </span>
                 
@@ -231,7 +231,7 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 四月 23日 , 星期四 , 2:49 下午
+                本文最后更新于：2020 八月 24日 , 星期一 , 12:21 中午
               </p>
             
           <article class="markdown-body">
@@ -305,7 +305,128 @@ comment_type_list=[]
 <li>受老旧思想禁锢，我的第一感觉是直接访问动态的地址来获取信息，也就是request-<a href="https://space.bilibili.com/27534330/dynamic" target="_blank" rel="noopener">https://space.bilibili.com/27534330/dynamic</a>  。结果错误返回，提示过多的重定向错误<div class="hljs"><pre><code class="hljs plain">requests.exceptions.TooManyRedirects: Exceeded 30 redirects.</code></pre></div>
 于是我通过查找信息,添加参数allow_redirects=False来忽略这个错误，结果是不报错了，但仍然没得到想要的数据，后来才想到通过数据包来获取动态数据  </li>
 <li>jQuery那段我也不清楚是不是jQuery，毕竟没接触过。然后凑巧的是当我将他前面的无关数据剔除掉后，他就是一个非常完美的json数据格式，有点投机取巧的感觉。  </li>
-<li>最后一点就是type和oid了，说实话穷举的方法实在不可取，但也是没办法，他获取的type也与链接里的type并不一致。目前我的猜想是在之前的数据包中有类似的js文件，用来进行对type的处理。  <h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2>全文共5200余字，感谢你能看到这里，打赏这种不可能的我也就不说了。成品文件我已放在了<a href="https://github.com/liuyunfz/bilibili_Extraction-cover/blob/master/bh3.py" target="_blank" rel="noopener">我的GitHub</a>上，如果有什么疑问或者我的代码有何问题，请在下方的评论区回复。</li>
+<li>最后一点就是type和oid了，说实话穷举的方法实在不可取，但也是没办法，他获取的type也与链接里的type并不一致。目前我的猜想是在之前的数据包中有类似的js文件，用来进行对type的处理。  <h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2>全文共1800余字，感谢你能看到这里，打赏这种不可能的我也就不说了。<del>成品文件我已放在了<a href="https://github.com/liuyunfz/bilibili_Extraction-cover/blob/master/bh3.py" target="_blank" rel="noopener">我的GitHub</a>上</del>，如果有什么疑问或者我的代码有何问题，请在下方的评论区回复。<br>因为某些原因已经删除了该项目的GitHub仓库，所以直接在下面附上代码。需要注意的是本文件在获取评论的基础上增加了获取崩坏三兑换码的功能（尚未完善），但是获取评论的代码以自定义函数的方式独立出现，所以仍不影响阅读学习。<div class="hljs"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> requests,json,time,re
+dhm=[]
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_comment</span><span class="hljs-params">(oid=str,types=int)</span>:</span>
+    
+    headers_small=&#123;
+        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'*/*'</span>,
+        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
+        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+        <span class="hljs-string">'Cookie'</span>:<span class="hljs-string">r''</span>,
+        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'api.bilibili.com'</span>,
+        <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://space.bilibili.com/27534330/dynamic'</span>,
+        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'no-cors'</span>,
+        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'same-site'</span>,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'</span>
+    &#125;
+    <span class="hljs-comment">#requests.exceptions.TooManyRedirects: Exceeded 30 redirects.           太多重定向，使用allow_redirects=False   302重定向页面</span>
+    <span class="hljs-keyword">if</span> types==<span class="hljs-number">2</span>:
+        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=11&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
+    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">8</span>:    
+        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=1&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
+    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">4</span>:
+        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=17&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
+    <span class="hljs-keyword">elif</span> types==<span class="hljs-number">1</span>:
+        rsp=requests.get(url=<span class="hljs-string">"https://api.bilibili.com/x/v2/reply?callback=jQuery172017694877061996372_1580287236452&amp;jsonp=jsonp&amp;pn=1&amp;type=17&amp;oid=&#123;0&#125;&amp;sort=2&amp;_=1580287547926"</span>.format(oid),headers=headers_small,allow_redirects=<span class="hljs-literal">False</span>)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">"types error"</span>+str(types))
+    <span class="hljs-comment">#print(rsp.status_code)</span>
+    
+    <span class="hljs-keyword">try</span>:
+        rsp_json=json.loads(rsp.text[<span class="hljs-number">42</span>:<span class="hljs-number">-1</span>])
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-string">'''</span>
+<span class="hljs-string">    with open("D:/py/123.htm","w",encoding='utf-8')as f:</span>
+<span class="hljs-string">        f.write(rsp.text[41:-1])</span>
+<span class="hljs-string">    #rsp_xpath = selector.xpath('//div[@id="app"]/div[@class="s-space"]/div/div/div/div/div/div')</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    rsp_json=json.loads(rsp.text)</span>
+<span class="hljs-string">    rsp_jsonpath=jsonpath.jsonpath(rsp_json,'$..message')</span>
+<span class="hljs-string">    print(rsp_jsonpath)</span>
+<span class="hljs-string">    '''</span>
+
+    <span class="hljs-string">'''</span>
+<span class="hljs-string">    for i in range(len(rsp_json["data"]["hots"])):</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">        print(rsp_json["data"]["hots"][i]["replies"][i]["content"]["message"])</span>
+<span class="hljs-string">    评论中的评论</span>
+<span class="hljs-string">    '''</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(rsp_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"hots"</span>])):
+            print(str(i+<span class="hljs-number">1</span>)+<span class="hljs-string">":   "</span>+rsp_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"hots"</span>][i][<span class="hljs-string">"content"</span>][<span class="hljs-string">"message"</span>])
+            <span class="hljs-keyword">try</span>:
+                <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> re.findall(<span class="hljs-string">"([a-z0-9A-Z]&#123;10,17&#125;)"</span>,rsp_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"hots"</span>][i][<span class="hljs-string">"content"</span>][<span class="hljs-string">"message"</span>]):
+                    dhm.append(x)
+            <span class="hljs-keyword">except</span>:
+                <span class="hljs-keyword">pass</span>
+            
+            <span class="hljs-string">'''</span>
+<span class="hljs-string">            try:</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">                for j in range(len(rsp_json["data"]["hots"][i]["replies"])):</span>
+<span class="hljs-string">                    print("                         "+rsp_json["data"]["hots"][i]["replies"][j]["content"]["message"])</span>
+<span class="hljs-string">            except:</span>
+<span class="hljs-string">                pass</span>
+<span class="hljs-string">            '''</span>
+            print(<span class="hljs-string">"_______________________________________"</span>)
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_dynamic</span><span class="hljs-params">()</span>:</span>
+    dynamic_headers=&#123;
+        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json, text/plain, */*'</span>,
+        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
+        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+        <span class="hljs-string">'Cookie'</span>:<span class="hljs-string">r''</span>,
+        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'api.vc.bilibili.com'</span>,
+        <span class="hljs-string">'Origin'</span>:<span class="hljs-string">'https://space.bilibili.com'</span>,
+        <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://space.bilibili.com/27534330/dynamic'</span>,
+        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'cors'</span>,
+        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'same-site'</span>,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'</span>
+    &#125;
+    dynamic=requests.get(url=<span class="hljs-string">"https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history?visitor_uid=7053465&amp;host_uid=27534330&amp;offset_dynamic_id=0&amp;need_top=1"</span>,headers=dynamic_headers)
+    dynamic_json=json.loads(dynamic.text)
+    comment_list=[]
+    comment_type_list=[]
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>])):
+            comment_type=dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"type"</span>]
+            <span class="hljs-keyword">if</span> comment_type == <span class="hljs-number">2</span> <span class="hljs-keyword">or</span> comment_type==<span class="hljs-number">8</span> :
+                comment_list.append(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"rid_str"</span>])
+            <span class="hljs-keyword">else</span>:
+                comment_list.append(dynamic_json[<span class="hljs-string">"data"</span>][<span class="hljs-string">"cards"</span>][i][<span class="hljs-string">"desc"</span>][<span class="hljs-string">"dynamic_id_str"</span>])
+            comment_type_list.append(comment_type)
+            
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">return</span>([comment_list,comment_type_list])  
+    
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    t=time.time()
+    comments=[]
+    comments_type=[]
+    comments=get_dynamic()[<span class="hljs-number">0</span>]
+    comments_type=get_dynamic()[<span class="hljs-number">1</span>]
+    <span class="hljs-keyword">for</span> x,y <span class="hljs-keyword">in</span> zip(comments,comments_type):
+        print(str(x)+<span class="hljs-string">"      "</span>+str(y))
+        get_comment(x,y)
+        <span class="hljs-comment">#time.sleep(3)</span>
+    print(time.time()-t)
+    print(dhm)</code></pre></div>
+
+
+
+
+</li>
 </ol>
 
           </article>
@@ -345,9 +466,9 @@ comment_type_list=[]
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
                     
                       <a class="hover-with-bg" href="/tags/bilibili/">bilibili</a>
                     
