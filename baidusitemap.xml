@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.6yfz.cn/tutorial/bot-dingtalk.html</loc>
+    <lastmod>2020-11-05</lastmod>
+  </url>  <url>
     <loc>https://blog.6yfz.cn/issue/issue-gzip.html</loc>
     <lastmod>2020-09-20</lastmod>
   </url>  <url>
@@ -15,9 +18,6 @@
   </url>  <url>
     <loc>https://blog.6yfz.cn/tutorial/hexo-CDN.html</loc>
     <lastmod>2020-08-24</lastmod>
-  </url>  <url>
-    <loc>https://blog.6yfz.cn/tutorial/bot-dingtalk.html</loc>
-    <lastmod>2020-08-06</lastmod>
   </url>  <url>
     <loc>https://blog.6yfz.cn/tutorial/windows-menu-new.html</loc>
     <lastmod>2020-08-02</lastmod>
