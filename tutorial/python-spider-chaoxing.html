@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/favicon.ico">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+
+  
+    <meta name="description" content="分析超星（学习通）的网络协议，利用python实现一键刷课程视频。">
+  
+
+  <!--以上添加了description代码-->
+  <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
+  <meta name="author" content="Liu Yun">
+  <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
+  <title>超星学习通网课分析 | LiuYun的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1763598_pox2yzz0etj.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div id="dark" onclick="switchDarkMode()"></div>
+  <script>
+    var isNight = new Date().getHours() >= 22 || new Date().getHours() < 7;
+    if( matchMedia('(prefers-color-scheme: dark)').matches || isNight || localStorage.getItem('dark') === '1') {
+      if(!(isNight&&localStorage.getItem('noDark') === '1')) {
+        document.body.classList.add('dark');
+      }
+    }
+    document.getElementById('dark').innerHTML = document.querySelector("body").classList.contains("dark")?"🌙":"🌞";
+  </script>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>LiuYun的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/function/">
+              <i class="iconfont iconfunction"></i>
+              功能</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/history/">
+              <i class="iconfont iconbook"></i>
+              历程</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        <li class="nav-item">
+        <a class="nav-link" href="https://travellings.now.sh/" target="blank" title="开往-友链接力"><i class="iconfont iconfly" alt="开往-友链接力" width="120"></i></a>
+        </li>
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-11-13 21:54">
+                    2020 十一月 13日 , 星期五 , 9:54 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    5.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    74
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-warning">
+                本文最后更新于：2020 十一月 20日 , 星期五 , 11:05 晚上
+              </p>
+            
+          <article class="markdown-body">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个刚步入大学的新生，跟全国广大的大学生一样，也受到了来自各种学习软件的迫害，其中“超星”就是其中之一。因为疫情及各种学校当地原因，我们学校决定于十月开学，于是也就多了一个多月的线上学习时间。通过各种腾讯课堂，钉钉，腾讯会议，学习通等等进行网络授课。期间也遇到了各种宣传代刷网课的，本着以锻炼自己爬虫实力为目的，在闲暇之余开始研究超星的网络协议（主要上面有好多学习视频任务需要完成）。<br>在此也声明一下，本教程仅供学习，请勿用于非法商业用途。刷课一时爽，但也不要忘了掌握好知识，杜绝挂科。</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><p>超星平台的旧版登陆是需要验证码的<img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/1.png" srcset="/img/loading.gif" alt="old_sign_in"><br>然而通过新版进去却不需要直接输入验证码（尚未测试过多次密码错误后是否会出现验证码）<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/2.png" srcset="/img/loading.gif" alt="new_sign_in"><br>本着能简化就简化的理念（主要是懒），我们直接抓取这个新版的登陆页面。<a href="https://passport2.chaoxing.com/login?fid=&newversion=true&refer=http%3A%2F%2Fi.chaoxing.com" target="_blank" rel="noopener">https://passport2.chaoxing.com/login?fid=&amp;newversion=true&amp;refer=http%3A%2F%2Fi.chaoxing.com</a><br>尝试登陆，老套路了，避免登陆成功后跳转出现很多包，我们直接输入错误的登陆信息。结果很符合我们的预期，只多出了一个包<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/3.png" srcset="/img/loading.gif" alt="post_sign_in"><br>查看预览，正好是提示我们的“用户名或密码错误”，我们查看提交的表单，一个个来分析。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/4.png" srcset="/img/loading.gif" alt="post_form_sign_in"></p>
+<div class="hljs"><pre><code class="hljs plain">fid: -1
+uname: 11011110010
+password: bGl1eXVuZno&#x3D;
+refer: http%3A%2F%2Fi.chaoxing.com
+t: true</code></pre></div>
+<p>不管fid，-1应该是一个常量。uname正好是我们输入的手机号。password结尾有“=”，我们大胆猜测是base64编码<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/5.png" srcset="/img/loading.gif" alt="post_form_password"><br>正好是我们输入的密码，那么password也搞定了。t是一个布尔值，也作为常量，refer我就不多解释了，也把它作为常量吧。</p>
+<h3 id="代码撰写"><a href="#代码撰写" class="headerlink" title="代码撰写"></a>代码撰写</h3><p>照着我们的分析，我们尝试利用python代码模拟我们的登陆操作。</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests,base64
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sign_in</span><span class="hljs-params">(username:str,password:str)</span>:</span>
+    url=<span class="hljs-string">"https://passport2.chaoxing.com/fanyalogin"</span>
+    headers=&#123;
+        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'application/json, text/javascript, */*; q=0.01'</span>,
+        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6'</span>,
+        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+        <span class="hljs-string">'Content-Length'</span>:<span class="hljs-string">'95'</span>,
+        <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/x-www-form-urlencoded; charset=UTF-8'</span>,
+        <span class="hljs-string">'Cookie'</span>:<span class="hljs-string">''</span>,
+        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'passport2.chaoxing.com'</span>,
+        <span class="hljs-string">'Origin'</span>:<span class="hljs-string">'https://passport2.chaoxing.com'</span>,
+        <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://passport2.chaoxing.com/login?fid=&amp;newversion=true&amp;refer=http%3A%2F%2Fi.chaoxing.com'</span>,
+        <span class="hljs-string">'Sec-Fetch-Dest'</span>:<span class="hljs-string">'empty'</span>,
+        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'cors'</span>,
+        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'same-origin'</span>,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36 Edg/86.0.622.68'</span>,
+        <span class="hljs-string">'X-Requested-With'</span>:<span class="hljs-string">'XMLHttpRequest'</span>
+    &#125;
+    data=<span class="hljs-string">"fid=-1&amp;uname=&#123;0&#125;&amp;password=&#123;1&#125;&amp;refer=http%253A%252F%252Fi.chaoxing.com&amp;t=true"</span>.format(username,base64.b64encode(password.encode()).decode())
+    print(base64.b64encode(password.encode()).decode())
+    rsp=requests.post(url=url,headers=headers,data=data)
+    print(rsp.text,rsp.status_code)</code></pre></div>
+<p>调试一下，我这里把私密信息打了马赛克，但不影响看出成功。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/6.png" srcset="/img/loading.gif" alt="function_sign_in"><br>为了后续内容的顺利进行，这边我们再把登陆成功的cookie记录下来</p>
+<div class="hljs"><pre><code class="hljs python">cookieStr = <span class="hljs-string">''</span> 
+    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> rsp.cookies:
+        cookieStr = cookieStr + item.name + <span class="hljs-string">'='</span> + item.value + <span class="hljs-string">';'</span>
+    print(cookieStr)</code></pre></div>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/7.png" srcset="/img/loading.gif" alt="cookie_sign_in"></p>
+<h2 id="获取课程"><a href="#获取课程" class="headerlink" title="获取课程"></a>获取课程</h2><h3 id="网页分析-1"><a href="#网页分析-1" class="headerlink" title="网页分析"></a>网页分析</h3><h4 id="抓取课程信息"><a href="#抓取课程信息" class="headerlink" title="抓取课程信息"></a>抓取课程信息</h4><p>因为不能确定个人空间里面的课程内容是通过json获取数据在本地渲染的还是服务器就渲染好后传给用户的。所以我们还是抓包看看。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/8.png" srcset="/img/loading.gif" alt="post_zone"><br>查找我们的课程，发现在源代码里并没有找到，所以大概率是第一种可能，所以我们尝试往下找传递课程数据的json包。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/9.png" srcset="/img/loading.gif" alt="post_zone_true"><br>可以看到，成功找到了我们要的数据包，可惜并不是我们想要的json包，但问题也不大，只是增加了我们代码解析时的复杂度。然后具体看我们抓到的这个课程数据包，请求方式为get，唯一麻烦的是参数s<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/10.png" srcset="/img/loading.gif" alt="get_course"><br>这个s参数肯定不会无故出现，所以我们往前寻找有没有前面就给出了这个地址的，我们从最前面找，看看最初的那个空间地址包里面有没有这个地址。<br>然而正当我打算尝试时，我发现把s参数去掉了一样可以正常访问我们的课程数据<code>http://mooc1-2.chaoxing.com/visit/courses</code><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/11.png" srcset="/img/loading.gif" alt="get_course_withNoS"><br>那么为了尽可能简化，我们还是能偷懒就偷懒。<br>然后我们跳到代码阶段，先试试前面的cookie能否正常使用，并且读取到这个课程网页的信息。</p>
+<p><a href="#尝试cookie与读取课程信息">点我跳转</a></p>
+<h4 id="解析课程信息"><a href="#解析课程信息" class="headerlink" title="解析课程信息"></a>解析课程信息</h4><p>因为课程数据已经在<a href="http://mooc1-2.chaoxing.com/visit/courses" target="_blank" rel="noopener">http://mooc1-2.chaoxing.com/visit/courses</a> 这个包里给出了，但它又不是一个json，所以我们把它作为一个单独的网页来进行结构分析。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/13.png" srcset="/img/loading.gif" alt="post_deal_data"><br>可以看到课程是一个ul结构下的多个li构成的。我们需要的里面每个课程的<code>courseId</code> <code>classId</code>与对应跳转的url(因为url里包含了courseid与classid，所以我们可以选择一是通过xpath先储存并关联url与对应的课程id；亦或是只获取url，后面再从url里读取参数courseid，classid等)。选中我们要的元素，右键复制xpath。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/14.png" srcset="/img/loading.gif" alt="html_xpath"><br>这里我选择了第二种方案，只获取url，courseid从url中读取。我们继续跳到代码步骤。 </p>
+<p><a href="#课程xpath书写与重定向问题">点我跳转</a> </p>
+<h3 id="代码撰写-1"><a href="#代码撰写-1" class="headerlink" title="代码撰写"></a>代码撰写</h3><h4 id="尝试cookie与读取课程信息"><a href="#尝试cookie与读取课程信息" class="headerlink" title="尝试cookie与读取课程信息"></a>尝试cookie与读取课程信息</h4><p>将登陆获取到的cookie合并成cookiestr后传入获取课程信息的函数</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_course</span><span class="hljs-params">(cookie:str)</span>:</span>
+    course_headers=&#123;
+        <span class="hljs-string">'Cookie'</span>:cookie,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+    &#125;
+    course_rsp=requests.get(url=<span class="hljs-string">"http://mooc1-2.chaoxing.com/visit/courses"</span>,headers=course_headers)
+    print(course_rsp.text)</code></pre></div>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/12.png" srcset="/img/loading.gif" alt="funtion_get_course"><br>可以看到，成功获取到了课程信息，同时也印证了我们前面登录函数的可行性。<br>之后回到网页，我们继续分析网页结构，使python可以解析我们的所有课程及相关信息。  </p>
+<p><a href="#解析课程信息">点我跳转</a>  </p>
+<h4 id="课程xpath书写与重定向问题"><a href="#课程xpath书写与重定向问题" class="headerlink" title="课程xpath书写与重定向问题"></a>课程xpath书写与重定向问题</h4><div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_course</span><span class="hljs-params">(cookie:str)</span>:</span>
+    course_headers=&#123;
+        <span class="hljs-string">'Cookie'</span>:cookie,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+    &#125;
+    course_rsp=requests.get(url=<span class="hljs-string">"http://mooc1-2.chaoxing.com/visit/courses"</span>,headers=course_headers)
+    <span class="hljs-keyword">if</span> course_rsp.status_code==<span class="hljs-number">200</span>:
+        <span class="hljs-keyword">from</span> lxml <span class="hljs-keyword">import</span> etree
+        class_HTML=etree.HTML(course_rsp.text)
+        print(<span class="hljs-string">"处理成功，您当前已开启的课程如下：\n"</span>)
+        i=<span class="hljs-number">0</span>
+        <span class="hljs-keyword">global</span> course_dict
+        course_dict=&#123;&#125;
+        <span class="hljs-keyword">for</span> class_item <span class="hljs-keyword">in</span> class_HTML.xpath(<span class="hljs-string">"/html/body/div/div[2]/div[3]/ul/li[@class='courseItem curFile']"</span>):
+            <span class="hljs-comment">#courseid=class_item.xpath("./input[@name='courseId']/@value")[0]</span>
+            <span class="hljs-comment">#classid=class_item.xpath("./input[@name='classId']/@value")[0]</span>
+            <span class="hljs-keyword">try</span>:              
+                class_item_name=class_item.xpath(<span class="hljs-string">"./div[2]/h3/a/@title"</span>)[<span class="hljs-number">0</span>]
+                <span class="hljs-comment">#等待开课的课程由于尚未对应链接，所有缺少a标签。</span>
+                i+=<span class="hljs-number">1</span>
+                print(class_item_name)
+                course_dict[i]=[class_item_name,<span class="hljs-string">"https://mooc1-2.chaoxing.com&#123;&#125;"</span>.format(class_item.xpath(<span class="hljs-string">"./div[1]/a[1]/@href"</span>)[<span class="hljs-number">0</span>])]
+            <span class="hljs-keyword">except</span>:
+                <span class="hljs-keyword">pass</span>
+        print(<span class="hljs-string">"———————————————————————————————————"</span>)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">"error:课程处理失败"</span>)</code></pre></div>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/15.png" srcset="/img/loading.gif" alt="code_xpath"><br>课程读取成功了，课程的url与name也作为list被我们关联储存到了course_dict这个dict中(为了使序号与课程进行关联，并且保持有序性)<br>课程获取完后我们就可以开始针对单个课程，读取里面的待完成视频任务添加到程序任务里。然而，仔细观察我们从html里获取到的url<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/16.png" srcset="/img/loading.gif" alt="before_url"><br>与我们手动访问课程获取的url<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/17.png" srcset="/img/loading.gif" alt="after_url"><br>发现两者并不相同，我们尝试访问html里的url，然后抓包看发生了什么<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/18.png" srcset="/img/loading.gif" alt="status_302"><br>不出所料，果然url发生了302重定向。<br>本来requests库是会识别302并自动跟随跳转的，但不知道为什么我这里出现了错误，并未跟随跳转，甚至让我一度怀疑问题出在了cookie上。</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deal_course</span><span class="hljs-params">(url:str)</span>:</span>
+    course_302_url=url
+    course_headers=&#123;
+        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'</span>,
+        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6'</span>,
+        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+        <span class="hljs-string">'Cookie'</span>:cookieStr,
+        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'mooc1-2.chaoxing.com'</span>,
+        <span class="hljs-string">'Sec-Fetch-Dest'</span>:<span class="hljs-string">'document'</span>,
+        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'navigate'</span>,
+        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'none'</span>,
+        <span class="hljs-string">'Upgrade-Insecure-Requests'</span>:<span class="hljs-string">'1'</span>,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+    &#125;
+    <span class="hljs-comment">#302跳转，requests库默认追踪headers里的location进行跳转，使用allow_redirects=False</span>
+    course_302_rsp=requests.get(url=course_302_url,headers=course_headers,allow_redirects=<span class="hljs-literal">False</span>)
+    new_url=course_302_rsp.headers[<span class="hljs-string">'Location'</span>]</code></pre></div>
+<p>这样，只需要将html里获取到的url传入到这个函数里，new_url就是我们要的真正的课程地址了。<br>真正的课程地址获取完成了，接下来我们继续回到网络分析，分析单个课程中我们需要完成的任务。 </p>
+<h2 id="课程任务"><a href="#课程任务" class="headerlink" title="课程任务"></a>课程任务</h2><h3 id="分析网页"><a href="#分析网页" class="headerlink" title="分析网页"></a>分析网页</h3><p>任意进入到一个课程中，通过观察可以发现：白色无内容的——没有任务；橙色有数字的——数字代表该章节的任务数；绿色勾勾的——有任务但已完成了的。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/19.png" srcset="/img/loading.gif" alt="misson_html"><br>刷新一下，发现该课程地址就已经给出了相关的章节信息，即在服务端已经渲染好了再传输到用户端，并没有额外的json数据包。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/20.png" srcset="/img/loading.gif" alt="post_course_html"><br>所以我们直接右键“检查”，查看网页元素。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/21.png" srcset="/img/loading.gif" alt="course_html_element"><br>找规律可以发现，正常的没有课程任务的，em元素的class是“blank”，如果有任务但已完成则是“openlock”，如果有任务但未完成则class为“orange”，且其text为任务数。<br>知道了这个，我们就好写了，只需要判断em元素class属性是orange的，并把它对应的url写入我们的任务列表里。所以接下来回到代码环节  </p>
+<h3 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h3><p>章节信息判断与未完成任务读取<br>通过上面的分析，以及课程信息url的获取，将其传入的requests，获取源代码后即可进行判断处理。</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_misson</span><span class="hljs-params">(url:str)</span>:</span>
+    course_headers=&#123;
+        <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'</span>,
+        <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+        <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6'</span>,
+        <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+        <span class="hljs-string">'Cookie'</span>:cookieStr,
+        <span class="hljs-string">'Host'</span>:<span class="hljs-string">'mooc1-2.chaoxing.com'</span>,
+        <span class="hljs-string">'Sec-Fetch-Dest'</span>:<span class="hljs-string">'document'</span>,
+        <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'navigate'</span>,
+        <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'none'</span>,
+        <span class="hljs-string">'Upgrade-Insecure-Requests'</span>:<span class="hljs-string">'1'</span>,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+    &#125;
+    course_rsp=requests.get(url=url,headers=course_headers)
+    course_HTML=etree.HTML(course_rsp.text)
+    <span class="hljs-comment">#为防止账号没有课程或没有班级，需要后期在xpath获取加入try，以防报错</span>
+    chapter_mission=[]
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">for</span> course_unit <span class="hljs-keyword">in</span> course_HTML.xpath(<span class="hljs-string">"/html/body/div[5]/div[1]/div[2]/div[3]/div"</span>):
+            print(course_unit.xpath(<span class="hljs-string">"./h2/a/@title"</span>)[<span class="hljs-number">0</span>])
+            <span class="hljs-keyword">for</span> chapter_item <span class="hljs-keyword">in</span> course_unit.xpath(<span class="hljs-string">"./div"</span>):
+                chapter_status=chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='icon']/em/@class"</span>)[<span class="hljs-number">0</span>]
+                <span class="hljs-keyword">if</span> chapter_status == <span class="hljs-string">"orange"</span>:
+                    print(<span class="hljs-string">"----"</span>,chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='articlename']/a/@title"</span>)[<span class="hljs-number">0</span>],<span class="hljs-string">"      "</span>,chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='icon']/em/text()"</span>)[<span class="hljs-number">0</span>])
+                    chapter_mission.append(<span class="hljs-string">"https://mooc1-2.chaoxing.com&#123;&#125;"</span>.format(chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='articlename']/a/@href"</span>)[<span class="hljs-number">0</span>]))
+                <span class="hljs-keyword">else</span>:    
+                    print(<span class="hljs-string">"----"</span>,chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='articlename']/a/@title"</span>)[<span class="hljs-number">0</span>],<span class="hljs-string">"      "</span>,chapter_item.xpath(<span class="hljs-string">"./h3/span[@class='icon']/em/@class"</span>)[<span class="hljs-number">0</span>])
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">pass</span>
+    print(<span class="hljs-string">"课程读取完成，共有%d个章节可一键完成"</span>%len(chapter_mission))</code></pre></div>
+<p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/22.png" srcset="/img/loading.gif" alt="function_add_misson"></p>
+<h2 id="视频任务点"><a href="#视频任务点" class="headerlink" title="视频任务点"></a>视频任务点</h2><p>因为要实现的是一键刷课程视频，所以接下来我们要读取的是章节任务里面的视频任务点。</p>
+<h3 id="网页分析-2"><a href="#网页分析-2" class="headerlink" title="网页分析"></a>网页分析</h3><p>还是老样子，先抓一下包。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/23.png" srcset="/img/loading.gif" alt="post_video_misson"><br>可以从预览里看出，章节网页似乎并没有完全渲染完成后再传输给我们。通过查看响应里面的代码，我们也验证了猜想，并未找到有关的视频数据。所以我们尝试往下寻找包含视频信息的json包或者html网页。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/24.png" srcset="/img/loading.gif" alt="post_video"><br>最后，在这个“/knowledge/cards”里的包里找到了我们要的数据，可惜它也不是json，而是一个html，里面有js代码。所以我们还得自己提取代码，并转化成python可识别的内容。这边的分析还是比较麻烦的，但并不算难，只能说不熟练的话需要多试试。这个就请自己尝试看看吧，这边就不给出具体分析过程了（因为自己也想不起来了，也不想再分析一遍，懒）。不过如果实在有问题的话也可以联系我，和我交流交流。那我们就直接进入代码环节然后给出代码。<br>我们顺便分析一下这些视频数据代表的内容。<br>“isPassed”是任务点是否已完成，true为已完成，false为未完成，所以我们可以通过判断它的属性来直接判断是否需要对该视频进行处理。<br>“type”: “video”是类型为视频，也是我们判断是否要添加到任务列表的一个条件（因为我们要实现的只有刷超星视频），其他还有可能出现ppt这种。<br>其他其实通过名字也都能知道是什么，主要还是要看后面我们需要用到什么属性。</p>
+<h3 id="代码编写-1"><a href="#代码编写-1" class="headerlink" title="代码编写"></a>代码编写</h3><p>为了把js代码提取出来并变成python中的dict或list，我这里用到了正则表达式，取出我们要的内容。</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deal_misson</span><span class="hljs-params">(missons:list,class_cpi:str)</span>:</span>  
+    <span class="hljs-keyword">for</span> chapter_mission_item <span class="hljs-keyword">in</span> missons:
+        result = parse.urlparse(chapter_mission_item)
+        chapter_data=parse.parse_qs(result.query)
+        print(chapter_data)
+        medias_url=<span class="hljs-string">"https://mooc1-2.chaoxing.com/knowledge/cards?clazzid=&#123;0&#125;&amp;courseid=&#123;1&#125;&amp;knowledgeid=&#123;2&#125;&amp;num=0&amp;ut=s&amp;cpi=&#123;3&#125;&amp;v=20160407-1"</span>.format(chapter_data.get(<span class="hljs-string">'clazzid'</span>)[<span class="hljs-number">0</span>],chapter_data.get(<span class="hljs-string">'courseId'</span>)[<span class="hljs-number">0</span>],chapter_data.get(<span class="hljs-string">'chapterId'</span>)[<span class="hljs-number">0</span>],class_cpi)
+        class_headers=&#123;
+        <span class="hljs-string">'Cookie'</span>:cookieStr,
+        <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+        &#125;
+        medias_rsp=requests.get(url=medias_url,headers=class_headers)
+        medias_HTML=etree.HTML(medias_rsp.text)
+        medias_text=medias_HTML.xpath(<span class="hljs-string">"//script[1]/text()"</span>)[<span class="hljs-number">0</span>]
+        <span class="hljs-keyword">import</span> re,json
+        pattern = re.compile(<span class="hljs-string">r'attachments":([\s\S]*),"defaults"'</span>) 
+        re_result=re.findall(pattern,medias_text)[<span class="hljs-number">0</span>]
+        reportUrl=re.findall(<span class="hljs-string">r'reportUrl":([\s\S]*),"chapterCapture"'</span>,medias_text)[<span class="hljs-number">0</span>]
+        reportUrl=reportUrl.replace(<span class="hljs-string">"\""</span>,<span class="hljs-string">""</span>)
+        result_json=json.loads(re_result)</code></pre></div>
+<p>这里传入的missons是每个章节的链接构成的一个list，至于class_cpi是课程的cpi信息，每个课程中的所有章节中的所有视频都共用这个cpi属性，而这个是后面完成视频要用到的，针对我们现在判断视频任务并用不到。<strong>result_json</strong>即是我们从网页代码中提取出的json。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/25.png" srcset="/img/loading.gif" alt="misson_debug"><br>可以看到，调试成功了，而且是很完美的json格式，loads我们可以用list的操作方式轻松的调用其中的数据信息。<br>章节中的视频信息我们也处理完成了，到此我们的准备工作已经都完成了。<strong>账号登陆——判断课程信息——判断课程中的章节任务——判断章节里面的视频任务</strong>，最后一步就是完成章节里的视频任务了，也是我们最后的大头。</p>
+<h2 id="任务完成解析"><a href="#任务完成解析" class="headerlink" title="任务完成解析"></a>任务完成解析</h2><h3 id="抓包分析"><a href="#抓包分析" class="headerlink" title="抓包分析"></a>抓包分析</h3><p>打开“开发者选项”，进行抓包，然后播放视频。出现了两个包<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/26.png" srcset="/img/loading.gif" alt="post_video_status"><br>第一个是视频的包，用于向服务器请求视频数据，从其中的type，以及一些其他的headers都能看出来。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/27.png" srcset="/img/loading.gif" alt="post_video_first"><br>第二个包，就是我们要的用来完成任务的包了。它传输的是你观看的数据，返回的isPassed来说明你的任务是否完成了。因为我们只是播放了一下，所以任务当然没能完成，所以返回的数据是{“isPassed”:false}。<br>然后我们等视频放完，即将任务点完成，看它会发送什么包，与前面这个包有什么区别。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/28.png" srcset="/img/loading.gif" alt="post_video_finish"></p>
+<p>可以看出主要区别就在这个playingTime，翻译下来也很好理解，应该就是我们播放了的时间。只要这个时间等于视频的总长度，那么就算我们就完成了。接下来我们分析下提交的整个表单。<br>|  key   | 含义  | 来源 |<br>|  —-  | —-  | —- |<br>| clazzId  | 章节ID | 单个章节的url里 |<br>| playingTime  | 视频播放的时间 | 自己修改，通过读取视频的长度信息 |<br>| duration | 时间 | 与playingtime同步，都为视频的总时长 |<br>| clipTime | 起止时间？ | “0_”加上总时长，即与前面两个参数一样，但在前方加上”0_” |<br>| objectId | 视频的“objectId”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| otherInfo | 视频的“otherInfo”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| jobid | 视频的“jobid”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| userid | 用户id信息 | 由登陆时获取的cookie里获取 |<br>| isdrag | 视频状态信息，0：默认；3：播放；2：赞同；4：视频结束。 | 我们要用的是状态4，将其作为常量 |<br>| view | 终端情况？ | 值为pc，我们将其作为常量不修改它 |<br>| enc | 是其他表单所有数据经过算法计算后得出的数据校验码 | 全篇的最难点，见后面分析 |<br>| rt | 不清楚 | 将值0.9作为常量 |<br>| dtype | 任务类型 | 因为我们要实现的功能仅有视频，所以将值Video作为常量 |<br>| _t | 时间戳 | 可以添加实时时间戳，也可以沿用，服务端不会进行校验 |</p>
+<p>以下我将给出以上部分参数含义及来源的代码依据。</p>
+<h4 id="clipTime"><a href="#clipTime" class="headerlink" title="clipTime"></a>clipTime</h4><p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/29.png" srcset="/img/loading.gif" alt="post_clipTime"></p>
+<div class="hljs"><pre><code class="hljs js">clipTime = (params.startTime || <span class="hljs-string">"0"</span>) + <span class="hljs-string">"_"</span> + (params.endTime || params.duration);</code></pre></div>
+<p>以上是源代码，不难看懂，clipTime的值是 起始时间或”0” + “_”  + 终止时间或duration 。</p>
+<h4 id="isdrag"><a href="#isdrag" class="headerlink" title="isdrag"></a>isdrag</h4><p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/30.png" srcset="/img/loading.gif" alt="post_isdrag"></p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">var</span> isdrag = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">switch</span> (evt) &#123;
+<span class="hljs-keyword">case</span> <span class="hljs-string">"play"</span>:
+    isdrag = <span class="hljs-number">3</span>;
+    <span class="hljs-keyword">break</span>;
+<span class="hljs-keyword">case</span> <span class="hljs-string">"pause"</span>:
+    isdrag = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">break</span>;
+<span class="hljs-keyword">case</span> <span class="hljs-string">"ended"</span>:
+    isdrag = <span class="hljs-number">4</span>;
+    <span class="hljs-keyword">break</span>
+&#125;</code></pre></div>
+<p>因为我们要完成任务，自然是视频播放完结束后发送的包，所以为ended，所以我们用“4”作为常量值。</p>
+<h4 id="rt"><a href="#rt" class="headerlink" title="rt"></a>rt</h4><p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/31.png" srcset="/img/loading.gif" alt="post_rt"></p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">var</span> rt = data ? (data.rt ? data.rt : <span class="hljs-number">0.9</span>) : <span class="hljs-number">0.9</span>;</code></pre></div>
+<p>没学过js的我也不太清楚这段话的具体作用，不过我们把“0.9”作为常量传输不会有任何异常。<br>这里有个小细节，就是当我们全站检索“rt”时因为字符数较少，会出现较多的结果（因为很多函数或变量里都会包含这两个字符，所以我们搜索 rt 的定义语句——“var rt”，即可减少结果。</p>
+<h4 id="enc"><a href="#enc" class="headerlink" title="enc"></a>enc</h4><p>全文的最难点，以上所有数据的校验码。以下将给出我个人尝试破解的详细思路。<br>首先我选择全站检索enc，尝试找到它的由来。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/32.png" srcset="/img/loading.gif" alt="post_enc_1"><br>可以看到，出现了很多的数据（15个文件共77行匹配），所以为了缩小范围，我尝试跟上面的rt一样操作，查询enc的赋值语句。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/33.png" srcset="/img/loading.gif" alt="post_enc_2"><br>很有效果，结果只有4个文件5行匹配。而如图红色圈起来的代码，虽然都对enc进行了赋值，但都不是我们要的语句。我们一个个手动排除，最后我锁定了 <a href="https://mooc1-2.chaoxing.com/ananas/videojs-ext/videojs-ext.min.js" target="_blank" rel="noopener">https://mooc1-2.chaoxing.com/ananas/videojs-ext/videojs-ext.min.js</a> 这个文件，细心的朋友可能已经发现了，就是我们刚才找clipTime的那个地方。</p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">var</span> sendLog_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">player, isdrag, currentTimeSec, callback</span>) </span>&#123;
+    <span class="hljs-keyword">if</span> (!params.reportUrl) &#123;
+        <span class="hljs-keyword">return</span>
+    &#125;
+    <span class="hljs-keyword">if</span> (params.isFiled == <span class="hljs-number">1</span> || params.state == <span class="hljs-number">1</span>) &#123;
+        <span class="hljs-keyword">return</span>
+    &#125;
+    <span class="hljs-keyword">var</span> format = <span class="hljs-string">"[&#123;0&#125;][&#123;1&#125;][&#123;2&#125;][&#123;3&#125;][&#123;4&#125;][&#123;5&#125;][&#123;6&#125;][&#123;7&#125;]"</span>
+      , clipTime = (params.startTime || <span class="hljs-string">"0"</span>) + <span class="hljs-string">"_"</span> + (params.endTime || params.duration);
+    <span class="hljs-keyword">var</span> enc = Ext.String.format(format, params.clazzId, params.userid, params.jobid || <span class="hljs-string">""</span>, params.objectId, currentTimeSec * <span class="hljs-number">1000</span>, <span class="hljs-string">"d_yHJ!$pdA~5"</span>, params.duration * <span class="hljs-number">1000</span>, clipTime);
+    <span class="hljs-keyword">var</span> rurl = [params.reportUrl, <span class="hljs-string">"/"</span>, params.dtoken, <span class="hljs-string">"?clazzId="</span>, params.clazzId, <span class="hljs-string">"&amp;playingTime="</span>, currentTimeSec, <span class="hljs-string">"&amp;duration="</span>, params.duration, <span class="hljs-string">"&amp;clipTime="</span>, clipTime, <span class="hljs-string">"&amp;objectId="</span>, params.objectId, <span class="hljs-string">"&amp;otherInfo="</span>, params.otherInfo, <span class="hljs-string">"&amp;jobid="</span>, params.jobid, <span class="hljs-string">"&amp;userid="</span>, params.userid, <span class="hljs-string">"&amp;isdrag="</span>, isdrag, <span class="hljs-string">"&amp;view=pc"</span>, <span class="hljs-string">"&amp;enc="</span>, md5(enc), <span class="hljs-string">"&amp;rt="</span>, params.rt, <span class="hljs-string">"&amp;dtype=Video"</span>, <span class="hljs-string">"&amp;_t="</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()].join(<span class="hljs-string">""</span>);
+    logFunc(player, rurl, callback)
+&#125;;</code></pre></div>
+<p>把里面关于enc的代码提取出来</p>
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">var</span> format = <span class="hljs-string">"[&#123;0&#125;][&#123;1&#125;][&#123;2&#125;][&#123;3&#125;][&#123;4&#125;][&#123;5&#125;][&#123;6&#125;][&#123;7&#125;]"</span>
+
+<span class="hljs-keyword">var</span> enc = Ext.String.format(format, params.clazzId, params.userid, params.jobid || <span class="hljs-string">""</span>, params.objectId, currentTimeSec * <span class="hljs-number">1000</span>, <span class="hljs-string">"d_yHJ!$pdA~5"</span>, params.duration * <span class="hljs-number">1000</span>, clipTime);
+
+<span class="hljs-string">"&amp;enc="</span>, md5(enc)</code></pre></div>
+<p>大致意思就是令</p>
+<blockquote>
+<p>enc=[clazzId][userid][jobid][objectId][currentTimeSec * 1000][“d_yHJ!$pdA~5”][duration * 1000][clipTime]  </p>
+</blockquote>
+<p>然后再将取enc的md5，作为表单的校验码。这里面的参数多是前面已经分析过了的，只是中间多了一个字符串常量 &quot;d_yHJ!$pdA~5&quot; 。还有一个可能不太清楚的就是currentTimeSec了。<br>我们设置断点，一边看看这个currentTimeSec到底是啥，顺便验证下我们前面的是否正确。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/34.png" srcset="/img/loading.gif" alt="html_pause"><br>在这里设置断点，然后我们刷新后重新播放视频。将鼠标移到enc处，即可看到enc的值预览。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/35.png" srcset="/img/loading.gif" alt="html_enc">这里因为隐私问题做打码处理，可以自己尝试，和我们前面说的基本无二。而currentTimeSec我们也发现了，跟duration * 1000的值一模一样。<br>截止目前，数据包里面的所有参数我们已经都弄明白了，接下来就是写代码就好了。</p>
+<h3 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h3><p>以下是enc的返回函数</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode_enc</span><span class="hljs-params">(clazzid:str,duration:int,objectId:str,otherinfo:str,jobid:str,userid:str)</span>:</span>
+    <span class="hljs-keyword">import</span> hashlib
+    data=<span class="hljs-string">"[&#123;0&#125;][&#123;1&#125;][&#123;2&#125;][&#123;3&#125;][&#123;4&#125;][&#123;5&#125;][&#123;6&#125;][0_&#123;7&#125;]"</span>.format(clazzid,userid,jobid,objectId,duration*<span class="hljs-number">1000</span>,<span class="hljs-string">"d_yHJ!$pdA~5"</span>,duration*<span class="hljs-number">1000</span>,duration)
+    print(data)
+    <span class="hljs-keyword">return</span> hashlib.md5(data.encode()).hexdigest()</code></pre></div>
+<p>然后是数据包的代码</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">if</span> video_item.get(<span class="hljs-string">"isPassed"</span>) == <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">pass</span>
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">if</span> video_item.get(<span class="hljs-string">"type"</span>) == <span class="hljs-string">"video"</span>:
+        objectId=video_item.get(<span class="hljs-string">"objectId"</span>)
+        otherInfo=video_item.get(<span class="hljs-string">"otherInfo"</span>)
+        jobid=video_item.get(<span class="hljs-string">"jobid"</span>)
+        name=video_item.get(<span class="hljs-string">'property'</span>).get(<span class="hljs-string">'name'</span>)
+        status_url=<span class="hljs-string">"https://mooc1-1.chaoxing.com/ananas/status/&#123;&#125;?k=&amp;flag=normal&amp;_dc=1600850935908"</span>.format(objectId)
+        status_rsp=requests.get(url=status_url,headers=class_headers)
+        status_json=json.loads(status_rsp.text)
+        duration=status_json.get(<span class="hljs-string">'duration'</span>)
+        dtoken=status_json.get(<span class="hljs-string">'dtoken'</span>)
+        print(objectId,otherInfo,jobid,uid,name,duration,reportUrl)
+        multimedia_headers=&#123;
+            <span class="hljs-string">'Accept'</span>:<span class="hljs-string">'*/*'</span>,
+            <span class="hljs-string">'Accept-Encoding'</span>:<span class="hljs-string">'gzip, deflate, br'</span>,
+            <span class="hljs-string">'Accept-Language'</span>:<span class="hljs-string">'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6'</span>,
+            <span class="hljs-string">'Connection'</span>:<span class="hljs-string">'keep-alive'</span>,
+            <span class="hljs-string">'Content-Type'</span>:<span class="hljs-string">'application/json'</span>,
+            <span class="hljs-string">'Cookie'</span>:cookieStr,
+            <span class="hljs-string">'Host'</span>:<span class="hljs-string">'mooc1-1.chaoxing.com'</span>,
+            <span class="hljs-string">'Referer'</span>:<span class="hljs-string">'https://mooc1-1.chaoxing.com/ananas/modules/video/index.html?v=2020-0907-1546'</span>,
+            <span class="hljs-string">'Sec-Fetch-Dest'</span>:<span class="hljs-string">'empty'</span>,
+            <span class="hljs-string">'Sec-Fetch-Mode'</span>:<span class="hljs-string">'cors'</span>,
+            <span class="hljs-string">'Sec-Fetch-Site'</span>:<span class="hljs-string">'same-origin'</span>,
+            <span class="hljs-string">'User-Agent'</span>:<span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51'</span>
+        &#125;
+        <span class="hljs-keyword">import</span> time
+        elses=<span class="hljs-string">"/&#123;0&#125;?clazzId=&#123;1&#125;&amp;playingTime=&#123;2&#125;&amp;duration=&#123;2&#125;&amp;clipTime=0_&#123;2&#125;&amp;objectId=&#123;3&#125;&amp;otherInfo=&#123;4&#125;&amp;jobid=&#123;5&#125;&amp;userid=&#123;6&#125;&amp;isdrag=4&amp;view=pc&amp;enc=&#123;7&#125;&amp;rt=0.9&amp;dtype=Video&amp;_t=&#123;8&#125;"</span>.format(dtoken,chapter_data.get(<span class="hljs-string">'clazzid'</span>)[<span class="hljs-number">0</span>],duration,objectId,otherInfo,jobid,uid,encode_enc(chapter_data.get(<span class="hljs-string">'clazzid'</span>)[<span class="hljs-number">0</span>],duration,objectId,otherInfo,jobid,uid),int(time.time()*<span class="hljs-number">1000</span>))
+        reportUrl_item=reportUrl+str(elses)
+        print(reportUrl_item)
+        multimedia_rsp=requests.get(url=reportUrl_item,headers=multimedia_headers)
+        print(multimedia_rsp.text)</code></pre></div>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>截止至此，已经是2020/11/20 22:59:16 ，这篇文章还是断断续续写了很久。里面我尽可能展示了我的思路。每一个功能的实现都存在一定的难度性，所以还是很值得记录与分享的。如果你仍有什么疑问，或者我哪里表达较为含糊，您都可以在下方直接评论，或者直接联系我。<br>最后再次强调，本文仅作为经验分享，请勿将其中内容二次修改用作商业用途。如有侵权也请联系我删除。<br>最后本文的全部代码以被我整合上传到了GitHub，详细请移步我的仓库 <a href="https://github.com/liuyunfz/chaoxing_tool" target="_blank" rel="noopener">chaoxing_tool</a> ,如果不介意的话可以给我个star支持下。</p>
+
+          </article>
+
+            
+              <! -- 添加捐赠图标 -->
+<div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+      </div>  
+	<div id="donate_guide" class="donate_bar center hidden" style="background-color: aqua; padding: 40px; height: 290px;">
+		<!-- 支付宝打赏图案 -->
+		<img src="/img/mix_pay.png" srcset="/img/loading.gif" alt="支付宝" style="margin-top: 0px;"> <br>
+		<a>感谢您的支持，这也是我前进的动力</a>
+		<!-- 微信打赏图案 -->
+		<!--img src="/img/weixin.jpg" alt="微信打赏" -->  
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onmousemove = function(){			
+			$('#donate_guide').removeClass('hidden');
+		}
+		document.getElementById('btn_donate').onmouseleave = function(){
+			$('#donate_guide').addClass('hidden');
+		}
+	</script>
+</div>
+
+
+            
+
+
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noopener" style="text-decoration:underline;">CC BY-NC-SA</a> 4.0协议 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/tutorial/windows-menu-new.html">
+                        <span class="hidden-mobile">自定义右键新建选项</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <hr>
+              <div style="padding: 50px 0 0 0;">
+                <div style="font-size: large; float: left;"><u>发表评论</u>：</div>
+                <div style="box-sizing: border-box; float: right; cursor: pointer; color: #40aadce1;" onclick="window.open('/comments')">《评论须知》</div>
+              </div>
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.5/Valine.min.js" ></script>
+  <!--script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js"></script-->
+  
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+      
+      new Valine({
+        el: "#vcomments",
+        app_id: "Omyq3YvoLOd3QOLieeH3Uzl1-MdYXbMMI",
+        app_key: "JIO0OiAqSJIVM5ouVcEfbdU6",
+        placeholder: "请留下您的正确邮箱地址，方便我对您进行回复通知，谢谢。",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+        emojiCDN: 'https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/emoji/', 
+        // 表情title和图片映射
+        emojiMaps: {
+          "blh" : "blh.png" ,
+          "bll" : "bll.png" ,
+          "bln" : "bln.png" ,
+          "bo9" : "bo9.png" ,
+          "bok" : "bok.png" ,
+          "bpj" : "bpj.png" ,
+          "bpq" : "bpq.png" ,
+          "bps" : "bps.png" ,
+          "bpw" : "bpw.png" ,
+          "brs" : "brs.png" ,
+          "f071" : "f071.png" ,
+          "tv_doge" : "tv_doge.png" ,
+          "tv_亲亲" : "tv_亲亲.png" ,
+          "tv_偷笑" : "tv_偷笑.png" ,
+          "tv_再见" : "tv_再见.png" ,
+          "tv_冷漠" : "tv_冷漠.png" ,
+          "tv_发怒" : "tv_发怒.png" ,
+          "tv_发财" : "tv_发财.png" ,
+          "tv_可爱" : "tv_可爱.png" ,
+          "tv_吐血" : "tv_吐血.png" ,
+          "tv_呆" : "tv_呆.png" ,
+          "tv_呕吐" : "tv_呕吐.png" ,
+          "tv_困" : "tv_困.png" ,
+          "tv_坏笑" : "tv_坏笑.png" ,
+          "tv_大佬" : "tv_大佬.png" ,
+          "tv_大哭" : "tv_大哭.png" ,
+          "tv_委屈" : "tv_委屈.png" ,
+          "tv_害羞" : "tv_害羞.png" ,
+          "tv_尴尬" : "tv_尴尬.png" ,
+          "tv_微笑" : "tv_微笑.png" ,
+          "tv_思考" : "tv_思考.png" ,
+          "tv_惊吓" : "tv_惊吓.png" ,
+          "tv_打脸" : "tv_打脸.png" ,
+          "tv_抓狂" : "tv_抓狂.png" ,
+          "tv_抠鼻" : "tv_抠鼻.png" ,
+          "tv_斜眼笑" : "tv_斜眼笑.png" ,
+          "tv_无奈" : "tv_无奈.png" ,
+          "tv_晕" : "tv_晕.png" ,
+          "tv_流汗" : "tv_流汗.png" ,
+          "tv_流泪" : "tv_流泪.png" ,
+          "tv_流鼻血" : "tv_流鼻血.png" ,
+          "tv_点赞" : "tv_点赞.png" ,
+          "tv_生气" : "tv_生气.png" ,
+          "tv_生病" : "tv_生病.png" ,
+          "tv_疑问" : "tv_疑问.png" ,
+          "tv_白眼" : "tv_白眼.png" ,
+          "tv_皱眉" : "tv_皱眉.png" ,
+          "tv_目瞪口呆" : "tv_目瞪口呆.png" ,
+          "tv_睡着" : "tv_睡着.png" ,
+          "tv_笑哭" : "tv_笑哭.png" ,
+          "tv_腼腆" : "tv_腼腆.png" ,
+          "tv_色" : "tv_色.png" ,
+          "tv_调侃" : "tv_调侃.png" ,
+          "tv_调皮" : "tv_调皮.png" ,
+          "tv_鄙视" : "tv_鄙视.png" ,
+          "tv_闭嘴" : "tv_闭嘴.png" ,
+          "tv_难过" : "tv_难过.png" ,
+          "tv_馋" : "tv_馋.png" ,
+          "tv_鬼脸" : "tv_鬼脸.png" ,
+          "tv_黑人问号" : "tv_黑人问号.png" ,
+          "tv_鼓掌" : "tv_鼓掌.png" ,
+          "动耳朵" : "动耳朵.gif" ,
+          "哭唧唧" : "哭唧唧.gif" ,
+          "哭泣" : "哭泣.png" ,
+          "尴尬" : "尴尬.png" ,
+          "开车" : "开车.gif" ,
+          "打篮球" : "打篮球.gif" ,
+            // ... 更多表情
+        } ,
+        mathJax: false
+      });     
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">浙ICP备20012672号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 3,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  
+<script src="/js/music.js"></script>
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?6589921a3cfb700a2ddaced6d4dc6c54";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "超星学习通网课分析&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
