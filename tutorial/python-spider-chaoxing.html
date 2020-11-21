@@ -230,11 +230,11 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                本文最后更新于：2020 十一月 20日 , 星期五 , 11:05 晚上
+                本文最后更新于：2020 十一月 21日 , 星期六 , 11:03 上午
               </p>
             
           <article class="markdown-body">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个刚步入大学的新生，跟全国广大的大学生一样，也受到了来自各种学习软件的迫害，其中“超星”就是其中之一。因为疫情及各种学校当地原因，我们学校决定于十月开学，于是也就多了一个多月的线上学习时间。通过各种腾讯课堂，钉钉，腾讯会议，学习通等等进行网络授课。期间也遇到了各种宣传代刷网课的，本着以锻炼自己爬虫实力为目的，在闲暇之余开始研究超星的网络协议（主要上面有好多学习视频任务需要完成）。<br>在此也声明一下，本教程仅供学习，请勿用于非法商业用途。刷课一时爽，但也不要忘了掌握好知识，杜绝挂科。</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为一个刚步入大学的新生，跟全国广大的大学生一样，也受到了来自各种学习软件的迫害，“超星”就是其中之一。因为疫情及各种学校当地原因，我们学校决定于十月开学，于是也就多了一个多月的线上学习时间。通过各种腾讯课堂，钉钉，腾讯会议，学习通等等进行网络授课。期间也遇到了各种宣传代刷网课的，本着以锻炼自己爬虫实力为目的，在闲暇之余开始研究超星的网络协议（主要上面有好多学习视频任务需要完成）。<br>在此也声明一下，本教程仅供学习，请勿用于非法商业用途。刷课一时爽，但也不要忘了掌握好知识，杜绝挂科。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><h3 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h3><p>超星平台的旧版登陆是需要验证码的<img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/1.png" srcset="/img/loading.gif" alt="old_sign_in"><br>然而通过新版进去却不需要直接输入验证码（尚未测试过多次密码错误后是否会出现验证码）<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/2.png" srcset="/img/loading.gif" alt="new_sign_in"><br>本着能简化就简化的理念（主要是懒），我们直接抓取这个新版的登陆页面。<a href="https://passport2.chaoxing.com/login?fid=&newversion=true&refer=http%3A%2F%2Fi.chaoxing.com" target="_blank" rel="noopener">https://passport2.chaoxing.com/login?fid=&amp;newversion=true&amp;refer=http%3A%2F%2Fi.chaoxing.com</a><br>尝试登陆，老套路了，避免登陆成功后跳转出现很多包，我们直接输入错误的登陆信息。结果很符合我们的预期，只多出了一个包<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/3.png" srcset="/img/loading.gif" alt="post_sign_in"><br>查看预览，正好是提示我们的“用户名或密码错误”，我们查看提交的表单，一个个来分析。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/4.png" srcset="/img/loading.gif" alt="post_form_sign_in"></p>
 <div class="hljs"><pre><code class="hljs plain">fid: -1
 uname: 11011110010
@@ -392,7 +392,86 @@ t: true</code></pre></div>
         result_json=json.loads(re_result)</code></pre></div>
 <p>这里传入的missons是每个章节的链接构成的一个list，至于class_cpi是课程的cpi信息，每个课程中的所有章节中的所有视频都共用这个cpi属性，而这个是后面完成视频要用到的，针对我们现在判断视频任务并用不到。<strong>result_json</strong>即是我们从网页代码中提取出的json。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/25.png" srcset="/img/loading.gif" alt="misson_debug"><br>可以看到，调试成功了，而且是很完美的json格式，loads我们可以用list的操作方式轻松的调用其中的数据信息。<br>章节中的视频信息我们也处理完成了，到此我们的准备工作已经都完成了。<strong>账号登陆——判断课程信息——判断课程中的章节任务——判断章节里面的视频任务</strong>，最后一步就是完成章节里的视频任务了，也是我们最后的大头。</p>
 <h2 id="任务完成解析"><a href="#任务完成解析" class="headerlink" title="任务完成解析"></a>任务完成解析</h2><h3 id="抓包分析"><a href="#抓包分析" class="headerlink" title="抓包分析"></a>抓包分析</h3><p>打开“开发者选项”，进行抓包，然后播放视频。出现了两个包<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/26.png" srcset="/img/loading.gif" alt="post_video_status"><br>第一个是视频的包，用于向服务器请求视频数据，从其中的type，以及一些其他的headers都能看出来。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/27.png" srcset="/img/loading.gif" alt="post_video_first"><br>第二个包，就是我们要的用来完成任务的包了。它传输的是你观看的数据，返回的isPassed来说明你的任务是否完成了。因为我们只是播放了一下，所以任务当然没能完成，所以返回的数据是{“isPassed”:false}。<br>然后我们等视频放完，即将任务点完成，看它会发送什么包，与前面这个包有什么区别。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/28.png" srcset="/img/loading.gif" alt="post_video_finish"></p>
-<p>可以看出主要区别就在这个playingTime，翻译下来也很好理解，应该就是我们播放了的时间。只要这个时间等于视频的总长度，那么就算我们就完成了。接下来我们分析下提交的整个表单。<br>|  key   | 含义  | 来源 |<br>|  —-  | —-  | —- |<br>| clazzId  | 章节ID | 单个章节的url里 |<br>| playingTime  | 视频播放的时间 | 自己修改，通过读取视频的长度信息 |<br>| duration | 时间 | 与playingtime同步，都为视频的总时长 |<br>| clipTime | 起止时间？ | “0_”加上总时长，即与前面两个参数一样，但在前方加上”0_” |<br>| objectId | 视频的“objectId”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| otherInfo | 视频的“otherInfo”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| jobid | 视频的“jobid”属性 | 由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。 |<br>| userid | 用户id信息 | 由登陆时获取的cookie里获取 |<br>| isdrag | 视频状态信息，0：默认；3：播放；2：赞同；4：视频结束。 | 我们要用的是状态4，将其作为常量 |<br>| view | 终端情况？ | 值为pc，我们将其作为常量不修改它 |<br>| enc | 是其他表单所有数据经过算法计算后得出的数据校验码 | 全篇的最难点，见后面分析 |<br>| rt | 不清楚 | 将值0.9作为常量 |<br>| dtype | 任务类型 | 因为我们要实现的功能仅有视频，所以将值Video作为常量 |<br>| _t | 时间戳 | 可以添加实时时间戳，也可以沿用，服务端不会进行校验 |</p>
+<p>可以看出主要区别就在这个playingTime，翻译下来也很好理解，应该就是我们播放了的时间。只要这个时间等于视频的总长度，那么就算我们就完成了。接下来我们分析下提交的整个表单。 </p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>含义</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clazzId</td>
+<td>章节ID</td>
+<td>单个章节的url里</td>
+</tr>
+<tr>
+<td>playingTime</td>
+<td>视频播放的时间</td>
+<td>自己修改，通过读取视频的长度信息</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>时间</td>
+<td>与playingtime同步，都为视频的总时长</td>
+</tr>
+<tr>
+<td>clipTime</td>
+<td>起止时间？</td>
+<td>“0_”加上总时长，即与前面两个参数一样，但在前方加上”0_”</td>
+</tr>
+<tr>
+<td>objectId</td>
+<td>视频的“objectId”属性</td>
+<td>由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。</td>
+</tr>
+<tr>
+<td>otherInfo</td>
+<td>视频的“otherInfo”属性</td>
+<td>由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。</td>
+</tr>
+<tr>
+<td>jobid</td>
+<td>视频的“jobid”属性</td>
+<td>由<a href="#视频任务点">视频任务点</a>中的所有视频信息“result_json” 里面的单个视频数据中给出。</td>
+</tr>
+<tr>
+<td>userid</td>
+<td>用户id信息</td>
+<td>由登陆时获取的cookie里获取</td>
+</tr>
+<tr>
+<td>isdrag</td>
+<td>视频状态信息，0：默认；3：播放；2：暂停；4：视频结束。</td>
+<td>我们要用的是状态4，将其作为常量</td>
+</tr>
+<tr>
+<td>view</td>
+<td>终端情况？</td>
+<td>值为”pc”，我们将其作为常量不修改它</td>
+</tr>
+<tr>
+<td>enc</td>
+<td>是其他表单所有数据经过算法计算后得出的数据校验码</td>
+<td>全篇的最难点，见后面分析</td>
+</tr>
+<tr>
+<td>rt</td>
+<td>不清楚</td>
+<td>将值0.9作为常量</td>
+</tr>
+<tr>
+<td>dtype</td>
+<td>任务类型</td>
+<td>因为我们要实现的功能仅有视频，所以将值Video作为常量</td>
+</tr>
+<tr>
+<td>_t</td>
+<td>时间戳</td>
+<td>可以添加实时时间戳，也可以沿用，服务端不会进行校验</td>
+</tr>
+</tbody></table>
 <p>以下我将给出以上部分参数含义及来源的代码依据。</p>
 <h4 id="clipTime"><a href="#clipTime" class="headerlink" title="clipTime"></a>clipTime</h4><p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/29.png" srcset="/img/loading.gif" alt="post_clipTime"></p>
 <div class="hljs"><pre><code class="hljs js">clipTime = (params.startTime || <span class="hljs-string">"0"</span>) + <span class="hljs-string">"_"</span> + (params.endTime || params.duration);</code></pre></div>
@@ -438,7 +517,7 @@ t: true</code></pre></div>
 <blockquote>
 <p>enc=[clazzId][userid][jobid][objectId][currentTimeSec * 1000][“d_yHJ!$pdA~5”][duration * 1000][clipTime]  </p>
 </blockquote>
-<p>然后再将取enc的md5，作为表单的校验码。这里面的参数多是前面已经分析过了的，只是中间多了一个字符串常量 &quot;d_yHJ!$pdA~5&quot; 。还有一个可能不太清楚的就是currentTimeSec了。<br>我们设置断点，一边看看这个currentTimeSec到底是啥，顺便验证下我们前面的是否正确。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/34.png" srcset="/img/loading.gif" alt="html_pause"><br>在这里设置断点，然后我们刷新后重新播放视频。将鼠标移到enc处，即可看到enc的值预览。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/35.png" srcset="/img/loading.gif" alt="html_enc">这里因为隐私问题做打码处理，可以自己尝试，和我们前面说的基本无二。而currentTimeSec我们也发现了，跟duration * 1000的值一模一样。<br>截止目前，数据包里面的所有参数我们已经都弄明白了，接下来就是写代码就好了。</p>
+<p>然后再将取enc的md5，作为表单的校验码。这里面的参数多是前面已经分析过了的，只是中间多了一个字符串常量 &quot;d_yHJ!$pdA~5&quot; 。还有一个可能不太清楚的就是currentTimeSec了。<br>我们设置断点，一边看看这个currentTimeSec到底是啥，顺便验证下我们前面的是否正确。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/34.png" srcset="/img/loading.gif" alt="html_pause"><br>在这里设置断点，然后我们刷新后重新播放视频。将鼠标移到enc处，即可看到enc的值预览。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/chaoxing/35.png" srcset="/img/loading.gif" alt="html_enc">这里因为隐私问题做打码处理，可以自己尝试，和我们前面说的基本无二。而currentTimeSec我们也发现了，currentTimeSec * 1000跟 duration * 1000 的值一模一样。<br>截止目前，数据包里面的所有参数我们已经都弄明白了，接下来就是写代码就好了。</p>
 <h3 id="代码书写"><a href="#代码书写" class="headerlink" title="代码书写"></a>代码书写</h3><p>以下是enc的返回函数</p>
 <div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode_enc</span><span class="hljs-params">(clazzid:str,duration:int,objectId:str,otherinfo:str,jobid:str,userid:str)</span>:</span>
     <span class="hljs-keyword">import</span> hashlib
@@ -480,7 +559,7 @@ t: true</code></pre></div>
         print(reportUrl_item)
         multimedia_rsp=requests.get(url=reportUrl_item,headers=multimedia_headers)
         print(multimedia_rsp.text)</code></pre></div>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>截止至此，已经是2020/11/20 22:59:16 ，这篇文章还是断断续续写了很久。里面我尽可能展示了我的思路。每一个功能的实现都存在一定的难度性，所以还是很值得记录与分享的。如果你仍有什么疑问，或者我哪里表达较为含糊，您都可以在下方直接评论，或者直接联系我。<br>最后再次强调，本文仅作为经验分享，请勿将其中内容二次修改用作商业用途。如有侵权也请联系我删除。<br>最后本文的全部代码以被我整合上传到了GitHub，详细请移步我的仓库 <a href="https://github.com/liuyunfz/chaoxing_tool" target="_blank" rel="noopener">chaoxing_tool</a> ,如果不介意的话可以给我个star支持下。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>截止至此，已经是2020/11/20 22:59:16 ，这篇文章还是断断续续写了很久。里面我尽可能展示了我的思路。每一个功能的实现都存在一定的难度性，所以还是很值得记录与分享的。如果你仍有什么疑问，或者我哪里表达较为含糊，您都可以在下方直接评论，或者直接联系我。<br>最后再次强调，本文仅作为经验分享，请勿将其中内容二次修改用作商业用途。如有侵权也请联系我删除。<br>最后本文的全部代码已被我整合上传到了GitHub，详细请移步我的仓库 <a href="https://github.com/liuyunfz/chaoxing_tool" target="_blank" rel="noopener">chaoxing_tool</a> ,如果不介意的话可以给我个star支持下。</p>
 
           </article>
 
