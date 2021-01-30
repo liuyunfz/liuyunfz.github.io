@@ -1,7 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -15,57 +15,61 @@
   
   <meta name="theme-color" content="#2f4154">
 
+
   
     <meta name="description" content="利用不蒜子提供的免费计数服务，为hexo中的文章添加阅读次数显示。">
   
 
-  <!--以上添加了description代码-->
-  <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
+
+
   <meta name="author" content="Liu Yun">
-  <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
+  <meta name="keywords" content="hexo,个人博客,python,spider">
   <title>为hexo-yilia添加文章阅读数 | LiuYun的博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/railscasts.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1763598_pox2yzz0etj.css">
 
 
-
-
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="/css/custom.css">
 
-
-
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.6yfz.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"6589921a3cfb700a2ddaced6d4dc6c54","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
-  <div id="dark" onclick="switchDarkMode()"></div>
-  <script>
-    var isNight = new Date().getHours() >= 22 || new Date().getHours() < 7;
-    if( matchMedia('(prefers-color-scheme: dark)').matches || isNight || localStorage.getItem('dark') === '1') {
-      if(!(isNight&&localStorage.getItem('noDark') === '1')) {
-        document.body.classList.add('dark');
-      }
-    }
-    document.getElementById('dark').innerHTML = document.querySelector("body").classList.contains("dark")?"🌙":"🌞";
-  </script>
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -85,73 +89,109 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/links/">
-              <i class="iconfont icon-link-fill"></i>
-              友链</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/function/">
-              <i class="iconfont iconfunction"></i>
-              功能</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/function/">
+                <i class="iconfont iconfunction"></i>
+                功能
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/history/">
-              <i class="iconfont iconbook"></i>
-              历程</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/history/">
+                <i class="iconfont iconbook"></i>
+                历程
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-        <li class="nav-item">
-        <a class="nav-link" href="https://travellings.now.sh/" target="blank" title="开往-友链接力"><i class="iconfont iconfly" alt="开往-友链接力" width="120"></i></a>
-        </li>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="https://travellings.now.sh/" target="_blank" rel="noopener">
+                <i class="iconfont iconfly"></i>
+                
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -159,55 +199,61 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="为hexo-yilia添加文章阅读数">
               
             </span>
 
             
-              
-                <div class="mt-3 post-meta">
-                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-01-20 23:18">
-                    2020 一月 20日 , 星期一 , 11:18 晚上
-                  </time>
-                </div>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-20 23:18" pubdate>
+        2020年1月20日 晚上
+      </time>
+    </span>
+  
+</div>
 
-              <div class="mt-1">
-                
-                  
-                  <span class="post-meta mr-2">
-                    <i class="iconfont icon-chart"></i>
-                    331 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      333 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta mr-2">
-                      <i class="iconfont icon-clock-fill"></i>
-                    
-                    
-                    4
-                     分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4
+       分钟
+    </span>
+  
 
-                
-                  <!-- 不蒜子统计文章PV -->
-                  
-                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
-                    <i class="iconfont icon-eye" aria-hidden="true"></i>
-                    <span id="busuanzi_value_page_pv"></span> 次
-                  </span>
-                
-              </div>
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
             
           </div>
 
@@ -221,64 +267,33 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">为hexo-yilia添加文章阅读数</h1>
             
-              <p class="note note-warning">
-                本文最后更新于：2020 四月 25日 , 星期六 , 9:56 晚上
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月25日 晚上
+                
               </p>
             
-          <article class="markdown-body">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。</p>
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想为博客添加一个阅读数统计，一个是方便查看，另一方面也会使自己更有成就感。于是在网上搜索了下教程，发现hexo的统计大多用的都是不蒜子的统计，于是也就随大流使用。但是在期间遇到了一些问题，并进行了一个客制化修改，具体样式应该也可以在右上角看到，仅供参考借鉴。</p>
 <a id="more"></a>
 <h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><h3 id="1："><a href="#1：" class="headerlink" title="1："></a>1：</h3><p>首先修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>after-footer.ejs</strong>文件，在任意位置添加以下代码</p>
-<div class="hljs"><pre><code class="hljs bash">&lt;script async src=<span class="hljs-string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">&lt;script async src=<span class="hljs-string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/19.png" srcset="/img/loading.gif" alt="avatar"><br><br></p>
 <h3 id="2："><a href="#2：" class="headerlink" title="2："></a>2：</h3><p>然后再修改<strong>\themes\yilia\layout\_partial</strong>目录下的<strong>article.ejs</strong>文件，在&lt;%- partial(‘post/title’, {class_name: ‘article-title’}) %&gt;代码下添加</p>
-<div class="hljs"><pre><code class="hljs bash">&lt;!--显示阅读次数--&gt;
-        &lt;% <span class="hljs-keyword">if</span> (!index &amp;&amp; post.comments)&#123; %&gt;
-          &lt;br/&gt;
-          &lt;a class=<span class="hljs-string">"cloud-tie-join-count"</span> href=<span class="hljs-string">"javascript:void(0);"</span> style=<span class="hljs-string">"color:gray;font-size:14px;"</span>&gt;
-          &lt;span class=<span class="hljs-string">"icon-sort"</span> id=<span class="hljs-string">"busuanzi_container_page_pv"</span> style=<span class="hljs-string">"font-size:14px;margin-left:84.4%;"</span>&gt;
-                    阅读总数: &lt;span id=<span class="hljs-string">"busuanzi_value_page_pv"</span> style=<span class="hljs-string">"color:#ef7522;"</span>&gt;&lt;/span&gt;次 &amp;nbsp;&amp;nbsp;
-          &lt;/span&gt;
-          &lt;/a&gt;</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">&lt;!--显示阅读次数--&gt;<br>        &lt;% <span class="hljs-keyword">if</span> (!index &amp;&amp; post.comments)&#123; %&gt;<br>          &lt;br/&gt;<br>          &lt;a class=<span class="hljs-string">"cloud-tie-join-count"</span> href=<span class="hljs-string">"javascript:void(0);"</span> style=<span class="hljs-string">"color:gray;font-size:14px;"</span>&gt;<br>          &lt;span class=<span class="hljs-string">"icon-sort"</span> id=<span class="hljs-string">"busuanzi_container_page_pv"</span> style=<span class="hljs-string">"font-size:14px;margin-left:84.4%;"</span>&gt;<br>                    阅读总数: &lt;span id=<span class="hljs-string">"busuanzi_value_page_pv"</span> style=<span class="hljs-string">"color:#ef7522;"</span>&gt;&lt;/span&gt;次 &amp;nbsp;&amp;nbsp;<br>          &lt;/span&gt;<br>          &lt;/a&gt;<br></code></pre></div></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/20.png" srcset="/img/loading.gif" alt="avatar"><br>当然也可以根据自己的审美需求修改代码的位置或者颜色等，如果有不清楚的可以与我讨论（虽然我也不太懂，是个半吊子）</p>
 
-          </article>
-
-            
-              <! -- 添加捐赠图标 -->
-<div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-      </div>  
-	<div id="donate_guide" class="donate_bar center hidden" style="background-color: aqua; padding: 40px; height: 290px;">
-		<!-- 支付宝打赏图案 -->
-		<img src="/img/mix_pay.png" srcset="/img/loading.gif" alt="支付宝" style="margin-top: 0px;"> <br>
-		<a>感谢您的支持，这也是我前进的动力</a>
-		<!-- 微信打赏图案 -->
-		<!--img src="/img/weixin.jpg" alt="微信打赏" -->  
-    </div>
-	<script type="text/javascript">
-		document.getElementById('btn_donate').onmousemove = function(){			
-			$('#donate_guide').removeClass('hidden');
-		}
-		document.getElementById('btn_donate').onmouseleave = function(){
-			$('#donate_guide').addClass('hidden');
-		}
-	</script>
-</div>
-
-
-            
-
-
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -299,11 +314,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noopener" style="text-decoration:underline;">CC BY-NC-SA</a> 4.0协议 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/tutorial/python-spider-bilibili-comments.html">
@@ -312,8 +327,8 @@
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/diary/20200120.html">
@@ -322,127 +337,45 @@
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
               <!-- Comments -->
-              <hr>
-              <div style="padding: 50px 0 0 0;">
-                <div style="font-size: large; float: left;"><u>发表评论</u>：</div>
-                <div style="box-sizing: border-box; float: right; cursor: pointer; color: #40aadce1;" onclick="window.open('/comments')">《评论须知》</div>
-              </div>
-              <div class="comments" id="comments">
+              <article class="comments" id="comments">
                 
                 
   <div id="vcomments"></div>
-  <script defer src="https://cdn.staticfile.org/valine/1.4.5/Valine.min.js" ></script>
-  <!--script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js"></script-->
-  
-
   <script type="text/javascript">
-    var oldLoadVa = window.onload;
-    window.onload = function () {
-      oldLoadVa && oldLoadVa();
-      
-      new Valine({
-        el: "#vcomments",
-        app_id: "Omyq3YvoLOd3QOLieeH3Uzl1-MdYXbMMI",
-        app_key: "JIO0OiAqSJIVM5ouVcEfbdU6",
-        placeholder: "请留下您的正确邮箱地址，方便我对您进行回复通知，谢谢。",
-        path: window.location.pathname,
-        avatar: "retro",
-        meta: ["nick","mail","link"],
-        pageSize: "10",
-        lang: "zh-CN",
-        highlight: false,
-        recordIP: false,
-        serverURLs: "",
-        emojiCDN: 'https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/emoji/', 
-        // 表情title和图片映射
-        emojiMaps: {
-          "blh" : "blh.png" ,
-          "bll" : "bll.png" ,
-          "bln" : "bln.png" ,
-          "bo9" : "bo9.png" ,
-          "bok" : "bok.png" ,
-          "bpj" : "bpj.png" ,
-          "bpq" : "bpq.png" ,
-          "bps" : "bps.png" ,
-          "bpw" : "bpw.png" ,
-          "brs" : "brs.png" ,
-          "f071" : "f071.png" ,
-          "tv_doge" : "tv_doge.png" ,
-          "tv_亲亲" : "tv_亲亲.png" ,
-          "tv_偷笑" : "tv_偷笑.png" ,
-          "tv_再见" : "tv_再见.png" ,
-          "tv_冷漠" : "tv_冷漠.png" ,
-          "tv_发怒" : "tv_发怒.png" ,
-          "tv_发财" : "tv_发财.png" ,
-          "tv_可爱" : "tv_可爱.png" ,
-          "tv_吐血" : "tv_吐血.png" ,
-          "tv_呆" : "tv_呆.png" ,
-          "tv_呕吐" : "tv_呕吐.png" ,
-          "tv_困" : "tv_困.png" ,
-          "tv_坏笑" : "tv_坏笑.png" ,
-          "tv_大佬" : "tv_大佬.png" ,
-          "tv_大哭" : "tv_大哭.png" ,
-          "tv_委屈" : "tv_委屈.png" ,
-          "tv_害羞" : "tv_害羞.png" ,
-          "tv_尴尬" : "tv_尴尬.png" ,
-          "tv_微笑" : "tv_微笑.png" ,
-          "tv_思考" : "tv_思考.png" ,
-          "tv_惊吓" : "tv_惊吓.png" ,
-          "tv_打脸" : "tv_打脸.png" ,
-          "tv_抓狂" : "tv_抓狂.png" ,
-          "tv_抠鼻" : "tv_抠鼻.png" ,
-          "tv_斜眼笑" : "tv_斜眼笑.png" ,
-          "tv_无奈" : "tv_无奈.png" ,
-          "tv_晕" : "tv_晕.png" ,
-          "tv_流汗" : "tv_流汗.png" ,
-          "tv_流泪" : "tv_流泪.png" ,
-          "tv_流鼻血" : "tv_流鼻血.png" ,
-          "tv_点赞" : "tv_点赞.png" ,
-          "tv_生气" : "tv_生气.png" ,
-          "tv_生病" : "tv_生病.png" ,
-          "tv_疑问" : "tv_疑问.png" ,
-          "tv_白眼" : "tv_白眼.png" ,
-          "tv_皱眉" : "tv_皱眉.png" ,
-          "tv_目瞪口呆" : "tv_目瞪口呆.png" ,
-          "tv_睡着" : "tv_睡着.png" ,
-          "tv_笑哭" : "tv_笑哭.png" ,
-          "tv_腼腆" : "tv_腼腆.png" ,
-          "tv_色" : "tv_色.png" ,
-          "tv_调侃" : "tv_调侃.png" ,
-          "tv_调皮" : "tv_调皮.png" ,
-          "tv_鄙视" : "tv_鄙视.png" ,
-          "tv_闭嘴" : "tv_闭嘴.png" ,
-          "tv_难过" : "tv_难过.png" ,
-          "tv_馋" : "tv_馋.png" ,
-          "tv_鬼脸" : "tv_鬼脸.png" ,
-          "tv_黑人问号" : "tv_黑人问号.png" ,
-          "tv_鼓掌" : "tv_鼓掌.png" ,
-          "动耳朵" : "动耳朵.gif" ,
-          "哭唧唧" : "哭唧唧.gif" ,
-          "哭泣" : "哭泣.png" ,
-          "尴尬" : "尴尬.png" ,
-          "开车" : "开车.gif" ,
-          "打篮球" : "打篮球.gif" ,
-            // ... 更多表情
-        } ,
-        mathJax: false
-      });     
-    };
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.5/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "Omyq3YvoLOd3QOLieeH3Uzl1-MdYXbMMI",
+          app_key: "JIO0OiAqSJIVM5ouVcEfbdU6",
+          placeholder: "请留下您的正确邮箱地址，方便我对您进行回复通知，谢谢",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
 
 
-              </div>
+              </article>
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
@@ -450,7 +383,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -462,16 +395,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -492,77 +424,78 @@
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
   <!-- 备案信息 -->
-  <div>
-    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
-       rel="nofollow noopener">浙ICP备20012672号</a>
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备20012672号
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/main.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-  <script  src="/js/lazyload.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 3,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -570,12 +503,41 @@
 
 
 
-  
-<script src="/js/music.js"></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<!-- Plugins -->
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
 
 
   
@@ -603,83 +565,10 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "为hexo-yilia添加文章阅读数&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
 
 
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      getSearchFile(path);
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

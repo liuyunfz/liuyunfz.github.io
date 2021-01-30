@@ -1,7 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -15,57 +15,45 @@
   
   <meta name="theme-color" content="#2f4154">
 
+
   
-    <meta name="description" content="">
+    <meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。">
   
 
-  <!--以上添加了description代码-->
-  <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
+
+
   <meta name="author" content="Liu Yun">
-  <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
+  <meta name="keywords" content="hexo,个人博客,python,spider">
   <title>LiuYun的博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1763598_pox2yzz0etj.css">
 
 
-
-
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="/css/custom.css">
 
-
-
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.6yfz.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"6589921a3cfb700a2ddaced6d4dc6c54","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
-  <div id="dark" onclick="switchDarkMode()"></div>
-  <script>
-    var isNight = new Date().getHours() >= 22 || new Date().getHours() < 7;
-    if( matchMedia('(prefers-color-scheme: dark)').matches || isNight || localStorage.getItem('dark') === '1') {
-      if(!(isNight&&localStorage.getItem('noDark') === '1')) {
-        document.body.classList.add('dark');
-      }
-    }
-    document.getElementById('dark').innerHTML = document.querySelector("body").classList.contains("dark")?"🌙":"🌞";
-  </script>
   <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -85,73 +73,109 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/links/">
-              <i class="iconfont icon-link-fill"></i>
-              友链</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/function/">
-              <i class="iconfont iconfunction"></i>
-              功能</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/function/">
+                <i class="iconfont iconfunction"></i>
+                功能
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/history/">
-              <i class="iconfont iconbook"></i>
-              历程</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/history/">
+                <i class="iconfont iconbook"></i>
+                历程
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-        <li class="nav-item">
-        <a class="nav-link" href="https://travellings.now.sh/" target="blank" title="开往-友链接力"><i class="iconfont iconfly" alt="开往-友链接力" width="120"></i></a>
-        </li>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="https://travellings.now.sh/" target="_blank" rel="noopener">
+                <i class="iconfont iconfly"></i>
+                
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -159,13 +183,13 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="远有宾客至，寒舍荜生光">
               
             </span>
 
@@ -184,7 +208,7 @@
 
   <main>
     
-      <div class="container nopadding-md">
+      <div class="container nopadding-x-md">
         <div class="py-5" id="board"
           style=margin-top:0>
           
@@ -197,21 +221,29 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-spider-chaoxing.html">超星学习通网课分析</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-spider-chaoxing.html">超星学习通网课分析</a>
+      </h1>
 
-      <a href="/tutorial/python-spider-chaoxing.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-spider-chaoxing.html">
           
-        
-        <div>分析超星（学习通）的网络协议，利用python实现一键刷课程视频。</div>
-      </a>
+          
+            
+          
+          分析超星（学习通）的网络协议，利用python实现一键刷课程视频。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-11-13
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-13 21:54" pubdate>
+              2020-11-13
+            </time>
           </div>
         
         
@@ -226,28 +258,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/windows-menu-new.html">自定义右键新建选项</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/windows-menu-new.html">自定义右键新建选项</a>
+      </h1>
 
-      <a href="/tutorial/windows-menu-new.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/windows-menu-new.html">
           
-        
-        <div>通过修改注册表，自定义右键中的新建选项。</div>
-      </a>
+          
+            
+          
+          通过修改注册表，自定义右键中的新建选项。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-08-02
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-02 17:34" pubdate>
+              2020-08-02
+            </time>
           </div>
         
         
@@ -262,28 +302,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/bot-dingtalk.html">钉钉机器人</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/bot-dingtalk.html">钉钉机器人</a>
+      </h1>
 
-      <a href="/tutorial/bot-dingtalk.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/bot-dingtalk.html">
           
-        
-        <div>基于Github Action搭建属于自己的钉钉线报机器人。</div>
-      </a>
+          
+            
+          
+          基于Github Action搭建属于自己的钉钉线报机器人。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-26
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-26 15:01" pubdate>
+              2020-07-26
+            </time>
           </div>
         
         
@@ -302,28 +350,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/mover-onedrive.html">网盘转存-将文件转存到OneDrive</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/mover-onedrive.html">网盘转存-将文件转存到OneDrive</a>
+      </h1>
 
-      <a href="/tutorial/mover-onedrive.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/mover-onedrive.html">
           
-        
-        <div>利用微软旗下的mover将Google Drive，Amazon，Dropbox等网盘的文件转存到自己的OneDrive目录下。在线转存，不消耗本机流量，不需要魔法，后台自动执行任务不需要常驻网页。</div>
-      </a>
+          
+            
+          
+          利用微软旗下的mover将Google Drive，Amazon，Dropbox等网盘的文件转存到自己的OneDrive目录下。在线转存，不消耗本机流量，不需要魔法，后台自动执行任务不需要常驻网页。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-16
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-16 15:55" pubdate>
+              2020-07-16
+            </time>
           </div>
         
         
@@ -340,28 +396,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/issue/issue-gzip.html">【issue 已解决】一次gzip导致的编码问题</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/issue/issue-gzip.html">【issue 已解决】一次gzip导致的编码问题</a>
+      </h1>
 
-      <a href="/issue/issue-gzip.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/issue/issue-gzip.html">
           
-        
-        <div>一次由于headers中存有gzip字段导致的requests自动gzip解码引起的编码错误。</div>
-      </a>
+          
+            
+          
+          一次由于headers中存有gzip字段导致的requests自动gzip解码引起的编码错误。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-12
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-12 08:12" pubdate>
+              2020-07-12
+            </time>
           </div>
         
         
@@ -383,28 +447,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-wechat-searchvirus.html">为微信公众号接入疫情数据查询</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-wechat-searchvirus.html">为微信公众号接入疫情数据查询</a>
+      </h1>
 
-      <a href="/tutorial/python-wechat-searchvirus.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-wechat-searchvirus.html">
           
-        
-        <div>利用之前的Python爬取丁香园疫情数据文章内容，进一步对接微信公众号，实现用户通过发送地图位置信息实时查询当地省市的疫情数据。</div>
-      </a>
+          
+            
+          
+          利用之前的Python爬取丁香园疫情数据文章内容，进一步对接微信公众号，实现用户通过发送地图位置信息实时查询当地省市的疫情数据。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-05-02
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-02 22:15" pubdate>
+              2020-05-02
+            </time>
           </div>
         
         
@@ -421,28 +493,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/diary/20200420.html">日记-2020年4月20日</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/diary/20200420.html">日记-2020年4月20日</a>
+      </h1>
 
-      <a href="/diary/20200420.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/diary/20200420.html">
           
-        
-        <div>4月20日，因为一个朋友的不幸遭遇有感而发。一定要开防DDOS!一定要开防DDOS!一定要开防DDOS!</div>
-      </a>
+          
+            
+          
+          4月20日，因为一个朋友的不幸遭遇有感而发。一定要开防DDOS!一定要开防DDOS!一定要开防DDOS!
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-04-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-20 23:19" pubdate>
+              2020-04-20
+            </time>
           </div>
         
         
@@ -462,28 +542,36 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/issue/hexo-valine-issue.html">【issue 已解决】Valine网址指向的一个小坑</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/issue/hexo-valine-issue.html">【issue 已解决】Valine网址指向的一个小坑</a>
+      </h1>
 
-      <a href="/issue/hexo-valine-issue.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/issue/hexo-valine-issue.html">
           
-        
-        <div>解决Valine评论中因环境变量的设置错误而导致的链接指向错误问题。</div>
-      </a>
+          
+            
+          
+          解决Valine评论中因环境变量的设置错误而导致的链接指向错误问题。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-04-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-20 11:21" pubdate>
+              2020-04-20
+            </time>
           </div>
         
         
@@ -507,32 +595,40 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-spider-dxy.html">利用Python爬取丁香园疫情数据</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-spider-dxy.html">利用Python爬取丁香园疫情数据</a>
+      </h1>
 
-      <a href="/tutorial/python-spider-dxy.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-spider-dxy.html">
           
-        
-        <div>疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂 
+          
+            
+          
+          疫情到现在过去很久了，国内已经大体控制下来了。这次的目标是爬取利用python爬取疫情数据（基于丁香园的数据）这期本来3.9就创建了的，但一直拖到今天4.13才完成，还是太懒😂😂 
 准备：
 python及常用模块
 VS Code
-浏览器目标网址：https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&</div>
-      </a>
+浏览器目标网址：https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&amp;clicktime=1579579384&
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-09
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-09 21:33" pubdate>
+              2020-03-09
+            </time>
           </div>
         
         
@@ -547,29 +643,37 @@ VS Code
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-spider-bilibili-comments.html">实战Python爬取B站评论</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-spider-bilibili-comments.html">实战Python爬取B站评论</a>
+      </h1>
 
-      <a href="/tutorial/python-spider-bilibili-comments.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-spider-bilibili-comments.html">
           
-        
-        <div>前言
-本人是一个崩坏三的游戏玩家，大家也都知道官方会因为一些活动，在其他平台发布一些兑换码。为了更方便的获取水晶，就一直有这么个想法，想爬取B站的评论，利用热心网友在官方账号动态下发的评论，来实现获取最新的水晶兑换码。（本思路启迪于酷安一位用网站RSS获取水晶码的大佬，很早以前见过他的帖子，但现在找不到了，这里匿名感谢下） </div>
-      </a>
+          
+            
+          
+          前言
+本人是一个崩坏三的游戏玩家，大家也都知道官方会因为一些活动，在其他平台发布一些兑换码。为了更方便的获取水晶，就一直有这么个想法，想爬取B站的评论，利用热心网友在官方账号动态下发的评论，来实现获取最新的水晶兑换码。（本思路启迪于酷安一位用网站RSS获取水晶码的大佬，很早以前见过他的帖子，但现在找不到了，这里匿名感谢下） 
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-30
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-30 21:22" pubdate>
+              2020-01-30
+            </time>
           </div>
         
         
@@ -586,8 +690,8 @@ VS Code
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
 
@@ -612,16 +716,15 @@ VS Code
         </div>
       </div>
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -642,49 +745,72 @@ VS Code
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
   <!-- 备案信息 -->
-  <div>
-    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
-       rel="nofollow noopener">浙ICP备20012672号</a>
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备20012672号
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/main.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-  <script  src="/js/lazyload.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
 
 
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -692,12 +818,41 @@ VS Code
 
 
 
-  
-<script src="/js/music.js"></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<!-- Plugins -->
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
 
 
   
@@ -725,69 +880,10 @@ VS Code
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "远有宾客至，寒舍荜生光&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
 
 
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      getSearchFile(path);
-      this.onclick = null
-    }
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

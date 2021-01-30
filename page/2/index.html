@@ -1,7 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -15,57 +15,45 @@
   
   <meta name="theme-color" content="#2f4154">
 
+
   
-    <meta name="description" content="">
+    <meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。">
   
 
-  <!--以上添加了description代码-->
-  <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
+
+
   <meta name="author" content="Liu Yun">
-  <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
+  <meta name="keywords" content="hexo,个人博客,python,spider">
   <title>LiuYun的博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1763598_pox2yzz0etj.css">
 
 
-
-
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="/css/custom.css">
 
-
-
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.6yfz.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"6589921a3cfb700a2ddaced6d4dc6c54","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
-  <div id="dark" onclick="switchDarkMode()"></div>
-  <script>
-    var isNight = new Date().getHours() >= 22 || new Date().getHours() < 7;
-    if( matchMedia('(prefers-color-scheme: dark)').matches || isNight || localStorage.getItem('dark') === '1') {
-      if(!(isNight&&localStorage.getItem('noDark') === '1')) {
-        document.body.classList.add('dark');
-      }
-    }
-    document.getElementById('dark').innerHTML = document.querySelector("body").classList.contains("dark")?"🌙":"🌞";
-  </script>
   <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -85,73 +73,109 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/links/">
-              <i class="iconfont icon-link-fill"></i>
-              友链</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/function/">
-              <i class="iconfont iconfunction"></i>
-              功能</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/function/">
+                <i class="iconfont iconfunction"></i>
+                功能
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/history/">
-              <i class="iconfont iconbook"></i>
-              历程</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/history/">
+                <i class="iconfont iconbook"></i>
+                历程
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-        <li class="nav-item">
-        <a class="nav-link" href="https://travellings.now.sh/" target="blank" title="开往-友链接力"><i class="iconfont iconfly" alt="开往-友链接力" width="120"></i></a>
-        </li>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="https://travellings.now.sh/" target="_blank" rel="noopener">
+                <i class="iconfont iconfly"></i>
+                
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -159,13 +183,13 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="远有宾客至，寒舍荜生光">
               
             </span>
 
@@ -184,7 +208,7 @@
 
   <main>
     
-      <div class="container nopadding-md">
+      <div class="container nopadding-x-md">
         <div class="py-5" id="board"
           style=margin-top:0>
           
@@ -197,21 +221,29 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/hexo-busuanzi.html">为hexo-yilia添加文章阅读数</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/hexo-busuanzi.html">为hexo-yilia添加文章阅读数</a>
+      </h1>
 
-      <a href="/tutorial/hexo-busuanzi.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/hexo-busuanzi.html">
           
-        
-        <div>利用不蒜子提供的免费计数服务，为hexo中的文章添加阅读次数显示。</div>
-      </a>
+          
+            
+          
+          利用不蒜子提供的免费计数服务，为hexo中的文章添加阅读次数显示。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-20 23:18" pubdate>
+              2020-01-20
+            </time>
           </div>
         
         
@@ -230,31 +262,39 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/diary/20200120.html">日记-2020年1月20日</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/diary/20200120.html">日记-2020年1月20日</a>
+      </h1>
 
-      <a href="/diary/20200120.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/diary/20200120.html">
           
-        
-        <div>马上就是新的一年，先祝大家在2020新的一年里新年快乐。
+          
+            
+          
+          马上就是新的一年，先祝大家在2020新的一年里新年快乐。
 这次的更新有：
 添加网站ICO图标
-利用不蒜子添加了网页阅读次数</div>
-      </a>
+利用不蒜子添加了网页阅读次数
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-01-20
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-20 10:25" pubdate>
+              2020-01-20
+            </time>
           </div>
         
         
@@ -274,32 +314,40 @@
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-tools-transform_headers.html">生产力工具-用Python做一个headers转换</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-tools-transform_headers.html">生产力工具-用Python做一个headers转换</a>
+      </h1>
 
-      <a href="/tutorial/python-tools-transform_headers.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-tools-transform_headers.html">
           
-        
-        <div>每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。
+          
+            
+          
+          每次写爬虫都要复制浏览器上的headers，而它又与python中的dict类型不符，每次都要自己一行行加引号加逗号分割。这次我们就用python识别剪辑版的headers内容来一键转换成我们要的dict类型，实现一劳永逸。
 准备工具
 Python
 VS Code
-tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:”value”}利用python</div>
-      </a>
+tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:”value”}利用python
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-10-03
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-10-03 21:31" pubdate>
+              2019-10-03
+            </time>
           </div>
         
         
@@ -314,28 +362,36 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/hexo-CDN.html">为hexo博客图片添加CDN加速</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/hexo-CDN.html">为hexo博客图片添加CDN加速</a>
+      </h1>
 
-      <a href="/tutorial/hexo-CDN.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/hexo-CDN.html">
           
-        
-        <div>利用国外的jsdelivr替换博客中的图片地址，实现对存在于GitHub储存库上的图片进行CDN加速</div>
-      </a>
+          
+            
+          
+          利用国外的jsdelivr替换博客中的图片地址，实现对存在于GitHub储存库上的图片进行CDN加速
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-09-09
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-09-09 21:31" pubdate>
+              2019-09-09
+            </time>
           </div>
         
         
@@ -352,28 +408,36 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/diary/20190831.html">日记-2019年8月31日</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/diary/20190831.html">日记-2019年8月31日</a>
+      </h1>
 
-      <a href="/diary/20190831.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/diary/20190831.html">
           
-        
-        <div>本站域名已成功由GitHub自给域名：liuyunfz.github.io 替换为 blog.6yfz.cn</div>
-      </a>
+          
+            
+          
+          本站域名已成功由GitHub自给域名：liuyunfz.github.io 替换为 blog.6yfz.cn
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-08-31
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-08-31 07:46" pubdate>
+              2019-08-31
+            </time>
           </div>
         
         
@@ -393,30 +457,38 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/issue/issue-4399-saving.html">【issue 已解决】关于4399造梦西游的存档保存</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/issue/issue-4399-saving.html">【issue 已解决】关于4399造梦西游的存档保存</a>
+      </h1>
 
-      <a href="/issue/issue-4399-saving.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/issue/issue-4399-saving.html">
           
-        
-        <div>2019.10.05更新：issue已解决，但因为某些原因本站不提供解决方案与相关步骤  
+          
+            
+          
+          2019.10.05更新：issue已解决，但因为某些原因本站不提供解决方案与相关步骤  
 
-背景我在一次偶然的尝试中抓包发现，当我点击造梦西游的保存存档按钮时，他会提交一个包，证明flash的数据也是通过发post对存档数据进行云端同步的，于是我便想通过更改提交的数据来实现修改甚至实现复制存档等操作。</div>
-      </a>
+背景我在一次偶然的尝试中抓包发现，当我点击造梦西游的保存存档按钮时，他会提交一个包，证明flash的数据也是通过发post对存档数据进行云端同步的，于是我便想通过更改提交的数据来实现修改甚至实现复制存档等操作。
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-08-29
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-08-29 18:30" pubdate>
+              2019-08-29
+            </time>
           </div>
         
         
@@ -438,28 +510,36 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/tutorial/python-spider-4399-hash.html">实战破解4399HASH验证</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/tutorial/python-spider-4399-hash.html">实战破解4399HASH验证</a>
+      </h1>
 
-      <a href="/tutorial/python-spider-4399-hash.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/tutorial/python-spider-4399-hash.html">
           
-        
-        <div>前景4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串</div>
-      </a>
+          
+            
+          
+          前景4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-08-28
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-08-28 07:46" pubdate>
+              2019-08-28
+            </time>
           </div>
         
         
@@ -476,28 +556,36 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
           </div>
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/diary/hello-world.html">Hello World</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/diary/hello-world.html">Hello World</a>
+      </h1>
 
-      <a href="/diary/hello-world.html" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/diary/hello-world.html">
           
-        
-        <div>This is my first blog.Then I will tell you something about this blog.please press ‘MORE’ boutton</div>
-      </a>
+          
+            
+          
+          This is my first blog.Then I will tell you something about this blog.please press ‘MORE’ boutton
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2019-08-23
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-08-23 16:35" pubdate>
+              2019-08-23
+            </time>
           </div>
         
         
@@ -510,8 +598,8 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
         
         
       </div>
-      <a><hr></a>
-    </div>
+      <a><hr style="margin-top: 3rem;"></a>
+    </article>
   </div>
 
 
@@ -536,16 +624,15 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
         </div>
       </div>
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -566,49 +653,72 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
   <!-- 备案信息 -->
-  <div>
-    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
-       rel="nofollow noopener">浙ICP备20012672号</a>
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备20012672号
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/main.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-  <script  src="/js/lazyload.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
 
 
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -616,12 +726,41 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
 
 
 
-  
-<script src="/js/music.js"></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<!-- Plugins -->
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
 
 
   
@@ -649,69 +788,10 @@ tkinter模块原理python中dict类型样式为:{a:”value”,b:”value”,c:�
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "远有宾客至，寒舍荜生光&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
 
 
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      getSearchFile(path);
-      this.onclick = null
-    }
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

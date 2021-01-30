@@ -1,7 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -15,57 +15,61 @@
   
   <meta name="theme-color" content="#2f4154">
 
+
    
     <meta name="description" content="前景4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串">
   
 
-  <!--以上添加了description代码-->
-  <!--meta name="description" content="一个信息网络爱好者的博客，将遇到的问题与解决过程留于此，如果能对来访的您有所帮助是我的荣幸，欢迎联系我并与我交流讨论。"-->
+
+
   <meta name="author" content="Liu Yun">
-  <meta name="keywords" content="hexo,个人博客,yilia,python,4399,spider">
+  <meta name="keywords" content="hexo,个人博客,python,spider">
   <title>实战破解4399HASH验证 | LiuYun的博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/monokai.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/railscasts.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1763598_pox2yzz0etj.css">
 
 
-
-
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="/css/custom.css">
 
-
-
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.6yfz.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"6589921a3cfb700a2ddaced6d4dc6c54","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body>
-  <div id="dark" onclick="switchDarkMode()"></div>
-  <script>
-    var isNight = new Date().getHours() >= 22 || new Date().getHours() < 7;
-    if( matchMedia('(prefers-color-scheme: dark)').matches || isNight || localStorage.getItem('dark') === '1') {
-      if(!(isNight&&localStorage.getItem('noDark') === '1')) {
-        document.body.classList.add('dark');
-      }
-    }
-    document.getElementById('dark').innerHTML = document.querySelector("body").classList.contains("dark")?"🌙":"🌞";
-  </script>
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -85,73 +89,109 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="iconfont icon-home-fill"></i>
-              首页</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">
-              <i class="iconfont icon-archive-fill"></i>
-              归档</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">
-              <i class="iconfont icon-tags-fill"></i>
-              标签</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/links/">
-              <i class="iconfont icon-link-fill"></i>
-              友链</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/function/">
-              <i class="iconfont iconfunction"></i>
-              功能</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/function/">
+                <i class="iconfont iconfunction"></i>
+                功能
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/history/">
-              <i class="iconfont iconbook"></i>
-              历程</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/history/">
+                <i class="iconfont iconbook"></i>
+                历程
+              </a>
+            </li>
+          
         
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">
-              <i class="iconfont icon-user-fill"></i>
-              关于</a>
-          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-        <li class="nav-item">
-        <a class="nav-link" href="https://travellings.now.sh/" target="blank" title="开往-友链接力"><i class="iconfont iconfly" alt="开往-友链接力" width="120"></i></a>
-        </li>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="https://travellings.now.sh/" target="_blank" rel="noopener">
+                <i class="iconfont iconfly"></i>
+                
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -159,55 +199,61 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="实战破解4399HASH验证">
               
             </span>
 
             
-              
-                <div class="mt-3 post-meta">
-                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2019-08-28 07:46">
-                    2019 八月 28日 , 星期三 , 7:46 早上
-                  </time>
-                </div>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-08-28 07:46" pubdate>
+        2019年8月28日 早上
+      </time>
+    </span>
+  
+</div>
 
-              <div class="mt-1">
-                
-                  
-                  <span class="post-meta mr-2">
-                    <i class="iconfont icon-chart"></i>
-                    1.8k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta mr-2">
-                      <i class="iconfont icon-clock-fill"></i>
-                    
-                    
-                    27
-                     分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
 
-                
-                  <!-- 不蒜子统计文章PV -->
-                  
-                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
-                    <i class="iconfont icon-eye" aria-hidden="true"></i>
-                    <span id="busuanzi_value_page_pv"></span> 次
-                  </span>
-                
-              </div>
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
             
           </div>
 
@@ -221,117 +267,45 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">实战破解4399HASH验证</h1>
             
-              <p class="note note-warning">
-                本文最后更新于：2020 四月 11日 , 星期六 , 11:02 晚上
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年4月11日 晚上
+                
               </p>
             
-          <article class="markdown-body">
-            <h1 id="前景"><a href="#前景" class="headerlink" title="前景"></a>前景</h1><p>4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。<br><br><br>而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串验证代码。<br><br>而这次我们就来实战攻破4399的HASH验证。</p>
+            <div class="markdown-body">
+              <h1 id="前景"><a href="#前景" class="headerlink" title="前景"></a>前景</h1><p>4399作为一个小型的游戏平台，代码安全以及复杂方面远不及BAT等大型公司来的难。因此被我当作爬虫的热身网站。我曾把4399的登录包，注册包，以及一大推的获取个人信息包都写了。然后是要实战一些模拟操作了。<br><br><br>而当我转向尝试去模拟4399群组中关注他人时，却被恶心到了，除了常规的验证码，提交的包中还多了一个HASH参数。略懂电脑基础知识对的应该都不陌生，虽然可能不是传统意义上的hash，但必然是一串验证代码。<br><br>而这次我们就来实战攻破4399的HASH验证。</p>
 <a id="more"></a>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><blockquote>
 <p><strong>Python[模块：json,requests,matplotlib,execjs]</strong><br><strong>Chrome<br>VS Code</strong></p>
 </blockquote>
 <h1 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h1><p>我们先尝试用浏览器进行抓包分析。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/1.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到当我们点击关注时，系统会发送一个关注包，这时他会自动判断（玄学）是否需要输入验证码。如果需要则会再发送两个包，一个是图中的geturl?type=zone<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/2.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到，这个包的作用是获得验证码的地址。</p>
-<div class="hljs"><pre><code class="hljs bash">def geturl(cookie):
-    get_headers=&#123;
-    <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json, text/javascript, */*; q=0.01'</span>,
-    <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>,
-    <span class="hljs-string">'Accept-Language'</span>: <span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,
-    <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'keep-alive'</span>,
-    <span class="hljs-string">'Cookie'</span>: cookie,
-    <span class="hljs-string">'Host'</span>: <span class="hljs-string">'my.4399.com'</span>,
-    <span class="hljs-string">'Referer'</span>: <span class="hljs-string">'http://my.4399.com/u/2576802349'</span>,
-    <span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'</span>,
-    <span class="hljs-string">'X-Requested-With'</span>: <span class="hljs-string">'XMLHttpRequest'</span>
-    &#125;
-    rsp = requests.get(url=<span class="hljs-string">"http://my.4399.com/plugins/captcha/index-getUrl?type=zone"</span>,headers=get_headers)    
-    url=json.loads(rsp.text)
-    url = url[<span class="hljs-string">"result"</span>][<span class="hljs-string">"url"</span>]
-    <span class="hljs-built_in">return</span> url</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">def geturl(cookie):<br>    get_headers=&#123;<br>    <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'application/json, text/javascript, */*; q=0.01'</span>,<br>    <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>,<br>    <span class="hljs-string">'Accept-Language'</span>: <span class="hljs-string">'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'</span>,<br>    <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'keep-alive'</span>,<br>    <span class="hljs-string">'Cookie'</span>: cookie,<br>    <span class="hljs-string">'Host'</span>: <span class="hljs-string">'my.4399.com'</span>,<br>    <span class="hljs-string">'Referer'</span>: <span class="hljs-string">'http://my.4399.com/u/2576802349'</span>,<br>    <span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'</span>,<br>    <span class="hljs-string">'X-Requested-With'</span>: <span class="hljs-string">'XMLHttpRequest'</span><br>    &#125;<br>    rsp = requests.get(url=<span class="hljs-string">"http://my.4399.com/plugins/captcha/index-getUrl?type=zone"</span>,headers=get_headers)    <br>    url=json.loads(rsp.text)<br>    url = url[<span class="hljs-string">"result"</span>][<span class="hljs-string">"url"</span>]<br>    <span class="hljs-built_in">return</span> url<br></code></pre></div></td></tr></table></figure>
 <p>根据这个包返回的格式我们判断出是json文件，所以利用json模块进行转换，然后按照格式取出包含在其中的URL。<br><br><br>这个时候我们还无法看出HASH的具体作用，我们输入验证码继续看看提交了什么<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.jpg" srcset="/img/loading.gif" alt="avatar"><br><br>可以看到，当我们提交了验证码，后面多了一个index-check的包，大概能猜出是验证码验证进行check。其中三个参数，type：zone.cap就是验证码了，hash就是我们这篇要解决的内容了。<br><br>我们知道了用处，回去看下之前那个GET-HASH包<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/3.png" srcset="/img/loading.gif" alt="avatar"><br><br>返回的是一堆json代码，我们尝试在命令提示符运行，可以看到，完美符合提交的HASH值。<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/4.png" srcset="/img/loading.gif" alt="avatar"><br><br>接下来的难点就是如何通过这个包返回的代码，利用python计算出hash，如果直接是json代码运行还可以，但是我们仔细观察可以看出，在返回的代码中，最后一句的大致意思是给网页中ID为cap_hash的对象赋值hash，但是在python中，我们并不会有相关的对象，所以我们得想办法取出我们想要的代码。<br>我首先想到的是读取行</p>
-<div class="hljs"><pre><code class="hljs bash">listd=rsp.text.split(<span class="hljs-string">"\n"</span>)
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd:
-        <span class="hljs-built_in">print</span>(i,<span class="hljs-string">"\n"</span>,<span class="hljs-string">"————————————————————————————————————————————————————————"</span>)</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">listd=rsp.text.split(<span class="hljs-string">"\n"</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd:<br>        <span class="hljs-built_in">print</span>(i,<span class="hljs-string">"\n"</span>,<span class="hljs-string">"————————————————————————————————————————————————————————"</span>)<br></code></pre></div></td></tr></table></figure>
 <p>返回的就有点奇怪</p>
-<div class="hljs"><pre><code class="hljs bash">var _4ba4cacd070fe=/*8/<span class="hljs-string">"e0*//*+f c62'c6-*/'_aa6b9'/*3=b8d'*/+/*5'5 3*/'69b11784ed'/*9"</span>b/;*/+/*,-5=4/;+_*/<span class="hljs-string">'a4f581c4'</span>/*;==,<span class="hljs-string">"18*/+/*/'+++9/9-*/'af15edcd1'/*a 48;4,,9*/+ </span>
-<span class="hljs-string"> ————————————————————————————————————————————————————————</span>
-<span class="hljs-string">        ''/*8f3c2+2;61*/;var _1eff743fb70c3ef68=/*3+=1+/- 5*/''/*;4ead70"</span>*/;var _f98ed25c1ead835f23e9fa=decodeURIComponent(/*<span class="hljs-string">"4ce8*//*f"</span>+9-,d1c8*/<span class="hljs-string">'%29%00'</span>/*=5--5_6+e8*/+/*f9c0=*/<span class="hljs-string">'%13%16%3'</span>/*<span class="hljs-string">'+d"c2 d*/+/*46 50*/'</span>D%5DU%0CW<span class="hljs-string">'/*/1f7db*/+/*4/d1"9c/d*/'</span>%00%00<span class="hljs-string">'/*'</span>3+<span class="hljs-string">'d54*/+/*c 854*/'</span>R%5BW<span class="hljs-string">'/*9-/b+3*/+/*87-9_;*/'</span>T%05Y%00W<span class="hljs-string">'/*c"'</span>00*/+/*--a;2*/<span class="hljs-string">'%04%0D'</span>/*4ce44_*/+/*a,b94_0_-*/<span class="hljs-string">'RZ%0C%0'</span>/*2_3e+b57f*/+/*_<span class="hljs-string">'__"c-/*/'</span>5%05%0<span class="hljs-string">'/*04+a6 b2,*/+/*=+=42*/'</span>7Q%5DSP<span class="hljs-string">'/*9474e*/+/*'</span>ee5c<span class="hljs-string">'/ad*/'</span>T%06jT%0<span class="hljs-string">'/*a2,";"b 2*/+/*f_- _1d/ef*/'</span>7S__CW%<span class="hljs-string">'/*5b,e6*/+/*638fd*/'</span>01EXXV<span class="hljs-string">'/*5f,+/67-*/+/*946f33*/'</span>%1CL%1F%<span class="hljs-string">'/*f5/9;868f*/+/*;9_;+4-*/'</span>17U%14<span class="hljs-string">'/*-42b210'</span>-*/+/*20<span class="hljs-string">";+*/'%15gRZ%01X'/*3_,a8*/+/*aeb0-*/'VP%03VQ%0'/*,ad39"</span>*/+/* ,01f_2/1<span class="hljs-string">'*/'</span>1%02%01%3<span class="hljs-string">'/*/2590/3a*/+/*5'</span>=57ff,b1*/<span class="hljs-string">'EV%05%0'</span>/*<span class="hljs-string">"208=3/*/+/*0=599/"</span><span class="hljs-string">'*/'</span>2R%0FS%0<span class="hljs-string">'/*79_-1",*/+/*==='</span>9=<span class="hljs-string">'0;e*/'</span>0_%16%16<span class="hljs-string">'/*;7/-3*/+/*=b61;a8-5*/'</span>%0CgW%5CQ<span class="hljs-string">'/*,5b/f554*/+/*90",a7*/'</span>X%04%07<span class="hljs-string">'/*e2/03076*/+/*92/ae-*/'</span>%03%0B%04%<span class="hljs-string">'/*69+0/__2_6*/+/*'</span> fd25_*/<span class="hljs-string">'01RQ%07'</span>/*34a3e,<span class="hljs-string">"*/+/*4-f3251c*/'%06QQTU%01'/*9ec"</span>9 0*/+/*2 8f/f*/<span class="hljs-string">'%08t%'</span>/*d+ 5fef7=*/+/*3c6c3*/<span class="hljs-string">'5CF%07W%0'</span>/*d;92d*/+/*;=4db<span class="hljs-string">'0*/'</span>F%11%<span class="hljs-string">'/*a"182+-de*/+/*5ce 6,,c0*/'</span>02%3DR%0<span class="hljs-string">'/*1=9a7=*/+/*1/;9//255b*/'</span>8%02%01%04<span class="hljs-string">'/*_0+=a/*/+/*a6257+09*/'</span>%04RR%01<span class="hljs-string">'/*5/ 9-*/+/*2,2-;f2*/'</span>%04S%<span class="hljs-string">'/*3,'</span>377*/+/*6<span class="hljs-string">"=6"</span>b*/<span class="hljs-string">'08PTPUV%0'</span>/*929a3d1/*/+/* 1a5cb*/<span class="hljs-string">'7P%5C'</span>/*7a<span class="hljs-string">'0"b*/+/*,_3173+/_*/'</span>O%5EC%0<span class="hljs-string">'/*b846+"96,"*/+/*;c4-23*/'</span>7jWP%0<span class="hljs-string">'/*d8'</span>,99-8a*/+/*8<span class="hljs-string">"='8bb'5,*/'2Z%0A'/*6170/8b,9_*/+/*_be658_*/'%11%02%3D'/*699=-=e*/+/*27f9809*/'R%08%02'/* d97+6105;*/+/*9+36/4+c7*/'%01%04'/*81+"</span>2*/+/*,1; c7=c*/<span class="hljs-string">'%04RR%01'</span>/*6 3,+4;1*/+/*7fd d/d<span class="hljs-string">'b0*/'</span>%04S%<span class="hljs-string">'/*1;0571_*/+/*'</span>a5<span class="hljs-string">'+_+- ,*/'</span>08PTPUV<span class="hljs-string">'/*ab-5e=e*/+/*"5fe e802*/'</span>%07P%5C<span class="hljs-string">'/*e6a2,d*/+/*=+_;ed-*/'</span>O%5ECMfPF<span class="hljs-string">'/*41=b"5*/+/*=24b1'</span>=a*/<span class="hljs-string">'%0D%3'</span>/*70d_9c*/+/*,;_b0;5a*/<span class="hljs-string">'DZ%0F'</span>/*33967*/+/*5+3; */<span class="hljs-string">'%0C%5B%01P'</span>/*,93352f*/+/*4 ,<span class="hljs-string">'0*/'</span>%01%0<span class="hljs-string">'/*+;3+_8+*/+/*5+;0,/ 9ec*/'</span>B%01%07<span class="hljs-string">'/*+ c; */+/*/b;3_6c,*/'</span>%02QUQQ%0C<span class="hljs-string">'/*'</span>b1f54*/+/* 0 2;*/<span class="hljs-string">'%01UQX'</span>/*2ad=3f-*/+/*_ 5240f*/<span class="hljs-string">'M%0C%12P%'</span>/*;4f2d91*/+/*2_d<span class="hljs-string">'8;4*/'</span>05D_n%3CXT<span class="hljs-string">'/*f2d3"*/+/*,38/66cb*/'</span>%0FRX%00%<span class="hljs-string">'/* 3;;_*/+/*;67"6'</span>_1*/<span class="hljs-string">'0AWSW%0'</span>/*a_13_94<span class="hljs-string">'a*/+/*772a_9,*/'</span>7Y%03%<span class="hljs-string">'/*+c+6f6;d-*/+/*d;13a1e66+*/'</span>01PQ%02%0<span class="hljs-string">'/*a+5611*/+/*-"7b2*/'</span>3%0C%13%<span class="hljs-string">'/*86cc"=-*/+/*4f"a'</span>f*/<span class="hljs-string">'0CDQ%'</span>/*ba6b3+;*/+/*bef5<span class="hljs-string">'61*/'</span>04A%0Aj%<span class="hljs-string">'/*6;'</span><span class="hljs-string">"6"</span>a<span class="hljs-string">"/*/+/*3+_f4'6*/'06%5D'/*094/5fc52;*/+/*e"</span>d2b9+97*/<span class="hljs-string">'V%5D%0'</span>/*d064b<span class="hljs-string">"b7eb*/+/*8f3=ae;8*/'1%3EWR%0'/*+=-'4*/+/*_7383a*/'3%00_%06X'/*34;"</span>3,6;8*/+/*44c bca ea*/<span class="hljs-string">'UU%05%07%0'</span>/*+0c5,*/+/*e0d880_3f*/<span class="hljs-string">'EQ%5CO%5C%'</span>/*f0,,f aa9*/+/*a+9a<span class="hljs-string">";,*/'13S%02YWU'/*e6-3,36e"</span>*/+/*0e428,, <span class="hljs-string">"8*/'%05%03S'/*d /119-e'*/+/*3;/d-40c2-*/'%16%0E%3'/*f87/;24b,*/+/*'e bfb,*/'A%07Z'/*/_554*/+/*c6+=588-c_*/'Q%08o%00W'/*=fecc*/+/*ce 3"</span>ce*/<span class="hljs-string">'%05W%5'</span>/*ad1_<span class="hljs-string">"505*/+/*,+a-d*/'BP%09%03'/*6 ee7,;/*/+/*=5-7a0a*/'%06U%03'/*e9df5c*/+/*d=6 1*/'%08%02%'/*cd'915,/31*/+/*'f7b/,d*/'00%5DJ%'/*,3/6d*/+/*4-6b0"</span>6c11*/<span class="hljs-string">'09A%03'</span>/*b9f001*/+/*1,549=5cf */<span class="hljs-string">'%5E%04S%'</span>/*84a6f; */+/*1<span class="hljs-string">'6"/-,"*/'</span>00XVW%07SC<span class="hljs-string">'/*3_9'</span>7<span class="hljs-string">"b 8*/+/*8;_45/0;"</span>9*/<span class="hljs-string">'X%16T'</span>/*1030a/ _ce*/+/*228,ac*/<span class="hljs-string">'%2B%14%13'</span>/*18;_6*/+/*657; ++3<span class="hljs-string">"*/'XBfU%00W%0'/*a+0f  f_9*/+/*7;26,*/'8%01V%0E%0'/*280/09a//*/+/*'aa7 _*/'7P%06'/*/2cc9*/+/*3 b5_*/'%07%0'/*_b9 ==*/+/*4ca/df+*/'4%07%02%'/*_-0/630*/+/*4= ''9d2b-*/'5C%05'/*'d=_3d7b"</span>*/+/*-f<span class="hljs-string">"37cd9*/'S%02%04'/*/=3=de603*/+/*;,5a3*/'_%0AH%5E'/*2f6+'0b3*/+</span>
-<span class="hljs-string"> ————————————————————————————————————————————————————————</span>
-<span class="hljs-string">        ''/*eb -1bd1"</span>*/);
- ————————————————————————————————————————————————————————
-<span class="hljs-keyword">for</span>(i=0; i&lt;_f98ed25c1ead835f23e9fa.length;i++)
- ————————————————————————————————————————————————————————
-_1eff743fb70c3ef68 += String.fromCharCode(_4ba4cacd070fe.charCodeAt(i%_4ba4cacd070fe.length)^_f98ed25c1ead835f23e9fa.charCodeAt(i));
- ————————————————————————————————————————————————————————
-<span class="hljs-built_in">eval</span>(_1eff743fb70c3ef68);
- ————————————————————————————————————————————————————————
-document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc5511ecc1a84115c98dc6d8730755fe();
- ————————————————————————————————————————————————————————</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">var _4ba4cacd070fe=/*8/<span class="hljs-string">"e0*//*+f c62'c6-*/'_aa6b9'/*3=b8d'*/+/*5'5 3*/'69b11784ed'/*9"</span>b/;*/+/*,-5=4/;+_*/<span class="hljs-string">'a4f581c4'</span>/*;==,<span class="hljs-string">"18*/+/*/'+++9/9-*/'af15edcd1'/*a 48;4,,9*/+ </span><br><span class="hljs-string"> ————————————————————————————————————————————————————————</span><br><span class="hljs-string">        ''/*8f3c2+2;61*/;var _1eff743fb70c3ef68=/*3+=1+/- 5*/''/*;4ead70"</span>*/;var _f98ed25c1ead835f23e9fa=decodeURIComponent(/*<span class="hljs-string">"4ce8*//*f"</span>+9-,d1c8*/<span class="hljs-string">'%29%00'</span>/*=5--5_6+e8*/+/*f9c0=*/<span class="hljs-string">'%13%16%3'</span>/*<span class="hljs-string">'+d"c2 d*/+/*46 50*/'</span>D%5DU%0CW<span class="hljs-string">'/*/1f7db*/+/*4/d1"9c/d*/'</span>%00%00<span class="hljs-string">'/*'</span>3+<span class="hljs-string">'d54*/+/*c 854*/'</span>R%5BW<span class="hljs-string">'/*9-/b+3*/+/*87-9_;*/'</span>T%05Y%00W<span class="hljs-string">'/*c"'</span>00*/+/*--a;2*/<span class="hljs-string">'%04%0D'</span>/*4ce44_*/+/*a,b94_0_-*/<span class="hljs-string">'RZ%0C%0'</span>/*2_3e+b57f*/+/*_<span class="hljs-string">'__"c-/*/'</span>5%05%0<span class="hljs-string">'/*04+a6 b2,*/+/*=+=42*/'</span>7Q%5DSP<span class="hljs-string">'/*9474e*/+/*'</span>ee5c<span class="hljs-string">'/ad*/'</span>T%06jT%0<span class="hljs-string">'/*a2,";"b 2*/+/*f_- _1d/ef*/'</span>7S__CW%<span class="hljs-string">'/*5b,e6*/+/*638fd*/'</span>01EXXV<span class="hljs-string">'/*5f,+/67-*/+/*946f33*/'</span>%1CL%1F%<span class="hljs-string">'/*f5/9;868f*/+/*;9_;+4-*/'</span>17U%14<span class="hljs-string">'/*-42b210'</span>-*/+/*20<span class="hljs-string">";+*/'%15gRZ%01X'/*3_,a8*/+/*aeb0-*/'VP%03VQ%0'/*,ad39"</span>*/+/* ,01f_2/1<span class="hljs-string">'*/'</span>1%02%01%3<span class="hljs-string">'/*/2590/3a*/+/*5'</span>=57ff,b1*/<span class="hljs-string">'EV%05%0'</span>/*<span class="hljs-string">"208=3/*/+/*0=599/"</span><span class="hljs-string">'*/'</span>2R%0FS%0<span class="hljs-string">'/*79_-1",*/+/*==='</span>9=<span class="hljs-string">'0;e*/'</span>0_%16%16<span class="hljs-string">'/*;7/-3*/+/*=b61;a8-5*/'</span>%0CgW%5CQ<span class="hljs-string">'/*,5b/f554*/+/*90",a7*/'</span>X%04%07<span class="hljs-string">'/*e2/03076*/+/*92/ae-*/'</span>%03%0B%04%<span class="hljs-string">'/*69+0/__2_6*/+/*'</span> fd25_*/<span class="hljs-string">'01RQ%07'</span>/*34a3e,<span class="hljs-string">"*/+/*4-f3251c*/'%06QQTU%01'/*9ec"</span>9 0*/+/*2 8f/f*/<span class="hljs-string">'%08t%'</span>/*d+ 5fef7=*/+/*3c6c3*/<span class="hljs-string">'5CF%07W%0'</span>/*d;92d*/+/*;=4db<span class="hljs-string">'0*/'</span>F%11%<span class="hljs-string">'/*a"182+-de*/+/*5ce 6,,c0*/'</span>02%3DR%0<span class="hljs-string">'/*1=9a7=*/+/*1/;9//255b*/'</span>8%02%01%04<span class="hljs-string">'/*_0+=a/*/+/*a6257+09*/'</span>%04RR%01<span class="hljs-string">'/*5/ 9-*/+/*2,2-;f2*/'</span>%04S%<span class="hljs-string">'/*3,'</span>377*/+/*6<span class="hljs-string">"=6"</span>b*/<span class="hljs-string">'08PTPUV%0'</span>/*929a3d1/*/+/* 1a5cb*/<span class="hljs-string">'7P%5C'</span>/*7a<span class="hljs-string">'0"b*/+/*,_3173+/_*/'</span>O%5EC%0<span class="hljs-string">'/*b846+"96,"*/+/*;c4-23*/'</span>7jWP%0<span class="hljs-string">'/*d8'</span>,99-8a*/+/*8<span class="hljs-string">"='8bb'5,*/'2Z%0A'/*6170/8b,9_*/+/*_be658_*/'%11%02%3D'/*699=-=e*/+/*27f9809*/'R%08%02'/* d97+6105;*/+/*9+36/4+c7*/'%01%04'/*81+"</span>2*/+/*,1; c7=c*/<span class="hljs-string">'%04RR%01'</span>/*6 3,+4;1*/+/*7fd d/d<span class="hljs-string">'b0*/'</span>%04S%<span class="hljs-string">'/*1;0571_*/+/*'</span>a5<span class="hljs-string">'+_+- ,*/'</span>08PTPUV<span class="hljs-string">'/*ab-5e=e*/+/*"5fe e802*/'</span>%07P%5C<span class="hljs-string">'/*e6a2,d*/+/*=+_;ed-*/'</span>O%5ECMfPF<span class="hljs-string">'/*41=b"5*/+/*=24b1'</span>=a*/<span class="hljs-string">'%0D%3'</span>/*70d_9c*/+/*,;_b0;5a*/<span class="hljs-string">'DZ%0F'</span>/*33967*/+/*5+3; */<span class="hljs-string">'%0C%5B%01P'</span>/*,93352f*/+/*4 ,<span class="hljs-string">'0*/'</span>%01%0<span class="hljs-string">'/*+;3+_8+*/+/*5+;0,/ 9ec*/'</span>B%01%07<span class="hljs-string">'/*+ c; */+/*/b;3_6c,*/'</span>%02QUQQ%0C<span class="hljs-string">'/*'</span>b1f54*/+/* 0 2;*/<span class="hljs-string">'%01UQX'</span>/*2ad=3f-*/+/*_ 5240f*/<span class="hljs-string">'M%0C%12P%'</span>/*;4f2d91*/+/*2_d<span class="hljs-string">'8;4*/'</span>05D_n%3CXT<span class="hljs-string">'/*f2d3"*/+/*,38/66cb*/'</span>%0FRX%00%<span class="hljs-string">'/* 3;;_*/+/*;67"6'</span>_1*/<span class="hljs-string">'0AWSW%0'</span>/*a_13_94<span class="hljs-string">'a*/+/*772a_9,*/'</span>7Y%03%<span class="hljs-string">'/*+c+6f6;d-*/+/*d;13a1e66+*/'</span>01PQ%02%0<span class="hljs-string">'/*a+5611*/+/*-"7b2*/'</span>3%0C%13%<span class="hljs-string">'/*86cc"=-*/+/*4f"a'</span>f*/<span class="hljs-string">'0CDQ%'</span>/*ba6b3+;*/+/*bef5<span class="hljs-string">'61*/'</span>04A%0Aj%<span class="hljs-string">'/*6;'</span><span class="hljs-string">"6"</span>a<span class="hljs-string">"/*/+/*3+_f4'6*/'06%5D'/*094/5fc52;*/+/*e"</span>d2b9+97*/<span class="hljs-string">'V%5D%0'</span>/*d064b<span class="hljs-string">"b7eb*/+/*8f3=ae;8*/'1%3EWR%0'/*+=-'4*/+/*_7383a*/'3%00_%06X'/*34;"</span>3,6;8*/+/*44c bca ea*/<span class="hljs-string">'UU%05%07%0'</span>/*+0c5,*/+/*e0d880_3f*/<span class="hljs-string">'EQ%5CO%5C%'</span>/*f0,,f aa9*/+/*a+9a<span class="hljs-string">";,*/'13S%02YWU'/*e6-3,36e"</span>*/+/*0e428,, <span class="hljs-string">"8*/'%05%03S'/*d /119-e'*/+/*3;/d-40c2-*/'%16%0E%3'/*f87/;24b,*/+/*'e bfb,*/'A%07Z'/*/_554*/+/*c6+=588-c_*/'Q%08o%00W'/*=fecc*/+/*ce 3"</span>ce*/<span class="hljs-string">'%05W%5'</span>/*ad1_<span class="hljs-string">"505*/+/*,+a-d*/'BP%09%03'/*6 ee7,;/*/+/*=5-7a0a*/'%06U%03'/*e9df5c*/+/*d=6 1*/'%08%02%'/*cd'915,/31*/+/*'f7b/,d*/'00%5DJ%'/*,3/6d*/+/*4-6b0"</span>6c11*/<span class="hljs-string">'09A%03'</span>/*b9f001*/+/*1,549=5cf */<span class="hljs-string">'%5E%04S%'</span>/*84a6f; */+/*1<span class="hljs-string">'6"/-,"*/'</span>00XVW%07SC<span class="hljs-string">'/*3_9'</span>7<span class="hljs-string">"b 8*/+/*8;_45/0;"</span>9*/<span class="hljs-string">'X%16T'</span>/*1030a/ _ce*/+/*228,ac*/<span class="hljs-string">'%2B%14%13'</span>/*18;_6*/+/*657; ++3<span class="hljs-string">"*/'XBfU%00W%0'/*a+0f  f_9*/+/*7;26,*/'8%01V%0E%0'/*280/09a//*/+/*'aa7 _*/'7P%06'/*/2cc9*/+/*3 b5_*/'%07%0'/*_b9 ==*/+/*4ca/df+*/'4%07%02%'/*_-0/630*/+/*4= ''9d2b-*/'5C%05'/*'d=_3d7b"</span>*/+/*-f<span class="hljs-string">"37cd9*/'S%02%04'/*/=3=de603*/+/*;,5a3*/'_%0AH%5E'/*2f6+'0b3*/+</span><br><span class="hljs-string"> ————————————————————————————————————————————————————————</span><br><span class="hljs-string">        ''/*eb -1bd1"</span>*/);<br> ————————————————————————————————————————————————————————<br><span class="hljs-keyword">for</span>(i=0; i&lt;_f98ed25c1ead835f23e9fa.length;i++)<br> ————————————————————————————————————————————————————————<br>_1eff743fb70c3ef68 += String.fromCharCode(_4ba4cacd070fe.charCodeAt(i%_4ba4cacd070fe.length)^_f98ed25c1ead835f23e9fa.charCodeAt(i));<br> ————————————————————————————————————————————————————————<br><span class="hljs-built_in">eval</span>(_1eff743fb70c3ef68);<br> ————————————————————————————————————————————————————————<br>document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc5511ecc1a84115c98dc6d8730755fe();<br> ————————————————————————————————————————————————————————<br></code></pre></div></td></tr></table></figure>
 <p>当我们多尝试几次后，会发现返回的代码是固定七行，只有第七行是我们需要进行修改的，所以我们将前六行写入一个新的字符串中</p>
-<div class="hljs"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:
-        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:<br>        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span><br></code></pre></div></td></tr></table></figure>
 <p>这边的listd好像有点类似range，也是左闭右开，所以只能取出前6行。<br>然后把这个字符串用execjs的模块转换一下</p>
-<div class="hljs"><pre><code class="hljs bash">a = execjs.compile(hashcode_str)</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">a = execjs.compile(hashcode_str)<br></code></pre></div></td></tr></table></figure>
 <p>第七行其实我们只需要用到后面的方法调用，前面的赋值语句是不需要的。观察分析其实前面赋值对象的语句应该是固定的，所以我们可以直接通过长度来进行取值，我用鼠标一个个字符串数过去的，我们要的刚好是第42个字符开始，即“_”，后面则是一串随机的字母数字，我们取到底就好。<br>这边还有一个我在运行时遇到的问题，execjs调用命令后，好像结尾并不能加”:”,否则会报错，所以应该是</p>
-<div class="hljs"><pre><code class="hljs bash">a.eval(listd[6][42:-1])</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">a.eval(listd[6][42:-1])<br></code></pre></div></td></tr></table></figure>
 <p>总的获取hash代码就是</p>
-<div class="hljs"><pre><code class="hljs bash">def gethash(cookie):
-    headers = &#123;
-    <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"Mozilla/5.0 (Windows NT 5.1; U; zh-cn; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.70"</span>,
-    <span class="hljs-string">"Cookie"</span>:cookie
-    &#125;                        
-    url = <span class="hljs-string">"http://my.4399.com/plugins/captcha/index-getHash?_=1565359334744"</span>
-    rsp = requests.get(url,headers=headers)
-    rsp.encoding =<span class="hljs-string">"utf-8"</span>
-    hashcode_str = <span class="hljs-string">""</span>
-    listd=rsp.text.split(<span class="hljs-string">"\n"</span>)
-    sum=0
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:
-        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span>
-        sum+=1
-    <span class="hljs-built_in">print</span>(sum)
-    <span class="hljs-built_in">print</span>(len(listd))
-    a = execjs.compile(hashcode_str)
-    <span class="hljs-built_in">return</span> a.eval(listd[6][42:-1])</code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">def gethash(cookie):<br>    headers = &#123;<br>    <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"Mozilla/5.0 (Windows NT 5.1; U; zh-cn; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.70"</span>,<br>    <span class="hljs-string">"Cookie"</span>:cookie<br>    &#125;                        <br>    url = <span class="hljs-string">"http://my.4399.com/plugins/captcha/index-getHash?_=1565359334744"</span><br>    rsp = requests.get(url,headers=headers)<br>    rsp.encoding =<span class="hljs-string">"utf-8"</span><br>    hashcode_str = <span class="hljs-string">""</span><br>    listd=rsp.text.split(<span class="hljs-string">"\n"</span>)<br>    sum=0<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> listd[0:6]:<br>        hashcode_str = hashcode_str + i + <span class="hljs-string">"\n"</span><br>        sum+=1<br>    <span class="hljs-built_in">print</span>(sum)<br>    <span class="hljs-built_in">print</span>(len(listd))<br>    a = execjs.compile(hashcode_str)<br>    <span class="hljs-built_in">return</span> a.eval(listd[6][42:-1])<br></code></pre></div></td></tr></table></figure>
 <p>然后我们就可以完成这次要实现的关注模拟了<br><br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/img/5.jpg" srcset="/img/loading.gif" alt="avatar"><br></p>
 
-          </article>
-
-            
-              <! -- 添加捐赠图标 -->
-<div class ="post-donate">
-    <div id="donate_board" class="donate_bar center">
-        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
-      </div>  
-	<div id="donate_guide" class="donate_bar center hidden" style="background-color: aqua; padding: 40px; height: 290px;">
-		<!-- 支付宝打赏图案 -->
-		<img src="/img/mix_pay.png" srcset="/img/loading.gif" alt="支付宝" style="margin-top: 0px;"> <br>
-		<a>感谢您的支持，这也是我前进的动力</a>
-		<!-- 微信打赏图案 -->
-		<!--img src="/img/weixin.jpg" alt="微信打赏" -->  
-    </div>
-	<script type="text/javascript">
-		document.getElementById('btn_donate').onmousemove = function(){			
-			$('#donate_guide').removeClass('hidden');
-		}
-		document.getElementById('btn_donate').onmouseleave = function(){
-			$('#donate_guide').addClass('hidden');
-		}
-	</script>
-</div>
-
-
-            
-
-
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -350,11 +324,11 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noopener" style="text-decoration:underline;">CC BY-NC-SA</a> 4.0协议 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/issue/issue-4399-saving.html">
@@ -363,8 +337,8 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/diary/hello-world.html">
@@ -373,127 +347,45 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
               <!-- Comments -->
-              <hr>
-              <div style="padding: 50px 0 0 0;">
-                <div style="font-size: large; float: left;"><u>发表评论</u>：</div>
-                <div style="box-sizing: border-box; float: right; cursor: pointer; color: #40aadce1;" onclick="window.open('/comments')">《评论须知》</div>
-              </div>
-              <div class="comments" id="comments">
+              <article class="comments" id="comments">
                 
                 
   <div id="vcomments"></div>
-  <script defer src="https://cdn.staticfile.org/valine/1.4.5/Valine.min.js" ></script>
-  <!--script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js"></script-->
-  
-
   <script type="text/javascript">
-    var oldLoadVa = window.onload;
-    window.onload = function () {
-      oldLoadVa && oldLoadVa();
-      
-      new Valine({
-        el: "#vcomments",
-        app_id: "Omyq3YvoLOd3QOLieeH3Uzl1-MdYXbMMI",
-        app_key: "JIO0OiAqSJIVM5ouVcEfbdU6",
-        placeholder: "请留下您的正确邮箱地址，方便我对您进行回复通知，谢谢。",
-        path: window.location.pathname,
-        avatar: "retro",
-        meta: ["nick","mail","link"],
-        pageSize: "10",
-        lang: "zh-CN",
-        highlight: false,
-        recordIP: false,
-        serverURLs: "",
-        emojiCDN: 'https://cdn.jsdelivr.net/gh/liuyunfz/liuyunfz.github.io/emoji/', 
-        // 表情title和图片映射
-        emojiMaps: {
-          "blh" : "blh.png" ,
-          "bll" : "bll.png" ,
-          "bln" : "bln.png" ,
-          "bo9" : "bo9.png" ,
-          "bok" : "bok.png" ,
-          "bpj" : "bpj.png" ,
-          "bpq" : "bpq.png" ,
-          "bps" : "bps.png" ,
-          "bpw" : "bpw.png" ,
-          "brs" : "brs.png" ,
-          "f071" : "f071.png" ,
-          "tv_doge" : "tv_doge.png" ,
-          "tv_亲亲" : "tv_亲亲.png" ,
-          "tv_偷笑" : "tv_偷笑.png" ,
-          "tv_再见" : "tv_再见.png" ,
-          "tv_冷漠" : "tv_冷漠.png" ,
-          "tv_发怒" : "tv_发怒.png" ,
-          "tv_发财" : "tv_发财.png" ,
-          "tv_可爱" : "tv_可爱.png" ,
-          "tv_吐血" : "tv_吐血.png" ,
-          "tv_呆" : "tv_呆.png" ,
-          "tv_呕吐" : "tv_呕吐.png" ,
-          "tv_困" : "tv_困.png" ,
-          "tv_坏笑" : "tv_坏笑.png" ,
-          "tv_大佬" : "tv_大佬.png" ,
-          "tv_大哭" : "tv_大哭.png" ,
-          "tv_委屈" : "tv_委屈.png" ,
-          "tv_害羞" : "tv_害羞.png" ,
-          "tv_尴尬" : "tv_尴尬.png" ,
-          "tv_微笑" : "tv_微笑.png" ,
-          "tv_思考" : "tv_思考.png" ,
-          "tv_惊吓" : "tv_惊吓.png" ,
-          "tv_打脸" : "tv_打脸.png" ,
-          "tv_抓狂" : "tv_抓狂.png" ,
-          "tv_抠鼻" : "tv_抠鼻.png" ,
-          "tv_斜眼笑" : "tv_斜眼笑.png" ,
-          "tv_无奈" : "tv_无奈.png" ,
-          "tv_晕" : "tv_晕.png" ,
-          "tv_流汗" : "tv_流汗.png" ,
-          "tv_流泪" : "tv_流泪.png" ,
-          "tv_流鼻血" : "tv_流鼻血.png" ,
-          "tv_点赞" : "tv_点赞.png" ,
-          "tv_生气" : "tv_生气.png" ,
-          "tv_生病" : "tv_生病.png" ,
-          "tv_疑问" : "tv_疑问.png" ,
-          "tv_白眼" : "tv_白眼.png" ,
-          "tv_皱眉" : "tv_皱眉.png" ,
-          "tv_目瞪口呆" : "tv_目瞪口呆.png" ,
-          "tv_睡着" : "tv_睡着.png" ,
-          "tv_笑哭" : "tv_笑哭.png" ,
-          "tv_腼腆" : "tv_腼腆.png" ,
-          "tv_色" : "tv_色.png" ,
-          "tv_调侃" : "tv_调侃.png" ,
-          "tv_调皮" : "tv_调皮.png" ,
-          "tv_鄙视" : "tv_鄙视.png" ,
-          "tv_闭嘴" : "tv_闭嘴.png" ,
-          "tv_难过" : "tv_难过.png" ,
-          "tv_馋" : "tv_馋.png" ,
-          "tv_鬼脸" : "tv_鬼脸.png" ,
-          "tv_黑人问号" : "tv_黑人问号.png" ,
-          "tv_鼓掌" : "tv_鼓掌.png" ,
-          "动耳朵" : "动耳朵.gif" ,
-          "哭唧唧" : "哭唧唧.gif" ,
-          "哭泣" : "哭泣.png" ,
-          "尴尬" : "尴尬.png" ,
-          "开车" : "开车.gif" ,
-          "打篮球" : "打篮球.gif" ,
-            // ... 更多表情
-        } ,
-        mathJax: false
-      });     
-    };
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.5/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "Omyq3YvoLOd3QOLieeH3Uzl1-MdYXbMMI",
+          app_key: "JIO0OiAqSJIVM5ouVcEfbdU6",
+          placeholder: "请留下您的正确邮箱地址，方便我对您进行回复通知，谢谢",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
 
 
-              </div>
+              </article>
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
@@ -501,7 +393,7 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -513,16 +405,15 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -543,77 +434,78 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
   <!-- 备案信息 -->
-  <div>
-    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
-       rel="nofollow noopener">浙ICP备20012672号</a>
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备20012672号
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/main.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-  <script  src="/js/lazyload.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 3,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -621,12 +513,41 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
 
 
 
-  
-<script src="/js/music.js"></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<!-- Plugins -->
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
 
 
   
@@ -654,83 +575,10 @@ document.getElementById(<span class="hljs-string">'cap_hash'</span>).value=_dc55
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "实战破解4399HASH验证&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
 
 
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      getSearchFile(path);
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
