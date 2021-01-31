@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>流式下载-Pythond的下载进阶</title>
+    <link href="/tutorial/python-spider-streamDownload.html"/>
+    <url>/tutorial/python-spider-streamDownload.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="常规下载"><a href="#常规下载" class="headerlink" title="常规下载"></a>常规下载</h1><p>近年来，Python常常与爬虫相挂钩，许多我身边的朋友听说Python甚至直接将它与爬虫划上了等号。仅仅通过几句代码，我们就可以用它来爬小说，来下载电影，来保存许多图片。</p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">with</span> open(<span class="hljs-string">"1.jpg"</span>,<span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> f :<br>rsp=requests.get(url=download_url)<br>f.write(rsp.content)<br></code></pre></div></td></tr></table></figure><p>上面这4句代码，就实现了最基础的下载功能。日常使用中我们往往只需要遵循这个框架，偶尔补上个UA，或者加个登录的cookie，总之万变不离其中。普通的下载图片肯定没什么问题的，但是当我们下载一个比较大的视频时，就会发现内存占用很大。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/streamDownload/1.png" srcset="/img/loading.gif" alt=""><br>就像上面这样，一下子就占用了解决100MB内存。这要是配置低点的电脑可就直接吃不消了啊。 </p><h1 id="问题解析"><a href="#问题解析" class="headerlink" title="问题解析"></a>问题解析</h1><p>试多了我们就能发现，内存占用的大小与我们下载的文件的大小基本一致。其实很好解释，requests模块的get方法，获取了所有的相关数据，并将它返回保存在rsp这个变量里。而变量又是存放在内存堆里的，自然内存就占去了一整个视频的大小。<br>那这可怎么办呢，我们对数据的读写肯定得先通过内存/缓存，再写入硬盘。既然一次性内存占用过大，那我们就分段下载，一段段下，一段段写。</p><h1 id="解决方案——流式下载"><a href="#解决方案——流式下载" class="headerlink" title="解决方案——流式下载"></a>解决方案——流式下载</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">with</span> open(<span class="hljs-string">"1.mp4"</span>,<span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> f :<br>print(<span class="hljs-string">"正在下载..."</span>)<br>rsp=requests.get(url=download_url,stream=<span class="hljs-literal">True</span>)<br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> rsp.iter_content(chunk_size=<span class="hljs-number">5242880</span>) :<br>    <span class="hljs-keyword">if</span> chunk :                                          <br>        f.write(chunk)<br>print(<span class="hljs-string">"\n下载完成"</span>)<br>f.close()<br></code></pre></div></td></tr></table></figure><p>get方法中的<code>stream</code>参数，默认为 False 。指定为 True 时，只有当我们调用rsp.content时，下载才会开始。<br>而response类的<code>iter_content</code>方法，则会像我们所想的那样，获取一段content。利用循环，我们就可以实现一段段的拿，一段段的写。里面的参数<code>chunk_size</code>为单次最多拿到的数据大小（即上限，但不一定能达到），单位为字节。可以根据自己的带宽与内存大小进行调节。<br>以下是requests模块中对于该方法的注释：</p><blockquote><p>Iterates over the response data.  When stream=True is set on the request, this avoids reading the content at once into memory for large responses.  The chunk size is the number of bytes it should read into memory.  This is not necessarily the length of each item returned as decoding can take place.</p></blockquote><p>至此，我们便解决了这个令人头疼的问题，来看看效果吧。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/streamDownload/streamDownload.gif" srcset="/img/loading.gif" alt="全程内存占用不超过23MB"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>教程</tag>
+      
+      <tag>python</tag>
+      
+      <tag>流式下载</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>超星学习通网课分析</title>
     <link href="/tutorial/python-spider-chaoxing.html"/>
     <url>/tutorial/python-spider-chaoxing.html</url>
