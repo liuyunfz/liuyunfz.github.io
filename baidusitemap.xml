@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.6yfz.cn/tutorial/lxml-huge_tree.html</loc>
+    <lastmod>2021-03-24</lastmod>
+  </url>  <url>
     <loc>https://blog.6yfz.cn/tutorial/python-spider-streamDownload.html</loc>
     <lastmod>2021-01-31</lastmod>
   </url>  <url>

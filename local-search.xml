@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>lxml的huge_tree问题</title>
+    <link href="/tutorial/lxml-huge_tree.html"/>
+    <url>/tutorial/lxml-huge_tree.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="前提背景与问题描述"><a href="#前提背景与问题描述" class="headerlink" title="前提背景与问题描述"></a>前提背景与问题描述</h1><p>因为最近在着手关于超星（学习通）的测验相关，发现里面的测验题是一层层嵌套而非并列。<br>可以看到，它是一个个class为TiMu的div嵌套而成的，我们想要读取就只有一层层的深入进去。所以按照常规想法，我采用了递归读取</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>issue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>流式下载-Python的下载进阶</title>
     <link href="/tutorial/python-spider-streamDownload.html"/>
     <url>/tutorial/python-spider-streamDownload.html</url>
@@ -208,9 +227,9 @@
     
     <tags>
       
-      <tag>issue</tag>
-      
       <tag>hexo</tag>
+      
+      <tag>issue</tag>
       
       <tag>valine</tag>
       
