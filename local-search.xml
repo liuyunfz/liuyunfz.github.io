@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>通过抓包下载钉钉直播回放</title>
+    <link href="/%E6%95%99%E7%A8%8B/python/%E9%92%89%E9%92%89/m3u8/dingtalk-video-download.html"/>
+    <url>/%E6%95%99%E7%A8%8B/python/%E9%92%89%E9%92%89/m3u8/dingtalk-video-download.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为疫情的原因，钉钉一度被人们所熟知。哪怕在疫情已经在国内淡去的现在，仍有许多公司或学校继续选择了使用钉钉。而为了解决钉钉被关闭了下载权限的录播，因而有了此文。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/dingtalk_video_download/1.png" srcset="/img/loading.gif" alt=""><br>由于我只是为了解决燃眉之急，所以并未对内容进行深究，仅仅是在我认为方便的程度上结束了该话题。因此你需要本地有相应的抓包软件（类似Fiddler），以及钉钉（目标程序）。</p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p>首先打开我们的抓包软件——Fiddler。然后对打开视频这个操作进行抓包。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/dingtalk_video_download/2.png" srcset="/img/loading.gif" alt=""><br>通过观察Url和返回内容，我们可以确定我们要的包是第8个。查看它返回的内容。<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/dingtalk_video_download/3.png" srcset="/img/loading.gif" alt=""><br>可以看到，这是一个m3u8文件。</p><h2 id="M3U8的不正式介绍"><a href="#M3U8的不正式介绍" class="headerlink" title="M3U8的不正式介绍"></a>M3U8的不正式介绍</h2><blockquote><p>m3u文件是用来描述一个或多个媒体文件地址的纯文本文件，通常以 M3U 或 m3u 作为扩展名。以 # 号开头的，是m3u的注释，而一些m3u扩展指令也是由 # 号开头<br>m3u的一个常见用途是作为一个指向网络中一个流媒体的播放列表，比如在线视频、广播等等。而所谓的M3U8就是用unicode编写的M3U文件，这最初是用在IOS设备上播放http实时流的基础格式。  </p></blockquote><p>以上内容来自Wiki翻译，就我个人的理解：一个完整的视频被等时长的分成了一堆小块（常见的有5s），然后这一个个小块（ts文件）全部存放在不同的位置。而这些位置（在这表现为Url地址）全部都被按顺序记录在了一个文本文件里，就是这个.m3u8文件。如果人们想要观看完整的视频，那么播放器就会按照这个文件的内容顺序一块块的获取视频，然后合在一起播放（切换很快而让我们感觉不到）。</p><p>此外，M3U8还有加密的说法，标识是里面包含key关键字<code>EXT-X-KEY</code>。而<code>#EXTM3U</code>则是我们判断这是否是一个M3U8文件的标准了（就像Html文件里一定会有&lt;html&gt;）。</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>知道了以上的背景知识我们就可以继续写代码了，因为为了尽可能的方便，这次我们不考虑通用性。直接复制抓包抓到的M3U8的文件内容，然后拿上对应的Cookie直接获取下载。（好处是高效开发，坏处是如果我们下次要下载其他视频还得重新抓一次包）<br><img src="https://cdn.jsdelivr.net/gh/liuyunfz/picgo_pictures/dingtalk_video_download/4.png" srcset="/img/loading.gif" alt=""><br>因为视频分段顺序是严格按照在文件中的顺序来的，所以我们依次读取，然后下载并追加到我们的目标视频文件中即可。<br>至此，我们就完成了下载无法下载的钉钉录播视频。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+      <category>python</category>
+      
+      <category>钉钉</category>
+      
+      <category>m3u8</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>流式下载-Python的下载进阶</title>
     <link href="/tutorial/python-spider-streamDownload.html"/>
     <url>/tutorial/python-spider-streamDownload.html</url>

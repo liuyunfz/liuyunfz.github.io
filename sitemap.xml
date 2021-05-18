@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.6yfz.cn/tutorial/python-spider-streamDownload.html</loc>
+    <loc>https://blog.6yfz.cn/%E6%95%99%E7%A8%8B/python/%E9%92%89%E9%92%89/m3u8/dingtalk-video-download.html</loc>
     
-    <lastmod>2021-01-31T09:41:49.846Z</lastmod>
+    <lastmod>2021-05-18T14:20:35.701Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://blog.6yfz.cn/about/index.html</loc>
     
-    <lastmod>2021-01-31T04:08:55.857Z</lastmod>
+    <lastmod>2021-05-18T13:33:26.208Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/history/index.html</loc>
+    
+    <lastmod>2021-05-18T13:32:38.116Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.6yfz.cn/tutorial/python-spider-streamDownload.html</loc>
+    
+    <lastmod>2021-01-31T09:41:49.846Z</lastmod>
     
   </url>
   
@@ -75,13 +89,6 @@
     <loc>https://blog.6yfz.cn/tutorial/windows-menu-new.html</loc>
     
     <lastmod>2020-08-02T10:21:18.165Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.6yfz.cn/history/index.html</loc>
-    
-    <lastmod>2020-05-09T08:48:21.861Z</lastmod>
     
   </url>
   
